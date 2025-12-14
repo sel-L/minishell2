@@ -6,7 +6,7 @@
 #    By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/31 10:47:03 by wshou-xi          #+#    #+#              #
-#    Updated: 2025/12/13 00:19:14 by wshou-xi         ###   ########.fr        #
+#    Updated: 2025/12/14 13:14:46 by wshou-xi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,18 @@ VALGRIND = valgrind --suppressions=readline.supp --leak-check=full --show-leak-k
 MAINDIR = src/parsing
 MAINFILES = main.c
 MAIN = $(addprefix $(MAINDIR)/, $(MAINFILES))
+
+ARGVDIR = src/argv
+ARGVFILES = argv_to_node.c argv_utils.c tok_conv.c
+ARGV = $(addprefix $(ARGVDIR)/, $(ARGVFILES))
+
+B_INDIR = src/builtins
+B_INFILES = pwd.c cd.c export.c unset.c env.c builtin.c
+B_IN = $(addprefix $(B_INDIR)/, $(B_INFILES))
+
+ENVDIR = src/env
+ENVFILES = env_init.c env_op.c env_utils.c env_var_utils.c env_vars.c
+ENV = $(addprefix $(ENVDIR)/, $(ENVFILES))
 
 SRC = $(MAIN)
 OBJDIR = obj
