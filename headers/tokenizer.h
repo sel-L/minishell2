@@ -1,21 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   tokenizer.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/14 13:22:18 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/14 13:22:21 by wshou-xi         ###   ########.fr       */
+/*   Created: 2025/12/14 14:20:01 by wshou-xi          #+#    #+#             */
+/*   Updated: 2025/12/14 17:02:08 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#ifndef TOKENIZER_H
+# define TOKENIZER_h
 
-void	env(t_env_list **env)
+# include "minishell.h"
+
+struct s_token_data
 {
-	if (!env || !*env)
-		perror("Env error\n");
-	print_env(*env);
-}
+	int	d_quote;
+	int	s_quote;
+}	t_token_data;
 
+typedef enum	e_token_type
+{
+	WORD,
+	PIPE,
+	R_IN,
+	R_OUT,
+	APPEND,
+	HEREDOC
+}				t_token_type;
+
+typedef struct	s_token
+{
+	char			*value;
+	t_token_type	type;
+	struct	s_token	*next;
+}	t_token;
+
+
+
+t_token	*add_and_append_token(t_token **list, t_token_type type, char *token);
+
+#endif
