@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 15:07:46 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/14 15:30:06 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2025/12/15 17:19:21 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,14 @@ void	append_token_to_list(t_token **token_list, t_token *token)
 	t_token	*temp;
 
 	if (!token_list || !*token_list)
+	{
+		*token_list = token;
 		return ;
+	}
 	temp = *token_list;
-	while(temp)
+	while (temp->next)
 		temp = temp->next;
-	if (token->next == NULL)
-		temp->next = token;
+	temp->next = token;
 	return ;
 }
 
@@ -54,15 +56,16 @@ t_token	*create_token(char *value, t_token_type type)
 
 t_token	*add_and_append_token(t_token **list, t_token_type type, char *token)
 {
-	t_token	*head;
 	t_token	*temp;
 
-	if (!list || !*list)
-		return (free(token), NULL);
-	head = *list;
 	temp = create_token(token, type);
 	if (!temp)
-		(free(token), NULL);
+		return (NULL);
 	append_token_to_list(list, temp);
-	return (head);
+	return (*list);
+}
+
+int	is_op(char c)
+{
+	return (c == '<' || c == '>' || c == '|');
 }

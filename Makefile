@@ -6,13 +6,13 @@
 #    By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/31 10:47:03 by wshou-xi          #+#    #+#              #
-#    Updated: 2025/12/14 13:14:46 by wshou-xi         ###   ########.fr        #
+#    Updated: 2025/12/15 16:44:16 by wshou-xi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -Iheaders -I./libft/
-LIB = -lreadline -lhistory -Llibft
+CFLAGS = -Wall -Werror -Wextra -Iheaders -I./libft
+LIB = -lreadline -lhistory -Llibft -lft
 RM = rm -rf
 VALGRIND = valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all --tool=memcheck --track-origins=yes --verbose
 
@@ -32,7 +32,11 @@ ENVDIR = src/env
 ENVFILES = env_init.c env_op.c env_utils.c env_var_utils.c env_vars.c
 ENV = $(addprefix $(ENVDIR)/, $(ENVFILES))
 
-SRC = $(MAIN)
+TOKENDIR = src/tokenizer
+TOKENFILES = tokenizer.c tokenizer_utils.c tokenizer_utils2.c lexer_utils.c
+TOKEN = $(addprefix $(TOKENDIR)/, $(TOKENFILES))
+
+SRC = $(MAIN) $(TOKEN)
 OBJDIR = obj
 OBJS = $(SRC:%.c=$(OBJDIR)/%.o)
 

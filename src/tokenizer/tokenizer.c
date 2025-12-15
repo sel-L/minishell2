@@ -6,65 +6,96 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 13:21:53 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/14 16:53:22 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2025/12/15 17:18:53 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenizer.h"
 
-int	is_op(char c)
+void	free_token_list(t_token *list)
 {
-	return (c == '<' || c == '>' || c == '|' || c == 32);
-}
+	t_token	*temp;
 
-t_token	*tokenizer(t_token *list, char *input)
-{
-	if (!input || !input[0])
-		return (NULL);
-}
-
-int	quote_size(char *str, int i)
-{
-	int	s_quote;
-	int	d_quote;
-
-	if (!str)
-		return (-1);
-	s_quote = 0;
-	d_quote = 0;
-	if (str[i] == '\'')
-		s_quote = 1;
-	if (str[i] == '"')
-		d_quote = 1;
-	i++;
-	while(str[i])
+	while (list)
 	{
-		if (str[i] == '"' && d_quote)
-			break ;
-		if (str[i] == '\'' && s_quote)
-			break ;
-		i++;
+		temp = list;
+		list = list->next;
+		free_single_token(temp);
 	}
-	return (i - 1);
 }
 
-char	*find_token(char *input)
+void	*quoted(t_lexer *lex, t_token **list)
 {
-	static int		i;
-	char			*temp;
+	char	quoted_c;
 
-	if (!input || !input[0])
-		return (NULL);
-	i = 0;
-	while (input[i])
+	while (*lex->lex_end)
 	{
-		if (is_op(input[i]))
-			return (temp);
-		if (input[i] == '\'' || input[i] == '"')
+		if (*lex->lex_end == '\'' || *lex->lex_end == '"')
 		{
-			temp = ft_substr(input, i, quote_size(input, i));
-			i += quote_size(input, i);
-			return (temp);
+			quoted_c = *lex->lex_end;
+			lex->lex_end++;
+			while (*lex->lex_end && *lex->lex_end != quoted_c)
+				lex->lex_end++;
+			if (*lex->lex_end == quoted_c)
+				lex->lex_end++;
+			else
+				return (NULL);
 		}
+		else
+			break ;
 	}
+	return (create_word_token(lex, list));
+}
+
+void	process_unquoted_word(t_lexer *lex)
+{
+	while (*lex->lex_end
+		&& (!ft_isspace(*lex->lex_end))
+		&& (!is_op(*lex->lex_end))
+		&& *lex->lex_end != '\''
+		&& *lex->lex_end != '"')
+		lex->lex_end++;
+}
+
+int	process_token(t_lexer *lex, t_token **list)
+{
+	if (*lex->lex_end == '"' || *lex->lex_end == '\'')
+	{
+		if (quoted(lex, list) == NULL)
+			return (ft_putendl_fd("Tokenizer: unclosed quotes", 2), 0);
+	}
+	else if (is_op(*lex->lex_end))
+	{
+		if (!create_op_token(lex, list))
+			return (0);
+	}
+	else
+	{
+		process_unquoted_word(lex);
+		if (!create_word_token(lex, list))
+			return (0);
+	}
+	return (1);
+}
+
+t_token	*tokenizer(char *input)
+{
+	t_lexer	*lex;
+	t_token	*list;
+
+	list = NULL;
+	lex = init_lex(input);
+	if (!lex)
+		return (NULL);
+	while (*lex->lex_end)
+	{
+		skip_whitespace(lex);
+		if (!*lex->lex_end)
+			break ;
+		lex->lex_start = lex->lex_end;
+		if (process_token(lex, &list) == 0)
+			return (free(lex),
+				ft_putendl_fd("Tokenizer: invalid token.", 2), NULL);
+	}
+	return (free(lex), list);
 }

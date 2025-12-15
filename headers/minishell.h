@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 00:17:21 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/13 00:17:57 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2025/12/15 16:28:20 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include <limits.h>
 # include <dirent.h>
 # include "../libft/libft.h"
+# include "tokenizer.h"
 
 
 #endif
