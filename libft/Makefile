@@ -6,7 +6,7 @@
 #    By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/15 19:16:04 by selow             #+#    #+#              #
-#    Updated: 2025/12/13 00:19:46 by wshou-xi         ###   ########.fr        #
+#    Updated: 2025/12/15 23:45:37 by wshou-xi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,7 @@ SRC =	ft_atoi.c \
 	ft_strncmp.c \
 	ft_strlcat.c \
 	ft_putnbr_fd.c \
+	ft_strcmp.c \
 	gnl/get_next_line.c \
 	
 BONUSES =	ft_lstsize.c \

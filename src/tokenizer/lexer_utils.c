@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 11:58:21 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/15 17:18:34 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2025/12/15 23:52:55 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,30 @@ void	print_token_list(t_token **token)
 		printf("token type: %d\n", temp->type);
 		temp = temp->next;
 	}
+}
+
+int	ft_strarr_len(char **str)
+{
+	int	size;
+
+	if (!str)
+		return (0);
+	size = 0;
+	while(str[size])
+		size++;
+	return (size);
+}
+
+void	ft_free_str_arr(char **str)
+{
+	int	i;
+
+	i = 0;
+	while(str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
+	return ;
 }

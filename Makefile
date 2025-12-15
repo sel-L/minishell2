@@ -6,7 +6,7 @@
 #    By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/31 10:47:03 by wshou-xi          #+#    #+#              #
-#    Updated: 2025/12/15 16:44:16 by wshou-xi         ###   ########.fr        #
+#    Updated: 2025/12/16 00:02:18 by wshou-xi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ RM = rm -rf
 VALGRIND = valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all --tool=memcheck --track-origins=yes --verbose
 
 MAINDIR = src/parsing
-MAINFILES = main.c
+MAINFILES = main.c ft_readline.c redir_check.c
 MAIN = $(addprefix $(MAINDIR)/, $(MAINFILES))
 
 ARGVDIR = src/argv
@@ -36,7 +36,7 @@ TOKENDIR = src/tokenizer
 TOKENFILES = tokenizer.c tokenizer_utils.c tokenizer_utils2.c lexer_utils.c
 TOKEN = $(addprefix $(TOKENDIR)/, $(TOKENFILES))
 
-SRC = $(MAIN) $(TOKEN)
+SRC = $(MAIN) $(TOKEN) $(ENV) $(B_IN) $(ARGV)
 OBJDIR = obj
 OBJS = $(SRC:%.c=$(OBJDIR)/%.o)
 

@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 13:49:21 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/12 07:35:58 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2025/12/16 00:04:38 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,11 @@ int	parsing(char *str, t_parsing *parse)
 {
 	if (!str)
 		return (1);
-	parse->token = tokenize(str);
+	parse->token = tokenizer(str);
 	if (validator(parse->token) != 0)
 		return (free_env(&parse->env_list),
-			free_tokens(&parse->token), free(parse), 1);
+			free_token_list(parse->token), free(parse), 1);
+	print_token_list(&parse->token);
 	return (0);
 }
 
@@ -45,7 +46,7 @@ void	garbage_collector(t_parsing	*p, char **argv, char *str)
 	if (argv || *argv)
 		free_argv(argv);
 	if ((*p).token)
-		free_tokens(&p->token);
+		free_token_list(p->token);
 	if (str)
 		free(str);
 }

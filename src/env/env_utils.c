@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 16:40:49 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/11 19:35:39 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2025/12/16 00:01:47 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,27 @@ int	key_value_len(char *key, t_env_list **list)
 	temp = get_value(key, list);
 	res = ft_strlen(temp);
 	return (free(temp), res);
+}
+
+char	**ft_strarrdup(char **str)
+{
+	char	**temp;
+	int		size;
+	int		i;
+
+	size = ft_strarr_len(str);
+	i = 0;
+	temp = malloc(sizeof(char *) * size);
+	if (!temp)
+		return (NULL);
+	ft_memset(temp, '\0', sizeof(char *) * (size + 1));
+	while(i < size)
+	{
+		temp[i] = ft_strdup(str[i]);
+		if (!temp[i])
+			return (ft_free_str_arr(temp), free(temp), NULL);
+		i++;
+	}
+	temp[i] = '\0';
+	return (temp);
 }

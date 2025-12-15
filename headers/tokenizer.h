@@ -6,23 +6,25 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 14:20:01 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/15 16:39:53 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2025/12/16 00:02:48 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TOKENIZER_H
 # define TOKENIZER_H
 
-# include "minishell.h"
+# include <stdio.h>
+# include <stdlib.h>
+# include "libft.h"
 
 typedef enum	e_token_type
 {
 	WORD,
 	PIPE,
-	R_IN,
-	R_OUT,
+	REDIR_IN,
+	REDIR_OUT,
 	APPEND,
-	HEREDOC
+	HERE_DOC
 }				t_token_type;
 
 typedef struct	s_token

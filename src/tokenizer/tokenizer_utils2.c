@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 11:25:31 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/15 17:19:14 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2025/12/16 00:05:06 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ int	identify_op(char *op)
 	if (*op == '>' && *temp_next == '>')
 		return (APPEND);
 	else if (*op == '<' && *temp_next == '<')
-		return (HEREDOC);
+		return (HERE_DOC);
 	else if (*op == '>')
-		return (R_OUT);
+		return (REDIR_OUT);
 	else if (*op == '<')
-		return (R_IN);
+		return (REDIR_IN);
 	else if (*op == '|')
 		return (PIPE);
 	return (-1);

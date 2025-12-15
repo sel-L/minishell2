@@ -6,18 +6,23 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 17:30:46 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/15 17:32:54 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2025/12/16 00:01:51 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
 
-# include "minishell.h"
 # include "tokenizer.h"
 # include "m_env.h"
 # include "builtin.h"
 
+typedef struct	s_node
+{
+	char			*cmd;
+	char			**argv;
+	struct s_node	*next;
+}				t_node;
 
 typedef struct	s_parsing
 {
@@ -67,5 +72,8 @@ void	print_node(t_node *node);
 void	garbage_collector(t_parsing	*p, char **argv, char *str);
 int		parsing(char *str, t_parsing *parse);
 int		ft_readline(t_parsing *p, char *prompt);
+void	ft_free_str_arr(char **str);
+int		ft_strarr_len(char **str);
+char	**ft_strarrdup(char **str);
 
 #endif
