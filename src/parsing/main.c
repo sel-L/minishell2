@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 13:49:21 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/16 00:04:38 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2025/12/16 00:26:25 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ int	parsing(char *str, t_parsing *parse)
 		return (1);
 	parse->token = tokenizer(str);
 	if (validator(parse->token) != 0)
-		return (free_env(&parse->env_list),
-			free_token_list(parse->token), free(parse), 1);
+		return (free_token_list(parse->token), 1);
 	print_token_list(&parse->token);
 	return (0);
 }
