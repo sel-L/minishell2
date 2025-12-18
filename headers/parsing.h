@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 17:30:46 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/16 00:01:51 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2025/12/17 17:11:30 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct	s_parsing
 {
 	t_env_list	*env_list;
 	t_token		*token;
+	char		**internal_env;
 }				t_parsing;
 
 typedef struct	s_redir
@@ -38,23 +39,23 @@ typedef struct	s_redir
 	struct s_node	*next;
 }					t_redir;
 
-typedef struct s_cmd
-{
-	pid_t	pid;
-	t_token	*words; // word tokens
-	t_redir	*redir_in; // < <<
-	t_redir	*redir_out; // > >>
-	int		infile; // final infile to dup2
-	int		outfile; // final infile to dup2
-	struct s_cmd	*next;
-}	t_cmd;
+// typedef struct s_cmd
+// {
+// 	pid_t	pid;
+// 	t_token	*words; // word tokens
+// 	t_redir	*redir_in; // < <<
+// 	t_redir	*redir_out; // > >>
+// 	int		infile; // final infile to dup2
+// 	int		outfile; // final infile to dup2
+// 	struct s_cmd	*next;
+// }	t_cmd;
 
-typedef struct s_data
-{
-	t_cmd		*cmds;
-	int			cmd_count;
-	t_env_list	**env;
-}				t_data;
+// typedef struct s_data
+// {
+// 	t_cmd		*cmds;
+// 	int			cmd_count;
+// 	t_env_list	**env;
+// }				t_data;
 
 int		validator(t_token *token);
 char	**tok_to_argv(t_token *token);

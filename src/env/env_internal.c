@@ -1,29 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   env_internal.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/14 16:19:34 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/17 18:05:31 by wshou-xi         ###   ########.fr       */
+/*   Created: 2025/12/17 17:28:55 by wshou-xi          #+#    #+#             */
+/*   Updated: 2025/12/17 17:57:18 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
-#include <readline/readline.h>
+#include "minishell.h"
+#include "parsing.h"
+#include "m_env.h"
 
-int	main(void)
+char	*get_int_env(char *target, char **list)
 {
-	char	*list[] = {"a", "b", "c", "d", "e", NULL};
-	char	**av;
+	char	*front;
+	char	*value;
 
-	av = list;
-	while(*av)
-	{
-		printf("%s\n", *av);
-		av++;
-	}
-	return (0);
+	if (!list || !*list)
+		return (NULL);
+	front = *list;
+	value = *list;
+	while (*value != '=')
+		value++;
+	front = ft_substr(front, 0, (value - front));
+	if (!ft_strcmp(target, front))
+		
+	value++;
+	value = ft_substr(value, 0, ft_strlen(value));
+	
 }

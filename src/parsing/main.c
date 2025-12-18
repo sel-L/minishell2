@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 13:49:21 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/16 00:26:25 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2025/12/17 17:21:54 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,17 @@ t_parsing	*init(char **envp)
 	t_parsing	*parse;
 
 	if (!envp)
-		return (perror("no env\n"), NULL);
+		return (ft_putendl_fd("init: no env\n", 2), NULL);
 	parse = malloc(sizeof(t_parsing));
 	if (!parse)
-		return (perror("malloc failed\n"), NULL);
+		return (ft_putendl_fd("init: malloc failed\n", 2), NULL);
 	parse->env_list = env_to_list(envp);
 	if (!parse->env_list)
-		return (free(parse), perror("env error\n"), NULL);
+		return (free(parse), ft_putendl_fd("init: env error\n", w), NULL);
+	parse->internal_env = malloc(sizeof(char *));
+	if (!parse->internal_env)
+		return (free);
+	ft_bzero(parse->internal_env, sizeof(char *));
 	return (parse);
 }
 
