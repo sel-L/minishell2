@@ -6,7 +6,7 @@
 #    By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/31 10:47:03 by wshou-xi          #+#    #+#              #
-#    Updated: 2025/12/16 00:02:18 by wshou-xi         ###   ########.fr        #
+#    Updated: 2025/12/18 09:46:26 by wshou-xi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ B_INFILES = pwd.c cd.c export.c unset.c env.c builtin.c
 B_IN = $(addprefix $(B_INDIR)/, $(B_INFILES))
 
 ENVDIR = src/env
-ENVFILES = env_init.c env_op.c env_utils.c env_var_utils.c env_vars.c
+ENVFILES = env_init.c env_op.c env_utils.c env_var_utils.c env_vars.c env_internal.c
 ENV = $(addprefix $(ENVDIR)/, $(ENVFILES))
 
 TOKENDIR = src/tokenizer

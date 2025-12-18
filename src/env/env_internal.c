@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 17:28:55 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/17 17:57:18 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2025/12/18 10:13:17 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,59 @@
 
 char	*get_int_env(char *target, char **list)
 {
-	char	*front;
+	int	i;
+	int	len;
+
+	if (!list || !target)
+		return (NULL);
+	len = ft_strlen(target);
+	i = 0;
+	while(list[i])
+	{
+		if (ft_strncmp(list[i], target, len) == 0 && list[i][len] == '=')
+			return (ft_strdup(list[i] + len + 1));
+		i++;
+	}
+	return (NULL);
+}
+
+char	*find_int_env(char *target, char **list)
+{
+	char	**temp;
 	char	*value;
 
-	if (!list || !*list)
+	temp = list;
+	while (temp)
+	{
+		if (ft_strncmp(target, *temp, ft_strlen(target)) == 0)
+			break ;
+		temp++;
+	}
+	if (!temp)
 		return (NULL);
-	front = *list;
-	value = *list;
 	while (*value != '=')
 		value++;
-	front = ft_substr(front, 0, (value - front));
-	if (!ft_strcmp(target, front))
-		
-	value++;
-	value = ft_substr(value, 0, ft_strlen(value));
-	
+	return (ft_substr(value, 1, ft_strlen(value)));
+}
+
+char	**add_int_env(char *target, char *value, char **list)
+{
+	char	*half_value;
+	char	*res;
+
+	if (!target || !value)
+		return (NULL);
+	if ((find_int_env(target, list) != NULL) && list)
+		return (NULL);
+	else
+	{
+		half_value = ft_strjoin(target, "=");
+		if (!half_value)
+			return (NULL);
+		res = ft_strjoin(half_value, value);
+		if (!value)
+			return (free(half_value), NULL);
+		list = ft_2d_append_back(list, res);
+		return (free(half_value), free(res), list);
+	}
 }
