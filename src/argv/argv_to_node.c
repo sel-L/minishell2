@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 16:29:30 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/11 17:45:11 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2025/12/18 14:00:15 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ void	print_node(t_node *node)
 	t_node	*temp;
 
 	temp = node;
-	while(node)
+	while(temp)
 	{
 		printf("%s\n", temp->cmd);
 		print_str_arr(temp->argv);
 		printf("\n");
-		node = temp->next;
+		temp = temp->next;
 	}
 }
 

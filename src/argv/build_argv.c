@@ -1,29 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   build_argv.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/14 16:19:34 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/17 18:05:31 by wshou-xi         ###   ########.fr       */
+/*   Created: 2025/12/18 13:52:46 by wshou-xi          #+#    #+#             */
+/*   Updated: 2025/12/18 13:52:47 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
-#include <readline/readline.h>
-
-int	main(void)
-{
-	char	*list[] = {"a", "b", "c", "d", "e", NULL};
-	char	**av;
-
-	av = list;
-	while(*av)
-	{
-		printf("%s\n", *av);
-		av++;
-	}
-	return (0);
-}

@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 17:30:46 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/17 17:11:30 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2025/12/18 13:57:11 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,6 @@ int		ft_readline(t_parsing *p, char *prompt);
 void	ft_free_str_arr(char **str);
 int		ft_strarr_len(char **str);
 char	**ft_strarrdup(char **str);
+t_node	*token_to_node(t_token *token);
 
 #endif

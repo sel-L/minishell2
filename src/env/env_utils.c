@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 16:40:49 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/17 12:08:22 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2025/12/18 14:10:38 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,17 +90,18 @@ char	**ft_strarrdup(char **str)
 	int		size;
 	int		i;
 
+	if (!str)
+		return (NULL);
 	size = ft_strarr_len(str);
 	i = 0;
-	temp = malloc(sizeof(char *) * size);
+	temp = malloc(sizeof(char *) * (size + 1));
 	if (!temp)
 		return (NULL);
-	ft_memset(temp, '\0', sizeof(char *) * (size + 1));
 	while(i < size)
 	{
 		temp[i] = ft_strdup(str[i]);
 		if (!temp[i])
-			return (ft_free_str_arr(temp), free(temp), NULL);
+			return (ft_free_str_arr(temp), NULL);
 		i++;
 	}
 	temp[i] = NULL;

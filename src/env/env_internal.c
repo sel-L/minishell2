@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 17:28:55 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/18 10:25:37 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2025/12/18 13:58:59 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ char	*find_int_env(char *target, char **list)
 			break ;
 		temp++;
 	}
+	value = *temp;
 	if (!temp)
 		return (NULL);
 	while (*value != '=')
