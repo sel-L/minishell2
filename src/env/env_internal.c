@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 17:28:55 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/18 10:13:17 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2025/12/18 10:25:37 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,19 @@ char	**add_int_env(char *target, char *value, char **list)
 		list = ft_2d_append_back(list, res);
 		return (free(half_value), free(res), list);
 	}
+}
+
+void	*print_int_env(char **int_env)
+{
+	int	i;
+
+	if (!int_env || !*int_env)
+		return (NULL);
+	i = 0;
+	while(int_env[i])
+	{
+		printf("declare -x %s\n", int_env[i]);
+		i++;
+	}
+	return (NULL);
 }

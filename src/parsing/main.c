@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 13:49:21 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/17 17:21:54 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2025/12/18 11:13:44 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,20 +36,23 @@ t_parsing	*init(char **envp)
 		return (ft_putendl_fd("init: malloc failed\n", 2), NULL);
 	parse->env_list = env_to_list(envp);
 	if (!parse->env_list)
-		return (free(parse), ft_putendl_fd("init: env error\n", w), NULL);
+		return (free(parse), ft_putendl_fd("init: env error\n", 2), NULL);
 	parse->internal_env = malloc(sizeof(char *));
 	if (!parse->internal_env)
-		return (free);
+		return (ft_free_str_arr(parse->internal_env), free(parse), NULL);
 	ft_bzero(parse->internal_env, sizeof(char *));
 	return (parse);
 }
 
 void	garbage_collector(t_parsing	*p, char **argv, char *str)
 {
-	if (argv || *argv)
+	if (argv)
 		free_argv(argv);
-	if ((*p).token)
+	if (p->token)
+	{
 		free_token_list(p->token);
+		p->token = NULL;
+	}
 	if (str)
 		free(str);
 }
@@ -78,6 +81,7 @@ int main(int ac, char **av, char **envp)
 	}
 	rl_clear_history();
 	free_env(&p->env_list);
+	ft_free_str_arr(p->internal_env);
 	free(p);
 	return (0);
 }

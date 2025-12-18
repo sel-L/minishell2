@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 14:28:05 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/11 15:12:30 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2025/12/18 10:25:56 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@ char		**list_to_char(t_env_list **list, char **res);
 int			key_value_len(char *key, t_env_list **list);
 int			change_key_value(char *key, char *value, t_env_list **env);
 char		*get_value(char *key, t_env_list **list);
-
+void		*print_int_env(char **int_env);
+char		**add_int_env(char *target, char *value, char **list);
+char		*find_int_env(char *target, char **list);
+char		*get_int_env(char *target, char **list);
 
 #endif
