@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 17:30:46 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/18 13:57:11 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2025/12/18 15:30:01 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,11 @@
 # include "m_env.h"
 # include "builtin.h"
 
-typedef struct	s_node
+typedef enum e_node_type
 {
-	char			*cmd;
-	char			**argv;
-	struct s_node	*next;
-}				t_node;
+	CMD,
+	PIPE
+}	t_node_type;
 
 typedef struct	s_parsing
 {
@@ -33,29 +32,19 @@ typedef struct	s_parsing
 
 typedef struct	s_redir
 {
-	int				fd;
 	t_token_type	type;
-	char			*value;
+	char			*file;
 	struct s_node	*next;
 }					t_redir;
 
-// typedef struct s_cmd
-// {
-// 	pid_t	pid;
-// 	t_token	*words; // word tokens
-// 	t_redir	*redir_in; // < <<
-// 	t_redir	*redir_out; // > >>
-// 	int		infile; // final infile to dup2
-// 	int		outfile; // final infile to dup2
-// 	struct s_cmd	*next;
-// }	t_cmd;
-
-// typedef struct s_data
-// {
-// 	t_cmd		*cmds;
-// 	int			cmd_count;
-// 	t_env_list	**env;
-// }				t_data;
+typedef struct s_ast
+{
+	t_node_type		type;
+	char			**argv;
+	struct t_redir	*redir;
+	struct t_ast	*left;
+	struct t_ast	*right;
+}	t_ast
 
 int		validator(t_token *token);
 char	**tok_to_argv(t_token *token);

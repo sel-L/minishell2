@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 13:49:21 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/18 14:12:19 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2025/12/18 14:24:28 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ void	garbage_collector(t_parsing	*p, char **argv, char *str)
 int main(int ac, char **av, char **envp)
 {
 	t_parsing	*p;
-	t_node		*node;
 	int			res;
 	char		**argv;
 
@@ -79,10 +78,6 @@ int main(int ac, char **av, char **envp)
 		argv = tok_to_argv(p->token);
 		if (is_builtin(argv) == 1)
 			builtin(argv, p);
-		// This is the part where i build my argv
-		node = token_to_node(p->token);
-		print_node(node);
-		free_node_list(node);
 		garbage_collector(p ,argv, NULL);
 	}
 	rl_clear_history();
