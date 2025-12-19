@@ -6,7 +6,7 @@
 #    By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/31 10:47:03 by wshou-xi          #+#    #+#              #
-#    Updated: 2025/12/19 10:59:38 by wshou-xi         ###   ########.fr        #
+#    Updated: 2025/12/19 16:37:44 by wshou-xi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ RM = rm -rf
 VALGRIND = valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all --tool=memcheck --track-origins=yes --verbose
 
 MAINDIR = src/parsing
-MAINFILES = main.c ft_readline.c redir_check.c
+MAINFILES = main.c ft_readline.c redir_check.c garbage_collector.c
 MAIN = $(addprefix $(MAINDIR)/, $(MAINFILES))
 
 ARGVDIR = src/argv

@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 16:15:15 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/19 11:29:36 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2025/12/19 15:44:01 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ t_ast	*build_ast(t_token **token)
 			return (NULL);
 		return (pipe);
 	}
-	printf("left returned\n");
 	return (left);
 }
 
