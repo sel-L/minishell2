@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 13:49:21 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/18 14:24:28 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2025/12/19 11:45:31 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,16 @@ t_parsing	*init(char **envp);
 
 int	parsing(char *str, t_parsing *parse)
 {
+	t_ast	*ast;
+
 	if (!str)
 		return (1);
 	parse->token = tokenizer(str);
 	if (validator(parse->token) != 0)
 		return (free_token_list(parse->token), 1);
+	ast = build_ast(&parse->token);
+	print_ast(ast, 0);
+	free_ast(ast);
 	print_token_list(&parse->token);
 	return (0);
 }
@@ -76,8 +81,8 @@ int main(int ac, char **av, char **envp)
 		else if (res == 2)
 			continue ;
 		argv = tok_to_argv(p->token);
-		if (is_builtin(argv) == 1)
-			builtin(argv, p);
+		// if (is_builtin(argv) == 1)
+		// 	builtin(argv, p);
 		garbage_collector(p ,argv, NULL);
 	}
 	rl_clear_history();

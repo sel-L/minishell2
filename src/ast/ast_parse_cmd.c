@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 16:15:12 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/19 11:35:48 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2025/12/19 11:53:32 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,21 +80,16 @@ t_redir	*build_redir(t_redir **redir, t_token **token)
 
 	if (!token || !*token)
 		return (NULL);
-	while (*token && (*token)->type != PIPE)
+	while (*token && is_redir((*token)->type))
 	{
-		if (is_redir((*token)->type))
-		{
-			if (!(*token)->next || (*token)->next->type != WORD)
-				return (ft_putendl_fd("Syntax error: expected filename\n", 2),
-					NULL);
-			temp = create_redir_node((*token)->next->value, (*token)->type);
-			if (!temp)
-				return (NULL);
-			append_redir_back(temp, redir);
-			*token = (*token)->next->next;
-		}
-		else
-			*token = (*token)->next;
+		if (!(*token)->next || (*token)->next->type != WORD)
+			return (ft_putendl_fd("Syntax error: expected filename\n", 2),
+				NULL);
+		temp = create_redir_node((*token)->next->value, (*token)->type);
+		if (!temp)
+			return (NULL);
+		append_redir_back(temp, redir);
+		*token = (*token)->next->next;
 	}
 	return (*redir);
 }
@@ -115,6 +110,8 @@ char	**build_arg(t_token **token)
 	}
 	*token = start;
 	arg = malloc(sizeof(char *) * (size + 1));
+	if (!arg)
+		return (ft_putendl_fd("Build arg: malloc failed\n", 2), NULL);
 	i = 0;
 	while (i < size)
 	{

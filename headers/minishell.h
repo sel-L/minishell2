@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 00:17:21 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/15 23:46:35 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2025/12/19 11:44:14 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@
 # include <stdlib.h>
 # include <sys/time.h>
 # include <sys/wait.h>
-# include <readline/history.h>
-# include <readline/readline.h>
 # include <sys/types.h>
 # include <fcntl.h>
 # include <limits.h>

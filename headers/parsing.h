@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 17:30:46 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/19 11:33:42 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2025/12/19 11:44:19 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include "tokenizer.h"
 # include "m_env.h"
+# include <readline/readline.h>
+# include <readline/history.h>
 // # include "builtin.h"
 
 typedef struct	s_node
@@ -62,7 +64,7 @@ void	ft_free_str_arr(char **str);
 int		ft_strarr_len(char **str);
 char	**ft_strarrdup(char **str);
 t_redir	*create_redir_node(char *file_dest, t_token_type type);
-void	*append_redir_back(t_redir *redir, t_redir **redir_list);
+void	append_redir_back(t_redir *redir, t_redir **redir_list);
 void	free_redir_list(t_redir *redir);
 t_ast	*parse_primary(t_token **token);
 t_ast	*build_pipe(t_ast *left, t_ast *right);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ast_utils.c                                        :+:      :+:    :+:   */
+/*   ast_redir_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 19:03:48 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/19 11:04:22 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2025/12/19 11:55:27 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,19 @@
 
 int	append_args_after_redir(t_ast *ast, t_token **token)
 {
-	if (!ast || !token || !*token)
+	if (!ast || !token)
 		return (0);
 	while ((*token) && (*token)->type != PIPE)
 	{
-		if ((*token) && (*token)->type == WORD)
+		if (is_redir((*token)->type))
+		{
+			if ((*token)->next)
+				*token = (*token)->next->next;
+			else
+				*token = (*token)->next;
+			continue ;
+		}
+		if ((*token)->type == WORD)
 		{
 			ast->argv = ft_2d_append_back(ast->argv, (*token)->value);
 			if (!ast->argv)
@@ -30,19 +38,21 @@ int	append_args_after_redir(t_ast *ast, t_token **token)
 	return (1);
 }
 
-void	*append_redir_back(t_redir *redir, t_redir **redir_list)
+void	append_redir_back(t_redir *redir, t_redir **redir_list)
 {
 	t_redir	*temp;
 
-	if (!redir_list || !redir_list)
-		*redir_list = redir;
+	if (!redir || !redir_list)
+		return ;
 	if (!*redir_list)
-		return ((*redir_list = redir), NULL);
+	{
+		*redir_list = redir;
+		return ;
+	}
 	temp = *redir_list;
 	while (temp->next)
 		temp = temp->next;
 	temp->next = redir;
-	return (*redir_list);
 }
 
 t_redir	*create_redir_node(char *file_dest, t_token_type type)
