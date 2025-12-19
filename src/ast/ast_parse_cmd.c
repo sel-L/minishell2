@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 16:15:12 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/19 16:04:00 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2025/12/19 19:25:29 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,7 @@ char	**build_arg(t_token **token)
 		*token = (*token)->next;
 	}
 	*token = start;
-	arg = malloc(sizeof(char *) * (size + 1));
-	arg = (char **)ft_memset(arg, 0, sizeof(char *) * (size + 1));
+	arg = ft_calloc(size + 1, sizeof(char *));
 	i = 0;
 	while (i < size)
 	{
@@ -120,5 +119,5 @@ char	**build_arg(t_token **token)
 		*token = (*token)->next;
 		i++;
 	}
-	return ((arg[i] = NULL), arg);
+	return (arg);
 }

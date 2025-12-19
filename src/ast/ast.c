@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 16:15:15 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/19 15:44:01 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2025/12/19 19:15:54 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,59 +37,59 @@ t_ast	*build_ast(t_token **token)
 	return (left);
 }
 
-void	print_redir(t_redir *redir, int	depth)
-{
-	int	i;
+// void	print_redir(t_redir *redir, int	depth)
+// {
+// 	int	i;
 
-	while (redir)
-	{
-		i = 0;
-		while(i < depth)
-		{
-			printf("  ");
-			i++;
-		}
-		if (redir->type == REDIR_IN)
-			printf("< %s\n", redir->file);
-		else if (redir->type == REDIR_OUT)
-			printf("> %s\n", redir->file);
-		else if (redir->type == HERE_DOC)
-			printf("<< %s\n", redir->file);
-		else if (redir->type == APPEND)
-			printf(">> %s\n", redir->file);
-		redir = redir->next;
-	}
-}
+// 	while (redir)
+// 	{
+// 		i = 0;
+// 		while(i < depth)
+// 		{
+// 			printf("  ");
+// 			i++;
+// 		}
+// 		if (redir->type == REDIR_IN)
+// 			printf("< %s\n", redir->file);
+// 		else if (redir->type == REDIR_OUT)
+// 			printf("> %s\n", redir->file);
+// 		else if (redir->type == HERE_DOC)
+// 			printf("<< %s\n", redir->file);
+// 		else if (redir->type == APPEND)
+// 			printf(">> %s\n", redir->file);
+// 		redir = redir->next;
+// 	}
+// }
 
-void	print_ast(t_ast *ast, int depth)
-{
-	int	i;
+// void	print_ast(t_ast *ast, int depth)
+// {
+// 	int	i;
 
-	if (!ast)
-	{
-		printf("Ast is null\n");
-		return ;
-	}
-	i = 0;
-	while (i < depth)
-	{
-		printf("  ");
-		i++;
-	}
-	if (ast->type == PIPE)
-	{
-		printf("Pipe\n");
-		print_ast(ast->left, depth + 1);
-		print_ast(ast->right, depth + 1);
-	}
-	else if (ast->type == CMD)
-	{
-		printf("CMD: ");
-		if (ast->argv)
-			print_str_arr(ast->argv);
-		else
-			printf("No argv\n");
-		if (ast->redir)
-			print_redir(ast->redir, depth + 1);
-	}
-}
+// 	if (!ast)
+// 	{
+// 		printf("Ast is null\n");
+// 		return ;
+// 	}
+// 	i = 0;
+// 	while (i < depth)
+// 	{
+// 		printf("  ");
+// 		i++;
+// 	}
+// 	if (ast->type == PIPE)
+// 	{
+// 		printf("Pipe\n");
+// 		print_ast(ast->left, depth + 1);
+// 		print_ast(ast->right, depth + 1);
+// 	}
+// 	else if (ast->type == CMD)
+// 	{
+// 		printf("CMD: ");
+// 		if (ast->argv)
+// 			print_str_arr(ast->argv);
+// 		else
+// 			printf("No argv\n");
+// 		if (ast->redir)
+// 			print_redir(ast->redir, depth + 1);
+// 	}
+// }
