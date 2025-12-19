@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 17:30:46 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/18 15:30:01 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2025/12/19 10:01:20 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct s_ast
 	struct t_redir	*redir;
 	struct t_ast	*left;
 	struct t_ast	*right;
-}	t_ast
+}	t_ast;
 
 int		validator(t_token *token);
 char	**tok_to_argv(t_token *token);
@@ -53,18 +53,19 @@ void	print_str_arr(char **str_arr);
 void	free_argv(char **argv);
 char	**ft_2d_append_back(char **ori, char *content);
 char	**ft_2d_dup(char **src);
-void	free_node(t_node *node);
 int		is_redir(t_token_type t);
-t_node	*create_node(char **argv);
-void	free_node(t_node *node);
-void	free_node_list(t_node *node);
-void	print_node(t_node *node);
 void	garbage_collector(t_parsing	*p, char **argv, char *str);
 int		parsing(char *str, t_parsing *parse);
 int		ft_readline(t_parsing *p, char *prompt);
 void	ft_free_str_arr(char **str);
 int		ft_strarr_len(char **str);
 char	**ft_strarrdup(char **str);
-t_node	*token_to_node(t_token *token);
+t_redir	*create_redir_node(char *file_dest, t_node_type type);
+void	append_redir_back(t_redir *redir, t_redir **redir_list);
+void	free_redir_list(t_redir **redir);
+t_ast	*parse_primary(t_token **token);
+t_ast	*build_pipe(t_ast *left, t_ast *right);
+void	*free_ast(t_ast *ast);
+int		append_args_after_redir(t_ast *ast, t_token **token);
 
 #endif

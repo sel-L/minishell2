@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_check.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wshou-xi <wshou-xi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 16:17:14 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/02 13:43:55 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2025/12/19 08:35:29 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@ int	validator(t_token *token)
 	return (0);
 }
 
+/// @brief Return true if type is redir
+/// @param type
+/// @return true if is redir and false if is not
 int	is_redir(t_token_type t)
 {
 	return (t == REDIR_IN || t == REDIR_OUT || t == APPEND || t == HERE_DOC);
