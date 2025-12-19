@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 14:20:01 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/16 00:02:48 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2025/12/19 11:21:17 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ typedef enum	e_token_type
 	REDIR_IN,
 	REDIR_OUT,
 	APPEND,
-	HERE_DOC
+	HERE_DOC,
+	CMD
 }				t_token_type;
 
 typedef struct	s_token

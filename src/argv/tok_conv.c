@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tok_conv.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wshou-xi <wshou-xi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 13:46:09 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/09 17:57:30 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2025/12/19 10:39:11 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	print_str_arr(char **str_arr)
 	i = 0;
 	while (str_arr[i])
 	{
-		printf("[\"%s\"], ", str_arr[i]);
+		printf("[\"%s\"] ", str_arr[i]);
 		i++;
 	}
 	printf("\n");

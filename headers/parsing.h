@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 17:30:46 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/19 10:01:20 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2025/12/19 11:33:42 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,14 @@
 
 # include "tokenizer.h"
 # include "m_env.h"
-# include "builtin.h"
+// # include "builtin.h"
 
-typedef enum e_node_type
+typedef struct	s_node
 {
-	CMD,
-	PIPE
-}	t_node_type;
+	char			*cmd;
+	char			**argv;
+	struct s_node	*next;
+}				t_node;
 
 typedef struct	s_parsing
 {
@@ -34,16 +35,16 @@ typedef struct	s_redir
 {
 	t_token_type	type;
 	char			*file;
-	struct s_node	*next;
+	struct s_redir	*next;
 }					t_redir;
 
 typedef struct s_ast
 {
-	t_node_type		type;
+	t_token_type	type;
 	char			**argv;
-	struct t_redir	*redir;
-	struct t_ast	*left;
-	struct t_ast	*right;
+	struct s_redir	*redir;
+	struct s_ast	*left;
+	struct s_ast	*right;
 }	t_ast;
 
 int		validator(t_token *token);
@@ -60,12 +61,15 @@ int		ft_readline(t_parsing *p, char *prompt);
 void	ft_free_str_arr(char **str);
 int		ft_strarr_len(char **str);
 char	**ft_strarrdup(char **str);
-t_redir	*create_redir_node(char *file_dest, t_node_type type);
-void	append_redir_back(t_redir *redir, t_redir **redir_list);
-void	free_redir_list(t_redir **redir);
+t_redir	*create_redir_node(char *file_dest, t_token_type type);
+void	*append_redir_back(t_redir *redir, t_redir **redir_list);
+void	free_redir_list(t_redir *redir);
 t_ast	*parse_primary(t_token **token);
 t_ast	*build_pipe(t_ast *left, t_ast *right);
 void	*free_ast(t_ast *ast);
 int		append_args_after_redir(t_ast *ast, t_token **token);
+t_ast	*build_ast(t_token **token);
+void	print_ast(t_ast *ast, int depth);
+t_node	*create_node(char **argv);
 
 #endif

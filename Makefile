@@ -6,7 +6,7 @@
 #    By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/31 10:47:03 by wshou-xi          #+#    #+#              #
-#    Updated: 2025/12/18 09:46:26 by wshou-xi         ###   ########.fr        #
+#    Updated: 2025/12/19 10:59:38 by wshou-xi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,11 @@ TOKENDIR = src/tokenizer
 TOKENFILES = tokenizer.c tokenizer_utils.c tokenizer_utils2.c lexer_utils.c
 TOKEN = $(addprefix $(TOKENDIR)/, $(TOKENFILES))
 
-SRC = $(MAIN) $(TOKEN) $(ENV) $(B_IN) $(ARGV)
+ASTDIR = src/ast
+ASTFILES = ast.c ast_utils.c ast_parse_cmd.c
+AST = $(addprefix $(ASTDIR)/, $(ASTFILES))
+
+SRC = $(MAIN) $(TOKEN) $(ENV) $(B_IN) $(ARGV) $(AST)
 OBJDIR = obj
 OBJS = $(SRC:%.c=$(OBJDIR)/%.o)
 
