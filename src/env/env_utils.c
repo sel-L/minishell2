@@ -10,9 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/parsing.h"
-#include <string.h>
-#include <uchar.h>
+// #include "../../headers/parsing.h"
+// #include <string.h>
+// #include <uchar.h>
+#include "main_minishell.h"
 
 /// @brief env_list size
 /// @param list 

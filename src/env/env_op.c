@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/parsing.h"
+// #include "../../headers/parsing.h"
+#include "main_minishell.h"
 
 /// @brief create new node with the content and add it to the back of the list,
 /// @brief If node exist, change the value of the node

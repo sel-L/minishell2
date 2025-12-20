@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <parsing.h>
+// #include <parsing.h>
+#include "main_minishell.h"
 
 void	garbage_collector(t_parsing	*p, char **argv, char *str)
 {

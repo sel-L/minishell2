@@ -10,8 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-#include "parsing.h"
+// #include "minishell.h"
+// #include "parsing.h"
+#include "main_minishell.h"
 
 char	**sort_env(char	**env)
 {
@@ -96,7 +97,7 @@ t_env_list	**export_with_arg(t_env_list **env , char *arg)
 	return (free(front), free(value), env);
 }
 
-void	*export(t_env_list **env, char **arg)
+void	*ft_export(t_env_list **env, char **arg)
 {
 	int	i;
 

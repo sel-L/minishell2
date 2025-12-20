@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/parsing.h"
+// #include "../../headers/parsing.h"
+#include "main_minishell.h"
 
 /// @brief loop through the envp from main and call add_env_list
 /// @param env 

@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/parsing.h"
+// #include "../../headers/parsing.h"
+#include "main_minishell.h"
 
 void	add_node_back(t_node *src, t_node **node);
 t_node	*token_to_node(t_token *token);

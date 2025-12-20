@@ -10,9 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-#include "parsing.h"
-#include "m_env.h"
+// #include "minishell.h"
+// #include "parsing.h"
+// #include "m_env.h"
+#include "main_minishell.h"
 
 char	*get_int_env(char *target, char **list)
 {

@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tokenizer.h"
+// #include "tokenizer.h"
+#include "main_minishell.h"
 
 void	free_token_list(t_token *list)
 {

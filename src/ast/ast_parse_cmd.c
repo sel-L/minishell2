@@ -10,8 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-#include "parsing.h"
+// #include "minishell.h"
+// #include "parsing.h"
+#include "main_minishell.h"
 
 char	**build_arg(t_token **token);
 t_redir	*build_redir(t_redir **redir, t_token **token);

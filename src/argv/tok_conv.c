@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/parsing.h"
+// #include "../../headers/parsing.h"
+#include "main_minishell.h"
 
 void	free_argv(char **argv)
 {

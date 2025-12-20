@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+// #include "minishell.h"
+#include "main_minishell.h"
 
 int	is_builtin(char	**argv)
 {
@@ -32,7 +33,7 @@ void	builtin(char **argv, t_parsing *p)
 	if (ft_strcmp(argv[0], "ls") == 0)
 		ls(argv[1]);
 	if (ft_strcmp(argv[0], "export") == 0)
-		export(&p->env_list, argv);
+		ft_export(&p->env_list, argv);
 	if (ft_strcmp(argv[0], "unset") == 0)
 		unset(argv[1], &p->env_list);
 	if (ft_strcmp(argv[0], "env") == 0)

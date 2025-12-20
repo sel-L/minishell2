@@ -25,6 +25,15 @@
 # include <fcntl.h>
 # include <limits.h>
 # include <dirent.h>
+# include "libft.h"
+
+typedef enum	e_redir_type
+{
+	R_IN,
+	R_OUT,
+	HEREDOC,
+	APP
+}	t_redir_type;
 
 typedef enum	e_token_type
 {
@@ -37,13 +46,13 @@ typedef enum	e_token_type
 	CMD
 }				t_token_type;
 
-typedef struct	s_parsing
+typedef struct	s_env_list
 {
-	t_env_list	*env_list;
-	t_token		*token;
-	t_ast		*ast;
-	char		**internal_env;
-}				t_parsing;
+	char				*front;
+	char				*env_val;
+	struct s_env_list	*next;
+	struct s_env_list	*prev;
+}	t_env_list;
 
 typedef struct s_ast
 {
@@ -85,19 +94,20 @@ typedef struct s_lexer
 	int		op;
 }				t_lexer;
 
-typedef struct	s_env_list
+typedef struct	s_parsing
 {
-	char				*front;
-	char				*env_val;
-	struct s_env_list	*next;
-	struct s_env_list	*prev;
-}	t_env_list;
+	t_env_list	*env_list;
+	t_token		*token;
+	t_ast		*ast;
+	char		**internal_env;
+}				t_parsing;
+
 
 // Builtin functions
 void	pwd(void);
 void	cd(char *h_path, t_parsing *p);
 void	ls(char *path);
-void	*export(t_env_list **env, char **arg);
+void	*ft_export(t_env_list **env, char **arg);
 void	unset(char *target, t_env_list **env);
 void	env(t_env_list **env);
 int		is_builtin(char	**argv);
@@ -134,7 +144,7 @@ void	print_ast(t_ast *ast, int depth);
 t_redir	*create_redir_node(char *file_dest, t_token_type type);
 t_ast	*parse_primary(t_token **token);
 t_ast	*build_pipe(t_ast *left, t_ast *right);
-void	*append_redir_back(t_redir *redir, t_redir **redir_list);
+void	append_redir_back(t_redir *redir, t_redir **redir_list);
 void	free_redir_list(t_redir *redir);
 int		append_args_after_redir(t_ast *ast, t_token **token);
 
@@ -149,14 +159,13 @@ int		ft_readline(t_parsing *p, char *prompt);
 void	final_cleanup(t_parsing *p);
 
 // Parsing helper functions
+t_node	*create_node(char **argv);
 int		tok_size(t_token *token);
 void	print_str_arr(char **str_arr);
 char	**ft_2d_append_back(char **ori, char *content);
-char	**ft_2d_dup(char **src);
 void	ft_free_str_arr(char **str);
 int		ft_strarr_len(char **str);
 char	**ft_strarrdup(char **str);
-t_node	*create_node(char **argv);
 
 // Tokenizer function
 t_token	*tokenizer(char *input);

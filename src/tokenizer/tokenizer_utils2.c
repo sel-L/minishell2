@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tokenizer.h"
+// #include "tokenizer.h"
+#include "main_minishell.h"
 
 int	ft_isspace(char c)
 {

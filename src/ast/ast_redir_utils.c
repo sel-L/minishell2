@@ -10,8 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-#include "parsing.h"
+// #include "minishell.h"
+// #include "parsing.h"
+#include "main_minishell.h"
 
 int	append_args_after_redir(t_ast *ast, t_token **token)
 {

@@ -10,8 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-#include "parsing.h"
+// #include "minishell.h"
+// #include "parsing.h"
+#include "main_minishell.h"
 
 char *get_curr_path();
 

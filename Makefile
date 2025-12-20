@@ -37,7 +37,7 @@ TOKENFILES = tokenizer.c tokenizer_utils.c tokenizer_utils2.c lexer_utils.c
 TOKEN = $(addprefix $(TOKENDIR)/, $(TOKENFILES))
 
 ASTDIR = src/ast
-ASTFILES = ast.c ast_utils.c ast_parse_cmd.c
+ASTFILES = ast.c ast_redir_utils.c ast_parse_cmd.c
 AST = $(addprefix $(ASTDIR)/, $(ASTFILES))
 
 SRC = $(MAIN) $(TOKEN) $(ENV) $(B_IN) $(ARGV) $(AST)

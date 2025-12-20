@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+// #include "minishell.h"
+#include "main_minishell.h"
 
 int	ft_readline(t_parsing *p, char *prompt)
 {
