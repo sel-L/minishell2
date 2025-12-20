@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/parsing.h"
-#include <readline/readline.h>
+#include "main_minishell.h"
 
 // int	main(int ac, char **av, char **envp)
 // {

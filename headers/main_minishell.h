@@ -27,14 +27,6 @@
 # include <dirent.h>
 # include "libft.h"
 
-typedef enum	e_redir_type
-{
-	R_IN,
-	R_OUT,
-	HEREDOC,
-	APP
-}	t_redir_type;
-
 typedef enum	e_token_type
 {
 	WORD,
@@ -102,6 +94,10 @@ typedef struct	s_parsing
 	char		**internal_env;
 }				t_parsing;
 
+// AST functions
+void	*free_ast(t_ast *ast);
+t_ast	*build_ast(t_token **token);
+void	print_ast(t_ast *ast, int depth);
 
 // Builtin functions
 void	pwd(void);
@@ -113,7 +109,7 @@ void	env(t_env_list **env);
 int		is_builtin(char	**argv);
 void	builtin(char **argv, t_parsing *p);
 
-// Env main functions
+// Env functions
 t_env_list	*find_env_key(char *to_find, t_env_list **list);
 t_env_list	*env_to_list(char **env);
 void		free_env(t_env_list **env_list);
@@ -122,6 +118,22 @@ int			change_key_value(char *key, char *value, t_env_list **env);
 int			add_env(char *env, t_env_list **list);
 int			remove_env(char *target, t_env_list **list);
 void		print_env(t_env_list *env);
+
+// Parsing functions
+int		validator(t_token *token);
+char	**tok_to_argv(t_token *token);
+void	free_argv(char **argv);
+int		is_redir(t_token_type t);
+void	garbage_collector(t_parsing	*p, char **argv, char *str);
+int		parsing(char *str, t_parsing *parse);
+int		ft_readline(t_parsing *p, char *prompt);
+void	final_cleanup(t_parsing *p);
+
+// Tokenizer function
+t_token	*tokenizer(char *input);
+t_lexer	*init_lex(char *input);
+void	free_token_list(t_token *list);
+void	print_token_list(t_token **token);
 
 // Env helper functions
 t_env_list	**delete_node(t_env_list **list);
@@ -135,11 +147,6 @@ char		**add_int_env(char *target, char *value, char **list);
 char		*find_int_env(char *target, char **list);
 char		*get_int_env(char *target, char **list);
 
-// AST functions
-void	*free_ast(t_ast *ast);
-t_ast	*build_ast(t_token **token);
-void	print_ast(t_ast *ast, int depth);
-
 // AST helper functions
 t_redir	*create_redir_node(char *file_dest, t_token_type type);
 t_ast	*parse_primary(t_token **token);
@@ -147,16 +154,6 @@ t_ast	*build_pipe(t_ast *left, t_ast *right);
 void	append_redir_back(t_redir *redir, t_redir **redir_list);
 void	free_redir_list(t_redir *redir);
 int		append_args_after_redir(t_ast *ast, t_token **token);
-
-// Parsing functions
-int		validator(t_token *token);
-char	**tok_to_argv(t_token *token);
-void	free_argv(char **argv);
-int		is_redir(t_token_type t);
-void	garbage_collector(t_parsing	*p, char **argv, char *str);
-int		parsing(char *str, t_parsing *parse);
-int		ft_readline(t_parsing *p, char *prompt);
-void	final_cleanup(t_parsing *p);
 
 // Parsing helper functions
 t_node	*create_node(char **argv);
@@ -166,12 +163,6 @@ char	**ft_2d_append_back(char **ori, char *content);
 void	ft_free_str_arr(char **str);
 int		ft_strarr_len(char **str);
 char	**ft_strarrdup(char **str);
-
-// Tokenizer function
-t_token	*tokenizer(char *input);
-t_lexer	*init_lex(char *input);
-void	free_token_list(t_token *list);
-void	print_token_list(t_token **token);
 
 // Tokenizer helper function
 t_token	*add_and_append_token(t_token **list, t_token_type type, char *token);
