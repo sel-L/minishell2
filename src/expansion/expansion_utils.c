@@ -1,33 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_readline.c                                      :+:      :+:    :+:   */
+/*   expansion_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/12 00:26:28 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/22 10:16:34 by wshou-xi         ###   ########.fr       */
+/*   Created: 2025/12/22 17:11:02 by wshou-xi          #+#    #+#             */
+/*   Updated: 2025/12/22 17:19:03 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "minishell.h"
 #include "main_minishell.h"
 
-int	ft_readline(t_parsing *p, char *prompt)
+int	single_quoted(char *str)
 {
-	char		*str;
-	static int	line_count;
+	int	i;
 
-	str = readline(prompt);
-	if (ft_strcmp(str, "exit") == 0)
-		return (free(str), 1);
-	if (str == NULL || *str == '\0' || *str == 32)
-		return (free(str), 2);
-	add_history(str);
-	line_count++;
-	p->line_count = line_count;
-	if (parsing(str, p) == 1)
-		return (free(str), rl_clear_history(), 1);
-	free(str);
-	return (0);
+	i = 0;
+	while (str[i] == '\'')
+		i++;
+	return (i);
+}
+
+char	*double_quoted(t_parsing *p, char *str)
+{
+	char	*value;
+
+	value = get_expanded_value(p, str);
+	if (*str == '"')
+		str++;
+	return (value);
+}
+
+int	idenfity_quotes(char *str)
+{
+	if (*str == '\'')
+		return (1);
+	else if (*str == '"')
+		return (2);
 }

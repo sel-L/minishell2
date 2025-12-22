@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 13:22:06 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/14 13:22:12 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2025/12/22 17:14:12 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,19 +97,19 @@ void cd(char *h_path, t_parsing *p)
 		free(h_path);
 }
 
-void ls(char *path)
-{
-	DIR				*dir;
-	char			*c_path;
-	struct dirent	*entry;
+// void ls(char *path)
+// {
+// 	DIR				*dir;
+// 	char			*c_path;
+// 	struct dirent	*entry;
 
-	c_path = find_path(path);
-	if (!c_path)
-		return (free(c_path));
-	dir = opendir(c_path);
-	while ((entry = readdir(dir)) != NULL)
-		printf("%s  ", entry->d_name);
-	printf("\n");
-	free(c_path);
-	closedir(dir);
-}
+// 	c_path = find_path(path);
+// 	if (!c_path)
+// 		return (free(c_path));
+// 	dir = opendir(c_path);
+// 	while ((entry = readdir(dir)) != NULL)
+// 		printf("%s  ", entry->d_name);
+// 	printf("\n");
+// 	free(c_path);
+// 	closedir(dir);
+// }

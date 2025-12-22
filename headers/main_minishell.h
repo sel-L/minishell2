@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 00:17:21 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/15 23:46:35 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2025/12/22 10:14:40 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@
 # include <fcntl.h>
 # include <limits.h>
 # include <dirent.h>
-# include "libft.h"
+# include "../libft/libft.h"
+# include "../libft/gnl/get_next_line.h"
 
 typedef enum	e_token_type
 {
@@ -92,6 +93,7 @@ typedef struct	s_parsing
 	t_token		*token;
 	t_ast		*ast;
 	char		**internal_env;
+	int			line_count;
 }				t_parsing;
 
 // AST functions
