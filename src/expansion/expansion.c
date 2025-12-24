@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 15:16:01 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/22 17:19:28 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2025/12/24 11:13:19 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,19 @@ char	*get_expanded_value(t_parsing *p, char *str)
 	return(expanded);
 }
 
-char	*expand()
+void	*expandable(char *str, int *flag)
+{
+	int	i;
+
+	i = 0;
+	while(str[i] && str[i] != '\'')
+	{
+		if (str[i] == '"')
+			return ((*flag = !(*flag)), NULL);
+		i++;
+	}
+	return (NULL);
+}
 
 char	*expansion(t_parsing *p, char *str)
 {
