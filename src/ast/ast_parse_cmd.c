@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 16:15:12 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/19 19:25:29 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2025/12/26 14:50:14 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,8 @@ t_ast	*build_pipe(t_ast *left, t_ast *right)
 	if (!pipe)
 		return (free_ast(left), free_ast(right),
 			ft_putendl_fd("Creation pipe node failed\n", 2), NULL);
-	pipe->type = PIPE;
-	pipe->left = left;
-	pipe->right = right;
-	pipe->redir = NULL;
-	pipe->argv = NULL;
+	*pipe = (t_ast){.type = PIPE, .left = left,
+		.right = right, .redir = NULL, .argv = NULL};
 	return (pipe);
 }
 
@@ -69,9 +66,7 @@ t_ast	*parse_primary(t_token **token)
 	ast_node->redir = build_redir(&redir, token);
 	if (!append_args_after_redir(ast_node, token))
 		return (free_ast(ast_node), NULL);
-	ast_node->type = CMD;
-	ast_node->left = NULL;
-	ast_node->right = NULL;
+	*ast_node = (t_ast){.type = CMD, .left = NULL, .right = NULL};
 	return (ast_node);
 }
 

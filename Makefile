@@ -6,7 +6,7 @@
 #    By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/31 10:47:03 by wshou-xi          #+#    #+#              #
-#    Updated: 2025/12/19 16:37:44 by wshou-xi         ###   ########.fr        #
+#    Updated: 2025/12/26 15:45:59 by wshou-xi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,11 @@ ASTDIR = src/ast
 ASTFILES = ast.c ast_redir_utils.c ast_parse_cmd.c
 AST = $(addprefix $(ASTDIR)/, $(ASTFILES))
 
-SRC = $(MAIN) $(TOKEN) $(ENV) $(B_IN) $(ARGV) $(AST)
+EXPDIR = src/expansion
+EXPFILES = expansion.c
+EXP = $(addprefix $(EXPDIR)/, $(EXPFILES))
+
+SRC = $(MAIN) $(TOKEN) $(ENV) $(B_IN) $(ARGV) $(AST) $(EXP)
 OBJDIR = obj
 OBJS = $(SRC:%.c=$(OBJDIR)/%.o)
 

@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 15:16:01 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/24 11:13:19 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2025/12/26 15:47:26 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ char	*get_expanded_value(t_parsing *p, char *str)
 {
 	t_env_list	*list;
 	int			size;
+	int			i;
 	char		*res;
 	char		*expanded;
 
@@ -35,30 +36,20 @@ char	*get_expanded_value(t_parsing *p, char *str)
 
 void	*expandable(char *str, int *flag)
 {
-	int	i;
+	int		i;
+	char	s_quote;
 
 	i = 0;
-	while(str[i] && str[i] != '\'')
+	s_quote = (str[i] == '\'');
+	while (str[i] == '\'')
+		i++;
+	while(str[i])
 	{
-		if (str[i] == '"')
+		if (str[i] == '\'' && s_quote)
+			s_quote = !s_quote;
+		if (str[i] == '"' && !s_quote)
 			return ((*flag = !(*flag)), NULL);
 		i++;
 	}
 	return (NULL);
-}
-
-char	*expansion(t_parsing *p, char *str)
-{
-	char	*res;
-	char	*value;
-
-	while (str)
-	{
-		if (*str == '\'')
-			str += single_quoted(str);
-		else if (*str == '"')
-			value = double_quoted(p, str);
-		
-		res = ft_strjoin(res, *str);
-	}
 }

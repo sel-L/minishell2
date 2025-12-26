@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 13:49:21 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/19 16:37:28 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2025/12/26 15:41:18 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int main(int ac, char **av, char **envp)
 
 	(void)ac;
 	(void)av;
-	if((p = init(envp)) == NULL)
+	if((p = init(envp)) == NULL) // not norm free
 		return (1);
 	while (1)
 	{
@@ -66,6 +66,7 @@ int main(int ac, char **av, char **envp)
 		if (res == 1)
 			break ;
 		argv = tok_to_argv(p->token);
+		printf("value is %s\n", get_expanded_value(p, p->token->value));
 		if (is_builtin(argv) == 1)
 			builtin(argv, p);
 		print_ast(p->ast, 0);

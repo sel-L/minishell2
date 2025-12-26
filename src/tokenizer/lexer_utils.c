@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 11:58:21 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/15 23:52:55 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2025/12/26 15:43:54 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,8 @@ t_lexer	*init_lex(char *input)
 	lex = malloc(sizeof(t_lexer));
 	if (!lex)
 		return (NULL);
-	ft_bzero(lex, sizeof(t_lexer));
-	lex->lex_start = input;
-	lex->lex_end = input;
+	*lex = (t_lexer){0};
+	*lex = (t_lexer){.lex_start = input, .lex_end = input};
 	return (lex);
 }
 

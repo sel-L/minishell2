@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 16:15:15 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/19 19:15:54 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2025/12/26 14:40:19 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,6 @@ void	print_ast(t_ast *ast, int depth)
 {
 	int	i;
 
-	if (!ast)
-	{
-		printf("Ast is null\n");
-		return ;
-	}
 	i = 0;
 	while (i < depth)
 	{

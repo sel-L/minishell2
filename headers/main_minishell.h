@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 00:17:21 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/22 10:14:40 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2025/12/26 14:53:10 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,9 @@ t_token	*tokenizer(char *input);
 t_lexer	*init_lex(char *input);
 void	free_token_list(t_token *list);
 void	print_token_list(t_token **token);
+
+// Expansion functions
+char	*get_expanded_value(t_parsing *p, char *str);
 
 // Env helper functions
 t_env_list	**delete_node(t_env_list **list);
