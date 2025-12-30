@@ -6,33 +6,11 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 15:16:01 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/26 15:47:26 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2025/12/30 15:41:06 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main_minishell.h"
-
-char	*get_expanded_value(t_parsing *p, char *str)
-{
-	t_env_list	*list;
-	int			size;
-	int			i;
-	char		*res;
-	char		*expanded;
-
-	list = p->env_list;
-	size = 0;
-	if (*str == '"')
-		str++;
-	if (*str == '$')
-		str++;
-	while (str[size] != ' ')
-		size++;
-	res = ft_substr(str, 0, size);
-	expanded = get_value(res, &list);
-	free(res);
-	return(expanded);
-}
 
 void	*expandable(char *str, int *flag)
 {
@@ -52,4 +30,74 @@ void	*expandable(char *str, int *flag)
 		i++;
 	}
 	return (NULL);
+}
+
+char	*quote_remover(char *str)
+{
+	char	*res;
+	char	quote;
+	int		i;
+	
+	i = 0;
+	quote = '\0';
+	res = ft_strdup("");
+	while (str[i])
+	{
+		if ((str[i] == '\'' || str[i] == '"') && !quote)
+			quote = str[i];
+		else if (str[i] == quote)
+			quote = '\0';
+		else
+			res = ft_charjoin(res, str[i]);
+		i++;
+	}
+	return (res);
+}
+
+char	*handle_dollar(char *str, int *i, char quote, t_parsing *p)
+{
+	char	*var_name;
+	char	*var_value;
+	char	*res;
+
+	var_name = extract_expandable(&str[*i]);
+	if (!ft_strcmp(var_name, "$"))
+	{
+		res = ft_strdup("$");
+		*i++;
+	}
+	else
+	{
+		var_value = get_expanded_value(p, var_name);
+		if (var_value)
+			res = ft_strdup(var_value);
+		else
+			res = ft_strdup("");
+		*i += ft_strlen(var_name);
+	}
+	free(var_name);
+	return (res);
+}
+
+char	*expand(char *str, t_parsing *p)
+{
+	char	*res;
+	char	quote;
+	int		i;
+
+	res = ft_strdup("");
+	i = 0;
+	quote = '\0';
+	while (str[i])
+	{
+		update_quote_state(str[i], &quote);
+		if (str[i] == '$' && quote != '\'')
+			res = ft_strjoin_then_free(res, handle_dollar(str, &i, quote, p));
+		else
+		{
+			res = ft_charjoin(res, str[i]);
+			i++;
+		}
+	}
+	return (res);
 }

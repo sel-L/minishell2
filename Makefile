@@ -6,7 +6,7 @@
 #    By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/31 10:47:03 by wshou-xi          #+#    #+#              #
-#    Updated: 2025/12/26 15:45:59 by wshou-xi         ###   ########.fr        #
+#    Updated: 2025/12/29 23:49:07 by wshou-xi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ RM = rm -rf
 VALGRIND = valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all --tool=memcheck --track-origins=yes --verbose
 
 MAINDIR = src/parsing
-MAINFILES = main.c ft_readline.c redir_check.c garbage_collector.c
+MAINFILES = test.c ft_readline.c redir_check.c garbage_collector.c
 MAIN = $(addprefix $(MAINDIR)/, $(MAINFILES))
 
 ARGVDIR = src/argv
@@ -41,7 +41,7 @@ ASTFILES = ast.c ast_redir_utils.c ast_parse_cmd.c
 AST = $(addprefix $(ASTDIR)/, $(ASTFILES))
 
 EXPDIR = src/expansion
-EXPFILES = expansion.c
+EXPFILES = expansion.c expansion_utils.c
 EXP = $(addprefix $(EXPDIR)/, $(EXPFILES))
 
 SRC = $(MAIN) $(TOKEN) $(ENV) $(B_IN) $(ARGV) $(AST) $(EXP)
