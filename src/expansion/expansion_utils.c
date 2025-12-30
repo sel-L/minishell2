@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 17:11:02 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/30 15:44:30 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2025/12/30 15:56:08 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	update_quote_state(char c, char *quote)
 {
 	if ((c == '\'' || c == '"') && *quote == '\0')
 		*quote = c;
-	else
+	else if (c == *quote)
 		*quote = '\0';
 }
 
@@ -30,7 +30,6 @@ char	*ft_charjoin(char *str, char chr)
 	temp[0] = chr;
 	temp[1] = '\0';
 	res = ft_strjoin_then_free(str, temp);
-	free(str);
 	return (res);
 }
 
@@ -47,7 +46,7 @@ char	*get_expanded_value(t_parsing *p, char *str)
 		str++;
 	if (*str == '$')
 		str++;
-	while (str[size] != ' ' && str[size] != '"')
+	while (str[size] && (str[size] != ' ' && str[size] != '"'))
 		size++;
 	res = ft_substr(str, 0, size);
 	expanded = get_value(res, &list);

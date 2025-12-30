@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 15:16:01 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/30 15:41:06 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2025/12/30 15:56:28 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	*quote_remover(char *str)
 	return (res);
 }
 
-char	*handle_dollar(char *str, int *i, char quote, t_parsing *p)
+char	*handle_dollar(char *str, int *i, t_parsing *p)
 {
 	char	*var_name;
 	char	*var_value;
@@ -64,11 +64,11 @@ char	*handle_dollar(char *str, int *i, char quote, t_parsing *p)
 	if (!ft_strcmp(var_name, "$"))
 	{
 		res = ft_strdup("$");
-		*i++;
+		*i += 1;
 	}
 	else
 	{
-		var_value = get_expanded_value(p, var_name);
+		var_value = get_value(var_name + 1, &p->env_list);
 		if (var_value)
 			res = ft_strdup(var_value);
 		else
@@ -79,7 +79,7 @@ char	*handle_dollar(char *str, int *i, char quote, t_parsing *p)
 	return (res);
 }
 
-char	*expand(char *str, t_parsing *p)
+char	*expansion(char *str, t_parsing *p)
 {
 	char	*res;
 	char	quote;
@@ -92,7 +92,7 @@ char	*expand(char *str, t_parsing *p)
 	{
 		update_quote_state(str[i], &quote);
 		if (str[i] == '$' && quote != '\'')
-			res = ft_strjoin_then_free(res, handle_dollar(str, &i, quote, p));
+			res = ft_strjoin_then_free(res, handle_dollar(str, &i, p));
 		else
 		{
 			res = ft_charjoin(res, str[i]);
