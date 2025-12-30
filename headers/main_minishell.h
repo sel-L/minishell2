@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 00:17:21 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/30 15:47:34 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2025/12/30 21:34:34 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,8 @@ void	free_token_list(t_token *list);
 void	print_token_list(t_token **token);
 
 // Expansion functions
+char	*expand_and_remove_quotes(char *str, t_parsing *p);
+void	process_ast_expansion(t_ast *node, t_parsing *p);
 char	*expansion(char *str, t_parsing *p);
 char	*get_expanded_value(t_parsing *p, char *str);
 void	*expandable(char *str, int *flag);

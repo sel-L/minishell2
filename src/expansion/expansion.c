@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 15:16:01 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/30 15:56:28 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2025/12/30 16:16:10 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,4 +100,18 @@ char	*expansion(char *str, t_parsing *p)
 		}
 	}
 	return (res);
+}
+
+char	*expand_and_remove_quotes(char *str, t_parsing *p)
+{
+	char	*expanded;
+	char	*quotes_proccessed;
+
+	if (!str || !*str)
+		return (ft_strdup(""));
+	expanded = expansion(str, p);
+	quotes_proccessed = quote_remover(expanded);
+	free(str);
+	free(expanded);
+	return (quotes_proccessed);
 }

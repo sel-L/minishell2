@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 12:38:53 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/30 00:08:00 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2025/12/30 16:00:27 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ int	main(int ac, char **av, char **envp)
 {
 	t_parsing	*p;
 	char		*str;
+	char		*expanded;
+	char		*proccessed;
 
 	p = init_half(envp);
 	(void)ac;
@@ -62,9 +64,14 @@ int	main(int ac, char **av, char **envp)
 	{
 		str = readline("> ");
 		add_history(str);
-		printf("remover is: %s\n", extract_expandable(str));
+		expanded = expansion(str, p);
+		printf("Expanded : %s\n", expanded);
+		proccessed = quote_remover(expanded);
+		printf("Quote removed: %s\n", proccessed);
 		free_token_list(p->token);
 		free(str);
+		free(expanded);
+		free(proccessed);
 	}
 	free_env(&p->env_list);
 	free(p);
