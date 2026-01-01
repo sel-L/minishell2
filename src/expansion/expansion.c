@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 15:16:01 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/30 16:16:10 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/01 14:01:43 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ char	*handle_dollar(char *str, int *i, t_parsing *p)
 		*i += ft_strlen(var_name);
 	}
 	free(var_name);
+	free(var_value);
 	return (res);
 }
 
@@ -111,7 +112,6 @@ char	*expand_and_remove_quotes(char *str, t_parsing *p)
 		return (ft_strdup(""));
 	expanded = expansion(str, p);
 	quotes_proccessed = quote_remover(expanded);
-	free(str);
 	free(expanded);
 	return (quotes_proccessed);
 }

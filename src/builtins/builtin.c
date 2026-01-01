@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 00:02:15 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/26 15:46:12 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/01 14:24:08 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,36 @@ int	is_builtin(char	**argv)
 		|| ft_strcmp(argv[0], "echo") == 0);
 }
 
+int	argument_count(char **argv)
+{
+	int	i;
+
+	i = 0;
+	if (!argv || !*argv)
+		return (0);
+	while (argv[i])
+		i++;
+	return (i);
+}
+
+void	print_invalid_argv()
+{
+	ft_putendl_fd("Builtin: Invalid arguments", 2);
+}
+
 void	builtin(char **argv, t_parsing *p)
 {
-	if (ft_strcmp(argv[0], "pwd") == 0)
+	if ((ft_strcmp(argv[0], "pwd") == 0) && (argument_count(argv) == 1))
 		pwd();
-	if (ft_strcmp(argv[0], "cd") == 0)
+	else if ((ft_strcmp(argv[0], "cd") == 0) && (argument_count(argv) == 2))
 		cd(argv[1], p);
-	if (ft_strcmp(argv[0], "export") == 0)
+	else if (ft_strcmp(argv[0], "export") == 0)
 		ft_export(&p->env_list, argv);
-	if (ft_strcmp(argv[0], "unset") == 0)
+	else if (ft_strcmp(argv[0], "unset") == 0)
 		unset(argv[1], &p->env_list);
-	if (ft_strcmp(argv[0], "env") == 0)
+	else if ((ft_strcmp(argv[0], "env") == 0) && (argument_count(argv) == 1))
 		env(&p->env_list);
+	else
+		return (print_invalid_argv());
+
 }

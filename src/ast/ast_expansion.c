@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 18:09:45 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/30 21:33:59 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/01 16:07:14 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ void	expand_ast_argv(t_ast *node, t_parsing *p);
 
 void	process_ast_expansion(t_ast *node, t_parsing *p)
 {
-	t_ast	*temp_node;
-
 	if(!node)
 		return ;
 	if (node->type == CMD)

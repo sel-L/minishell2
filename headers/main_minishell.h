@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 00:17:21 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/30 21:34:34 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/01 14:35:26 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,6 +162,7 @@ void		*print_int_env(char **int_env);
 char		**add_int_env(char *target, char *value, char **list);
 char		*find_int_env(char *target, char **list);
 char		*get_int_env(char *target, char **list);
+t_env_list	*empty_node(char *arg);
 
 // AST helper functions
 t_redir	*create_redir_node(char *file_dest, t_token_type type);

@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 17:11:02 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/30 15:56:08 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/01 16:22:35 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,12 @@ void	update_quote_state(char c, char *quote)
 
 char	*ft_charjoin(char *str, char chr)
 {
-	char	temp[2];
+	char	*temp;
 	char	*res;
 
 	if (!str)
 		str = ft_strdup("");
+	temp = malloc(2);
 	temp[0] = chr;
 	temp[1] = '\0';
 	res = ft_strjoin_then_free(str, temp);
@@ -63,9 +64,10 @@ char	*ft_strjoin_then_free(char *s1, char *s2)
 	if (!s1)
 		return (ft_strdup(""));
 	if (!s2)
-		return (s1);
+		return (free(s1), ft_strdup(""));
 	res = ft_strjoin(s1, s2);
 	free(s1);
+	free(s2);
 	return (res);
 }
 

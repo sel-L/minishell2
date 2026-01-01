@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 13:49:21 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/30 00:07:53 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/01 16:06:43 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	parsing(char *str, t_parsing *parse)
 	if (validator(parse->token) != 0)
 		return (free_token_list(parse->token), 1);
 	parse->ast = build_ast(&parse->token);
+	process_ast_expansion(parse->ast, parse);
 	parse->token = head;
 	return (0);
 }
@@ -65,8 +66,9 @@ int main(int ac, char **av, char **envp)
 		res = ft_readline(p, "> ");
 		if (res == 1)
 			break ;
+		if (res == 2)
+			continue ;
 		argv = tok_to_argv(p->token);
-		printf("value is %s\n", get_expanded_value(p, p->token->value));
 		if (is_builtin(argv) == 1)
 			builtin(argv, p);
 		print_ast(p->ast, 0);

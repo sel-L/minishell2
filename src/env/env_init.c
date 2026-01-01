@@ -6,12 +6,30 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 16:35:28 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/11 08:56:50 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/01 14:22:04 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // #include "../../headers/parsing.h"
 #include "main_minishell.h"
+
+/// @brief check for invalid shlvl, default is 1
+/// @param env 
+void	check_env(t_env_list *env)
+{
+	t_env_list	*temp;
+
+	temp = env;
+	while(temp)
+	{
+		if (ft_strcmp("SHLVL", temp->front) == 0)
+		{
+			if (!temp->env_val)
+				temp->env_val = ft_strdup("1");
+		}
+		temp = temp->next;
+	}
+}
 
 /// @brief loop through the envp from main and call add_env_list
 /// @param env 
@@ -31,6 +49,7 @@ t_env_list	*env_to_list(char **env)
 			return (free_env(&env_list), NULL);
 		i++;
 	}
+	check_env(env_list);
 	return (env_list);
 }
 

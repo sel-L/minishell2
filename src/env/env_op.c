@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 16:35:25 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/11 17:59:12 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/01 14:34:51 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,18 @@ int	change_key_value(char *key, char *value, t_env_list **env)
 	free(temp->env_val);
 	temp->env_val = ft_strdup(value);
 	return (0);
+}
+
+t_env_list	*empty_node(char *arg)
+{
+	t_env_list	*temp;
+
+	temp = malloc(sizeof(t_env_list));
+	if (!temp)
+		return (NULL);
+	temp->front = ft_strdup(arg);
+	temp->env_val = ft_strdup("");
+	temp->next = NULL;
+	temp->prev = NULL;
+	return (temp);
 }
