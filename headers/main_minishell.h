@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 00:17:21 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/26 14:53:10 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/01 14:35:26 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,18 @@ void	free_token_list(t_token *list);
 void	print_token_list(t_token **token);
 
 // Expansion functions
+char	*expand_and_remove_quotes(char *str, t_parsing *p);
+void	process_ast_expansion(t_ast *node, t_parsing *p);
+char	*expansion(char *str, t_parsing *p);
 char	*get_expanded_value(t_parsing *p, char *str);
+void	*expandable(char *str, int *flag);
+char	*quote_remover(char *str);
+
+// Expansion helper function
+char	*ft_charjoin(char *str, char chr);
+char	*extract_expandable(char *str);
+void	update_quote_state(char c, char *quote);
+char	*ft_strjoin_then_free(char *s1, char *s2);
 
 // Env helper functions
 t_env_list	**delete_node(t_env_list **list);
@@ -151,6 +162,7 @@ void		*print_int_env(char **int_env);
 char		**add_int_env(char *target, char *value, char **list);
 char		*find_int_env(char *target, char **list);
 char		*get_int_env(char *target, char **list);
+t_env_list	*empty_node(char *arg);
 
 // AST helper functions
 t_redir	*create_redir_node(char *file_dest, t_token_type type);

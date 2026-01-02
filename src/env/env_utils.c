@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 16:40:49 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/18 14:10:38 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/01 14:42:21 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,10 @@ void	print_env(t_env_list *env)
 	{
 		if (env->front[0] == '?')
 			env = env->next;
-		printf("%s=%s\n", env->front, env->env_val);
+		if (ft_strlen(env->env_val) >= 1)
+			printf("%s=%s\n", env->front, env->env_val);
+		else
+			printf("%s\n", env->front);
 		env = env->next;
 		i++;
 	}

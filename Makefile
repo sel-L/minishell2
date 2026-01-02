@@ -6,7 +6,7 @@
 #    By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/31 10:47:03 by wshou-xi          #+#    #+#              #
-#    Updated: 2025/12/26 15:45:59 by wshou-xi         ###   ########.fr        #
+#    Updated: 2026/01/01 16:07:05 by wshou-xi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,11 +37,11 @@ TOKENFILES = tokenizer.c tokenizer_utils.c tokenizer_utils2.c lexer_utils.c
 TOKEN = $(addprefix $(TOKENDIR)/, $(TOKENFILES))
 
 ASTDIR = src/ast
-ASTFILES = ast.c ast_redir_utils.c ast_parse_cmd.c
+ASTFILES = ast.c ast_redir_utils.c ast_parse_cmd.c ast_expansion.c
 AST = $(addprefix $(ASTDIR)/, $(ASTFILES))
 
 EXPDIR = src/expansion
-EXPFILES = expansion.c
+EXPFILES = expansion.c expansion_utils.c
 EXP = $(addprefix $(EXPDIR)/, $(EXPFILES))
 
 SRC = $(MAIN) $(TOKEN) $(ENV) $(B_IN) $(ARGV) $(AST) $(EXP)

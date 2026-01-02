@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 16:15:15 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/26 14:40:19 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/01 15:27:03 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	print_ast(t_ast *ast, int depth)
 	}
 	else if (ast->type == CMD)
 	{
-		printf("CMD: ");
+		printf("CMD: \n");
 		print_str_arr(ast->argv);
 		if (ast->redir)
 			print_redir(ast->redir, depth + 1);
