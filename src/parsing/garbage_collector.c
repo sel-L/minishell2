@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 16:34:04 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/01 15:18:05 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/01 16:39:44 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,5 @@ void	final_cleanup(t_parsing *p)
 {
 	free_env(&p->env_list);
 	ft_free_str_arr(p->internal_env);
-	// if (p->ast)
-	// 	free_ast(p->ast);
 	free(p);
 }

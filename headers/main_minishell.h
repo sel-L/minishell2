@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 00:17:21 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/01 14:35:26 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/03 22:53:09 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,9 @@ char	*expansion(char *str, t_parsing *p);
 char	*get_expanded_value(t_parsing *p, char *str);
 void	*expandable(char *str, int *flag);
 char	*quote_remover(char *str);
+
+// Heredoc
+int	heredoc(t_parsing *p, char *delim);
 
 // Expansion helper function
 char	*ft_charjoin(char *str, char chr);
