@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 13:49:21 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/01 16:06:43 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/04 15:25:28 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,13 @@ t_parsing	*init(char **envp);
 
 int	parsing(char *str, t_parsing *parse)
 {
-	t_token	*head;
-
 	if (!str)
 		return (1);
 	parse->token = tokenizer(str);
-	head = parse->token;
 	if (validator(parse->token) != 0)
 		return (free_token_list(parse->token), 1);
-	parse->ast = build_ast(&parse->token);
+	parse->ast = ast(&parse->token);
 	process_ast_expansion(parse->ast, parse);
-	parse->token = head;
 	return (0);
 }
 

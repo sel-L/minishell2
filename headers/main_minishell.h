@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 00:17:21 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/03 22:53:09 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/04 13:23:43 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,12 +99,12 @@ typedef struct	s_parsing
 // AST functions
 void	*free_ast(t_ast *ast);
 t_ast	*build_ast(t_token **token);
+t_ast	*ast(t_token **token);
 void	print_ast(t_ast *ast, int depth);
 
 // Builtin functions
 void	pwd(void);
 void	cd(char *h_path, t_parsing *p);
-void	ls(char *path);
 void	*ft_export(t_env_list **env, char **arg);
 void	unset(char *target, t_env_list **env);
 void	env(t_env_list **env);
