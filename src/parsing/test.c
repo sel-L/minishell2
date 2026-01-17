@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 12:38:53 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/01 15:27:52 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/17 10:14:20 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,3 +73,22 @@
 // 	free(p);
 // 	return (0);
 // }
+
+int	main()
+{
+	char	*buffer;
+	int		return_value;
+	while (1)
+	{
+		buffer = readline("> ");
+		add_history(buffer);
+		if (!(ft_strcmp(buffer, "exit")))
+			return (0);
+		else
+		{
+			rvalue(buffer);
+			return_value = rvalue(NULL);
+			printf("return value: %d\n", return_value);
+		}
+	}
+}

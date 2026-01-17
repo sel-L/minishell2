@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 00:17:21 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/04 13:23:43 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/17 09:40:53 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ void	garbage_collector(t_parsing	*p, char **argv, char *str);
 int		parsing(char *str, t_parsing *parse);
 int		ft_readline(t_parsing *p, char *prompt);
 void	final_cleanup(t_parsing *p);
+int		rvalue(void *input);
 
 // Tokenizer function
 t_token	*tokenizer(char *input);
