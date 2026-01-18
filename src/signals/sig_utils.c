@@ -34,6 +34,7 @@ void	set_signal(int signum)
 }
 
 // resetting sig to their original action; based on POSIX
+// During execution, the child should be responding the DEFAULT signals.
 void	reset_sig_to_default(int signum)
 {
 	struct	sigaction	sa;
@@ -45,6 +46,7 @@ void	reset_sig_to_default(int signum)
 	set_signal(signum);
 }
 
+// MIGHT BE AN EXTRA FUNCTION ?
 // Printing Quit (core dumped)
 void	print_core_dump(int signum)
 {

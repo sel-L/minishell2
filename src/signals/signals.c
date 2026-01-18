@@ -43,6 +43,5 @@ void	setup_sig_non_intereactive(void)
 	sigemptyset(&sa.sa_mask);
 	sa.sa_handler = reset_prompt;
 	sigaction(SIGINT, &sa, NULL);
-	sa.sa_handler = print_core_dump;
-	sigaction(SIGQUIT, &sa, NULL);
+	ignore_sig(SIGQUIT);
 }

@@ -13,6 +13,7 @@
 #include "sub_minishell.h"
 // IGNORING SIGNALS SECTION ==============
 // IGNORES BOTH SIGQUIT AND SIGINT
+// During execution, the parent should be ignoring all signals
 void	ignore_all_signals(void)
 {
 	ignore_sig(SIGQUIT);
