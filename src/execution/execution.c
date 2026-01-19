@@ -88,6 +88,8 @@ int exec_cmd(t_ast *node, char **env)
     if (pid == 0)
     {
         apply_redirections(node->redir);
+		if (is_builtin(node->argv[0]) == 1)
+			builtin(node->argv[0], env);
 		if (!is_alr_path(node->argv[0]))
 			path = get_path(node->argv[0], env);
 		else
