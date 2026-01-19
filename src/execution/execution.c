@@ -88,8 +88,8 @@ int exec_cmd(t_ast *node, char **env)
     if (pid == 0)
     {
         apply_redirections(node->redir);
-		if (is_builtin(node->argv[0]) == 1)
-			builtin(node->argv[0], env);
+		if (is_builtin(node->argv[0]))
+			builtin(node->argv[0], get_parsing_struct(NULL));
 		if (!is_alr_path(node->argv[0]))
 			path = get_path(node->argv[0], env);
 		else
@@ -101,7 +101,6 @@ int exec_cmd(t_ast *node, char **env)
 			else
 				error_msg_exit(node->argv[0], "Permission denied\n", 126);
 		}
-		exit(1); // dunno if this is needed? acts as filter?
 	}
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))
