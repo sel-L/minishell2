@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: selow <selow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 02:21:44 by selow             #+#    #+#             */
-/*   Updated: 2026/01/02 20:02:45 by selow            ###   ########.fr       */
+/*   Updated: 2026/01/19 23:05:50 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int exec_cmd(t_ast *node, char **env)
 			path = get_path(node->argv[0], env);
 		else
 			path = node->argv[0];
-        if (execve(path, node->argv, env) == -1)
+		if (execve(path, node->argv, env) == -1)
 		{
 			if (errno == ENOENT)
 				error_msg_exit(node->argv[0], "command not found\n", 127);
