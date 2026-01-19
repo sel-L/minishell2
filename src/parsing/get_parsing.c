@@ -1,34 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_readline.c                                      :+:      :+:    :+:   */
+/*   get_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/12 00:26:28 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/19 21:27:29 by wshou-xi         ###   ########.fr       */
+/*   Created: 2026/01/19 21:21:05 by wshou-xi          #+#    #+#             */
+/*   Updated: 2026/01/19 23:01:35 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "minishell.h"
 #include "main_minishell.h"
 
-int	ft_readline(t_parsing *p, char *prompt)
+t_parsing	*get_parsing_struct(t_parsing **p)
 {
-	char		*str;
-	static int	line_count;
+	static t_parsing	**parsing;
 
-	str = readline(prompt);
-	add_history(str);
-	// temp exit
-	if (ft_strcmp(str, "exit") == 0)
-		return (free(str), 1);
-	if (str == NULL || *str == '\0' || *str == 32)
-		return (free(str), 2);
-	line_count++;
-	p->line_count = line_count;
-	if (parsing(str, p) == 1)
-		return (free(str), rl_clear_history(), 1);
-	free(str);
-	return (0);
+	if (!p && (!parsing || !*parsing))
+		return (ft_putendl_fd(("get_parsing_struct: failed"), 2), NULL);
+	if (!p)
+		return (*parsing);
+	else
+		parsing = p;
+	return (NULL);
 }
