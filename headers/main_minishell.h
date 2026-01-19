@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 00:17:21 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/17 09:40:53 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/19 23:01:41 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,15 +122,16 @@ int			remove_env(char *target, t_env_list **list);
 void		print_env(t_env_list *env);
 
 // Parsing functions
-int		validator(t_token *token);
-char	**tok_to_argv(t_token *token);
-void	free_argv(char **argv);
-int		is_redir(t_token_type t);
-void	garbage_collector(t_parsing	*p, char **argv, char *str);
-int		parsing(char *str, t_parsing *parse);
-int		ft_readline(t_parsing *p, char *prompt);
-void	final_cleanup(t_parsing *p);
-int		rvalue(void *input);
+t_parsing	*get_parsing_struct(t_parsing **p);
+int			validator(t_token *token);
+char		**tok_to_argv(t_token *token);
+void		free_argv(char **argv);
+int			is_redir(t_token_type t);
+void		garbage_collector(t_parsing	*p, char **argv, char *str);
+int			parsing(char *str, t_parsing *parse);
+int			ft_readline(t_parsing *p, char *prompt);
+void		final_cleanup(t_parsing *p);
+int			rvalue(void *input);
 
 // Tokenizer function
 t_token	*tokenizer(char *input);

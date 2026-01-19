@@ -2,14 +2,14 @@
 
 void	init(char **envp)
 {
-  t_parsing *parsing;
+	t_parsing *parsing;
 
-  if (!envp || !*envp)
-	  return (ft_putendl_fd("Invalid envp", 2));
-  parsing = malloc(sizeof(t_parsing));
-  if (!parsing)
-    return (ft_putendl_fd("init: malloc failed", 2));
-  parsing->env_list = env_to_list(envp);
+	if (!envp || !*envp)
+		return (ft_putendl_fd("Invalid envp", 2));
+	parsing = malloc(sizeof(t_parsing));
+	if (!parsing)
+	return (ft_putendl_fd("init: malloc failed", 2));
+	parsing->env_list = env_to_list(envp);
 }
 
 int	parsing(char *str, t_parsing *parse)
