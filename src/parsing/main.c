@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 13:49:21 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/04 15:25:28 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/19 23:03:57 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ t_parsing	*init(char **envp)
 int main(int ac, char **av, char **envp)
 {
 	t_parsing	*p;
+	t_parsing	*test;
 	int			res;
 	char		**argv;
 
@@ -67,7 +68,9 @@ int main(int ac, char **av, char **envp)
 		argv = tok_to_argv(p->token);
 		if (is_builtin(argv) == 1)
 			builtin(argv, p);
-		print_ast(p->ast, 0);
+		(void)get_parsing_struct(&p); //save struct
+		test = get_parsing_struct(NULL); //get struct
+		print_ast(test->ast, 0);
 		garbage_collector(p ,argv, NULL);
 	}
 	rl_clear_history();

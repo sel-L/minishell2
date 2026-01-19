@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   apply_redir.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: selow <selow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 20:02:33 by selow             #+#    #+#             */
-/*   Updated: 2026/01/02 20:02:38 by selow            ###   ########.fr       */
+/*   Updated: 2026/01/19 23:06:17 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef struct	s_redir
 
 // opens and dup2 a file into their corresponding fds
 // serves nothing special other than a line saver, 
-// due to apply_redirection() being too long WHYYY
+// due to apply_redirection() being too long WHYYY (LMAO)
 static void	open_dup(char *file, int flags)
 {
 	int	fd;
