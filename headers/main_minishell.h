@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 00:17:21 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/19 23:01:41 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/19 23:49:24 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ char		**tok_to_argv(t_token *token);
 void		free_argv(char **argv);
 int			is_redir(t_token_type t);
 void		garbage_collector(t_parsing	*p, char **argv, char *str);
-int			parsing(char *str, t_parsing *parse);
+int			parse(char *str, t_parsing *parse);
 int			ft_readline(t_parsing *p, char *prompt);
 void		final_cleanup(t_parsing *p);
 int			rvalue(void *input);
@@ -196,5 +196,36 @@ void	skip_whitespace(t_lexer *lex);
 void	free_single_token(t_token *token);
 int		ft_isspace(char c);
 int		identify_op(char *op);
+
+// global var
+extern int g_signal;
+
+// builtins ============================
+void	echo(char **argv);
+// exit func h e r e
+
+// signal handling ======================
+//signals.c
+void	setup_sig_interactive(void);
+void	setup_sig_non_intereactive(void);
+// sig_utils.c
+void	reset_prompt(int signum);
+void	set_signal(int signum);
+void	reset_sig_to_default(int signum);
+void	print_core_dump(int signum);
+// sig_ignore.c
+void	ignore_all_signals(void);
+void	ignore_sig(int signum);
+
+// execution =============================
+int		exec_pipe(t_ast *node, char **env);
+int		execute(t_ast *node, char **env);
+int		exec_cmd(t_ast *node, char **env);
+// apply_redir
+void apply_redirections(t_redir *redir);
+// get_path
+char	*get_path(char	*cmd, char **envp);
+// error handling
+void	error_msg_exit(char *target, char *msg, int exit_code);
 
 #endif

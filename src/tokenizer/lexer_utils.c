@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 11:58:21 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/26 15:43:54 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/20 00:36:58 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ void	ft_free_str_arr(char **str)
 {
 	int	i;
 
+	if (!str)
+		return ;
 	i = 0;
 	while(str[i])
 	{
@@ -68,5 +70,4 @@ void	ft_free_str_arr(char **str)
 		i++;
 	}
 	free(str);
-	return ;
 }

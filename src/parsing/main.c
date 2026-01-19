@@ -6,25 +6,18 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 13:49:21 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/19 23:03:57 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/20 01:09:24 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // #include "../../headers/parsing.h"
 #include "main_minishell.h"
+int	g_signal;
 
-t_parsing	*init(char **envp);
-
-int	parsing(char *str, t_parsing *parse)
+static void cleanup_on_exit(int status, void *arg)
 {
-	if (!str)
-		return (1);
-	parse->token = tokenizer(str);
-	if (validator(parse->token) != 0)
-		return (free_token_list(parse->token), 1);
-	parse->ast = ast(&parse->token);
-	process_ast_expansion(parse->ast, parse);
-	return (0);
+	(void)status;
+	final_cleanup((t_parsing *)arg);
 }
 
 t_parsing	*init(char **envp)
@@ -37,43 +30,48 @@ t_parsing	*init(char **envp)
 	parse = malloc(sizeof(t_parsing));
 	if (!parse)
 		return (ft_putendl_fd("init: malloc failed\n", 2), NULL);
+	ft_bzero(parse, sizeof(t_parsing));
 	parse->env_list = env_to_list(envp);
 	if (!parse->env_list)
 		return (free(parse), ft_putendl_fd("init: env error\n", 2), NULL);
-	parse->internal_env = malloc(sizeof(char *));
-	if (!parse->internal_env)
-		return (ft_free_str_arr(parse->internal_env), free(parse), NULL);
-	ft_bzero(parse->internal_env, sizeof(char *));
+	parse->internal_env = NULL;
 	return (parse);
+}
+
+int	process_command(t_parsing *p)
+{
+	char	**envp;
+
+	envp = list_to_char(&p->env_list, NULL);
+	p->internal_env = envp;
+	if (p->ast && p->ast->argv && is_builtin(p->ast->argv) == 1)
+		builtin(p->ast->argv, p);
+	else
+		execute(p->ast, envp);
+	garbage_collector(p ,NULL, NULL);
+	ft_free_str_arr(envp);
+	p->internal_env = NULL;
+	return (0);
 }
 
 int main(int ac, char **av, char **envp)
 {
 	t_parsing	*p;
-	t_parsing	*test;
 	int			res;
-	char		**argv;
 
 	(void)ac;
 	(void)av;
-	if((p = init(envp)) == NULL) // not norm free
+	p = init(envp);
+	if (!p)
 		return (1);
+	on_exit(cleanup_on_exit, p);
 	while (1)
 	{
 		res = ft_readline(p, "> ");
 		if (res == 1)
 			break ;
-		if (res == 2)
-			continue ;
-		argv = tok_to_argv(p->token);
-		if (is_builtin(argv) == 1)
-			builtin(argv, p);
-		(void)get_parsing_struct(&p); //save struct
-		test = get_parsing_struct(NULL); //get struct
-		print_ast(test->ast, 0);
-		garbage_collector(p ,argv, NULL);
+		else if (!res)
+			process_command(p);
 	}
-	rl_clear_history();
-	final_cleanup(p);
 	return (0);
 }
