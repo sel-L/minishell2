@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 13:46:09 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/19 10:39:11 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/20 00:11:15 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	free_argv(char **argv)
 {
 	int	i;
 
-	if (!argv || !*argv)
+	if (!argv)
 		return ;
 	i = 0;
 	while (argv[i])

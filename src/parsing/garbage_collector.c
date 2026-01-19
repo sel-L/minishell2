@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 16:34:04 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/01 16:39:44 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/20 01:06:47 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,16 @@ void	garbage_collector(t_parsing	*p, char **argv, char *str)
 	if (str)
 		free(str);
 	free_ast(p->ast);
+	p->ast = NULL;
 }
 
 void	final_cleanup(t_parsing *p)
 {
+	if (!p)
+		return ;
+	garbage_collector(p, NULL, NULL);
 	free_env(&p->env_list);
 	ft_free_str_arr(p->internal_env);
 	free(p);
+	rl_clear_history();
 }

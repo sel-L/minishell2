@@ -6,7 +6,7 @@
 #    By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/31 10:47:03 by wshou-xi          #+#    #+#              #
-#    Updated: 2026/01/19 21:29:58 by wshou-xi         ###   ########.fr        #
+#    Updated: 2026/01/20 00:10:06 by wshou-xi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ ARGVFILES = argv_to_node.c argv_utils.c tok_conv.c
 ARGV = $(addprefix $(ARGVDIR)/, $(ARGVFILES))
 
 B_INDIR = src/builtins
-B_INFILES = pwd.c cd.c export.c unset.c env.c builtin.c
+B_INFILES = pwd.c cd.c export.c unset.c env.c builtin.c echo.c
 B_IN = $(addprefix $(B_INDIR)/, $(B_INFILES))
 
 ENVDIR = src/env
@@ -44,7 +44,11 @@ EXPDIR = src/expansion
 EXPFILES = expansion.c expansion_utils.c
 EXP = $(addprefix $(EXPDIR)/, $(EXPFILES))
 
-SRC = $(MAIN) $(TOKEN) $(ENV) $(B_IN) $(ARGV) $(AST) $(EXP)
+EXCDIR = src/execution
+EXECFILES = apply_redir.c error_msg_exit.c execution.c get_path.c
+EXE = $(addprefix $(EXCDIR)/, $(EXECFILES))
+
+SRC = $(MAIN) $(TOKEN) $(ENV) $(B_IN) $(ARGV) $(AST) $(EXP) $(EXE)
 OBJDIR = obj
 OBJS = $(SRC:%.c=$(OBJDIR)/%.o)
 

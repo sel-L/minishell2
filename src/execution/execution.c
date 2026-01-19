@@ -84,12 +84,19 @@ int exec_cmd(t_ast *node, char **env)
 	int		status;
 	char	*path;
 
+<<<<<<< HEAD
     pid = fork();
     if (pid == 0)
     {
         apply_redirections(node->redir);
 		if (is_builtin(node->argv[0]))
 			builtin(node->argv[0], get_parsing_struct(NULL));
+=======
+	pid = fork();
+	if (pid == 0)
+	{
+		apply_redirections(node->redir);
+>>>>>>> 03c289da04a5c11c7b7fb21ae7776d6cc873abdc
 		if (!is_alr_path(node->argv[0]))
 			path = get_path(node->argv[0], env);
 		else

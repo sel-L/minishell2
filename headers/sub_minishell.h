@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sub_minishell.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: selow <selow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 20:02:22 by selow             #+#    #+#             */
-/*   Updated: 2026/01/02 20:02:24 by selow            ###   ########.fr       */
+/*   Updated: 2026/01/19 23:50:33 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,12 @@
 				signals.c -> global variable, shld be placed into main.c
 			
 */
+
+typedef struct s_ast t_ast;
+typedef struct s_redir t_redir;
+
 // global var
-int g_signal;
+extern int g_signal;
 
 // builtins ============================
 void	echo(char **argv);
