@@ -6,16 +6,11 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 09:30:04 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/20 17:31:19 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/20 17:31:52 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main_minishell.h"
-
-int	isnumber(char c)
-{
-	return (c >= '0' || c  <= '9');
-}
 
 int	handle_negative_return(int num)
 {
