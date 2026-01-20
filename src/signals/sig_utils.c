@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sig_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: selow <selow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 12:54:04 by selow             #+#    #+#             */
-/*   Updated: 2025/12/12 12:54:05 by selow            ###   ########.fr       */
+/*   Updated: 2026/01/20 17:43:03 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // SIGNALS UTILS SECTION ================
 // resetting the prompt
-static void	reset_prompt(int signum)
+void	reset_prompt(int signum)
 {
 	(void)signum;
 	write(2, "\n", 1);

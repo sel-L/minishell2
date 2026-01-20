@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: selow <selow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 17:14:29 by selow             #+#    #+#             */
-/*   Updated: 2025/12/11 10:02:25 by selow            ###   ########.fr       */
+/*   Updated: 2026/01/20 17:45:28 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 		CTRL + \ will be signal = SIGQUIT = 3
 */
 #include "sub_minishell.h"
-int g_signal = 0;
+// int g_signal = 0;
 // to be put into main
 
 // waiting for user input signals

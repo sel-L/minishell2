@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 16:15:15 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/20 17:24:05 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/20 17:51:13 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	set_master(t_parsing *p, t_ast *ast)
 	temp = ast;
 	if (!temp->left && !temp->right)
 		return ; 
+	temp->master_struct = p;
 	set_master(p, ast->left);
 	set_master(p, ast->right);
 }
