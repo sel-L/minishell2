@@ -6,19 +6,12 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 13:49:21 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/20 01:09:24 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/20 19:57:09 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // #include "../../headers/parsing.h"
 #include "main_minishell.h"
-int	g_signal;
-
-static void cleanup_on_exit(int status, void *arg)
-{
-	(void)status;
-	final_cleanup((t_parsing *)arg);
-}
 
 t_parsing	*init(char **envp)
 {
@@ -64,7 +57,6 @@ int main(int ac, char **av, char **envp)
 	p = init(envp);
 	if (!p)
 		return (1);
-	on_exit(cleanup_on_exit, p);
 	while (1)
 	{
 		res = ft_readline(p, "> ");
