@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 16:15:15 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/20 16:56:26 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/20 17:24:05 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,27 @@
 // #include "parsing.h"
 #include "main_minishell.h"
 
-t_ast	*ast(t_parsing *parsing, t_token **token)
+void	set_master(t_parsing *p, t_ast *ast)
+{
+	t_ast	*temp;
+
+	temp = ast;
+	if (!temp->left && !temp->right)
+		return ; 
+	set_master(p, ast->left);
+	set_master(p, ast->right);
+}
+
+t_ast	*ast(t_parsing *p, t_token **token)
 {
 	t_ast	*ast;
+	t_ast	*temp;
 	t_token	*head;
 
 	head = *token;
 	ast = build_ast(token);
+	temp = ast;
+	set_master(p, temp);
 	*token = head;
 	return (ast);
 }

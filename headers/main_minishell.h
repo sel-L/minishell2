@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 00:17:21 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/20 16:55:31 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/20 17:24:26 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,18 @@ typedef struct	s_env_list
 {
 	char				*front;
 	char				*env_val;
-	struct s_parsing	*master_struct;
 	struct s_env_list	*next;
 	struct s_env_list	*prev;
 }	t_env_list;
 
 typedef struct s_ast
 {
-	t_token_type	type;
-	char			**argv;
-	struct s_redir	*redir;
-	struct s_ast	*left;
-	struct s_ast	*right;
+	t_token_type		type;
+	struct s_parsing	*master_struct;
+	char				**argv;
+	struct s_redir		*redir;
+	struct s_ast		*left;
+	struct s_ast		*right;
 }	t_ast;
 
 typedef struct	s_node
@@ -100,7 +100,7 @@ typedef struct	s_parsing
 // AST functions
 void	*free_ast(t_ast *ast);
 t_ast	*build_ast(t_token **token);
-t_ast	*ast(t_token **token);
+t_ast	*ast(t_parsing *p, t_token **token);
 void	print_ast(t_ast *ast, int depth);
 
 // Builtin functions
