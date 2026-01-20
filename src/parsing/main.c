@@ -59,6 +59,7 @@ int main(int ac, char **av, char **envp)
 		return (1);
 	while (1)
 	{
+		setup_sig_interactive();
 		res = ft_readline(p, "> ");
 		if (res == 1)
 			break ;
