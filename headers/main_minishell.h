@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 00:17:21 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/19 23:49:24 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/20 16:55:31 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct	s_env_list
 {
 	char				*front;
 	char				*env_val;
+	struct s_parsing	*master_struct;
 	struct s_env_list	*next;
 	struct s_env_list	*prev;
 }	t_env_list;
@@ -90,7 +91,7 @@ typedef struct s_lexer
 typedef struct	s_parsing
 {
 	t_env_list	*env_list;
-	t_token		*token;
+	t_token		*token; 
 	t_ast		*ast;
 	char		**internal_env;
 	int			line_count;

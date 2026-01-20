@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 16:15:15 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/04 13:23:17 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/20 16:56:26 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 // #include "parsing.h"
 #include "main_minishell.h"
 
-t_ast	*ast(t_token **token)
+t_ast	*ast(t_parsing *parsing, t_token **token)
 {
 	t_ast	*ast;
 	t_token	*head;

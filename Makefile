@@ -6,12 +6,12 @@
 #    By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/31 10:47:03 by wshou-xi          #+#    #+#              #
-#    Updated: 2026/01/20 00:10:06 by wshou-xi         ###   ########.fr        #
+#    Updated: 2026/01/20 15:07:37 by wshou-xi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -Iheaders -I./libft0
+CFLAGS = -Wall -Werror -Wextra -Iheaders -I./libft -g3
 LIB = -lreadline -lhistory -Llibft -lft
 RM = rm -rf
 VALGRIND = valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all --tool=memcheck --track-origins=yes --verbose
