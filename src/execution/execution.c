@@ -6,12 +6,11 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 02:21:44 by selow             #+#    #+#             */
-/*   Updated: 2026/01/20 16:00:50 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/19 23:05:50 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sub_minishell.h"
-
 
 // ==== main execution function ===============================
 // Executes an ast tree recursively
@@ -77,28 +76,6 @@ static bool	is_alr_path(char *path)
 	return (false);
 }
 
-void	errormsg(t_ast *node, char *msg)
-{
-	char	*target;
-
-	target = node->argv[0];
-	ft_putstr_fd("minishell: ", 2);
-	ft_putstr_fd(target, 2);
-	ft_putstr_fd(": ", 2);
-	ft_putstr_fd(msg, 2);
-}
-
-void	print_and_free(char **env, t_ast *node, int exitcode)
-{
-	if (exitcode == 127)
-		errormsg(node, "command not found\n");
-	else if (exitcode == 126)
-		errormsg(node, "Permission denied\n");
-	ft_free_str_arr(env);
-	free_ast(node);
-	exit(exitcode);
-}
-
 // Executes a given command (an AST node) in a child process
 // Returns the child's exit status
 int exec_cmd(t_ast *node, char **env)
@@ -107,18 +84,23 @@ int exec_cmd(t_ast *node, char **env)
 	int		status;
 	char	*path;
 
-	pid = fork();
-	if (pid == 0)
-	{
-		apply_redirections(node->redir);
-		if (is_builtin(&node->argv[0]))
-			builtin(&node->argv[0], get_parsing_struct(NULL));
+    pid = fork();
+    if (pid == 0)
+    {
+        apply_redirections(node->redir);
+		if (is_builtin(node->argv[0]))
+			builtin(node->argv[0], get_parsing_struct(NULL));
 		else if (!is_alr_path(node->argv[0]))
 			path = get_path(node->argv[0], env);
 		else
 			path = node->argv[0];
 		if (execve(path, node->argv, env) == -1)
-			print_and_free(env, node, errno);
+		{
+			if (errno == ENOENT)
+				error_msg_exit(node->argv[0], "command not found\n", 127);
+			else
+				error_msg_exit(node->argv[0], "Permission denied\n", 126);
+		}
 	}
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))
@@ -126,4 +108,3 @@ int exec_cmd(t_ast *node, char **env)
 	return (0);
 }
 // ===================================================================
-

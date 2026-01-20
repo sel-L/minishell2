@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 00:17:21 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/20 17:44:54 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/20 18:12:30 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ typedef struct s_lexer
 typedef struct	s_parsing
 {
 	t_env_list	*env_list;
-	t_token		*token; 
+	t_token		*token;
 	t_ast		*ast;
 	char		**internal_env;
 	int			line_count;
