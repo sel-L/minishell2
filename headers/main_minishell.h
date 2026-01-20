@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 00:17:21 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/20 17:24:26 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/20 17:44:54 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ void		garbage_collector(t_parsing	*p, char **argv, char *str);
 int			parse(char *str, t_parsing *parse);
 int			ft_readline(t_parsing *p, char *prompt);
 void		final_cleanup(t_parsing *p);
-int			rvalue(void *input);
+int			rvalue(int *input);
 
 // Tokenizer function
 t_token	*tokenizer(char *input);
@@ -199,7 +199,7 @@ int		ft_isspace(char c);
 int		identify_op(char *op);
 
 // global var
-extern int g_signal;
+// extern int g_signal;
 
 // builtins ============================
 void	echo(char **argv);
@@ -210,7 +210,7 @@ void	echo(char **argv);
 void	setup_sig_interactive(void);
 void	setup_sig_non_intereactive(void);
 // sig_utils.c
-void	reset_prompt(int signum);
+// void	reset_prompt(int signum);
 void	set_signal(int signum);
 void	reset_sig_to_default(int signum);
 void	print_core_dump(int signum);
