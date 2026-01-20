@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 16:17:14 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/01 16:40:52 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/20 22:25:59 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,14 @@ int	validator(t_token *token)
 	t_token	*temp;
 
 	if (!token || token->type == PIPE)
-		return (perror("syntax error near unexpected token"), 2);
+		return (ft_putendl_fd("syntax error near unexpected token", 2), 2);
 	temp = token;
 	while (temp)
 	{
-		printf("token type is: %d\n", token->type);
 		if (redir_val(temp) == 1)
-			return (perror("syntax error near unexpected token"), 2);
+			return (ft_putendl_fd("syntax error near unexpected token", 2), 2);
 		if (pipe_val(temp) == 1)
-			return (perror("syntax error near unexpected token"), 2);
+			return (ft_putendl_fd("syntax error near unexpected token", 2), 2);
 		temp = temp->next;
 	}
 	if (!token->next && token->type == PIPE)

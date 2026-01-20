@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 13:21:53 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/15 17:18:53 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/20 22:27:44 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	process_token(t_lexer *lex, t_token **list)
 	if (*lex->lex_end == '"' || *lex->lex_end == '\'')
 	{
 		if (quoted(lex, list) == NULL)
-			return (ft_putendl_fd("Tokenizer: unclosed quotes", 2), 0);
+			return (0);
 	}
 	else if (is_op(*lex->lex_end))
 	{

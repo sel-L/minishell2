@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 00:17:21 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/19 23:49:24 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/20 22:24:10 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <fcntl.h>
 # include <limits.h>
 # include <dirent.h>
+# include <signal.h>
 # include "../libft/libft.h"
 # include "../libft/gnl/get_next_line.h"
 
