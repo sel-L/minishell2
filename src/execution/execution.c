@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 02:21:44 by selow             #+#    #+#             */
-/*   Updated: 2026/01/19 23:05:50 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/20 19:08:14 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,12 @@ int exec_cmd(t_ast *node, char **env)
 	int		status;
 	char	*path;
 
-    pid = fork();
-    if (pid == 0)
-    {
-        apply_redirections(node->redir);
-		if (is_builtin(node->argv[0]))
-			builtin(node->argv[0], get_parsing_struct(NULL));
+	pid = fork();
+	if (pid == 0)
+	{
+		apply_redirections(node->redir);
+		if (is_builtin(node->argv))
+			builtin(node->argv, get_parsing_struct(NULL));
 		else if (!is_alr_path(node->argv[0]))
 			path = get_path(node->argv[0], env);
 		else
