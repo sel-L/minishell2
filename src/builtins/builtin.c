@@ -56,6 +56,9 @@ void	builtin(char **argv, t_parsing *p)
 	else if (ft_strcmp(argv[0], "echo") == 0)
 		echo(argv);
 	else
-		return (print_invalid_argv());
-
+	{
+		print_invalid_argv();
+		exit(1);
+	}
+	exit(0);
 }
