@@ -6,7 +6,7 @@
 #    By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/31 10:47:03 by wshou-xi          #+#    #+#              #
-#    Updated: 2026/01/20 19:26:59 by wshou-xi         ###   ########.fr        #
+#    Updated: 2026/01/20 21:52:07 by wshou-xi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,12 @@ EXCDIR = src/execution
 EXECFILES = apply_redir.c error_msg_exit.c execution.c get_path.c
 EXE = $(addprefix $(EXCDIR)/, $(EXECFILES))
 
-SRC = $(MAIN) $(TOKEN) $(ENV) $(B_IN) $(ARGV) $(AST) $(EXP) $(EXE)
+SIGDIR =  src/signals
+SIGFILE = sig_ignore.c sig_utils.c signals.c
+SIG =  $(addprefix $(SIGDIR)/, $(SIGFILE))
+
+SRC = $(MAIN) $(TOKEN) $(ENV) $(B_IN) $(ARGV) $(AST) $(EXP) $(EXE) $(SIG)
+
 OBJDIR = obj
 OBJS = $(SRC:%.c=$(OBJDIR)/%.o)
 
