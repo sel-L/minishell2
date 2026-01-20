@@ -14,7 +14,7 @@
 
 // SIGNALS UTILS SECTION ================
 // resetting the prompt
-static void	reset_prompt(int signum)
+void	reset_prompt(int signum)
 {
 	(void)signum;
 	write(2, "\n", 1);
