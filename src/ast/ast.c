@@ -6,11 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 16:15:15 by wshou-xi          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2026/01/20 17:51:13 by wshou-xi         ###   ########.fr       */
-=======
 /*   Updated: 2026/01/04 13:23:17 by wshou-xi         ###   ########.fr       */
->>>>>>> parent of 1bae2bd (made some modify)
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +14,7 @@
 // #include "parsing.h"
 #include "main_minishell.h"
 
-<<<<<<< HEAD
-void	set_master(t_parsing *p, t_ast *ast)
-{
-	t_ast	*temp;
-
-	temp = ast;
-	if (!temp->left && !temp->right)
-		return ; 
-	temp->master_struct = p;
-	set_master(p, ast->left);
-	set_master(p, ast->right);
-}
-
 t_ast	*ast(t_parsing *p, t_token **token)
-=======
-t_ast	*ast(t_token **token)
->>>>>>> parent of 1bae2bd (made some modify)
 {
 	t_ast	*ast;
 	t_ast	*temp;

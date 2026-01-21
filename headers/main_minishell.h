@@ -13,6 +13,7 @@
 #ifndef MAIN_MINISHELL_H
 # define MAIN_MINISHELL_H
 
+# include <stddef.h>
 # include <stdio.h>
 # include <unistd.h>
 # include <string.h>
@@ -233,7 +234,5 @@ void apply_redirections(t_parsing *p, t_redir *redir);
 char	*get_path(char	*cmd, char **envp);
 // error handling
 void	error_msg_exit(char *target, char *msg, int exit_code);
-
-#endif
 
 #endif
