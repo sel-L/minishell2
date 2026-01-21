@@ -23,7 +23,8 @@ int	is_builtin(char	**argv)
 		|| ft_strcmp(argv[0], "exit") == 0
 		|| ft_strcmp(argv[0], "unset") == 0
 		|| ft_strcmp(argv[0], "env") == 0
-		|| ft_strcmp(argv[0], "echo") == 0);
+		|| ft_strcmp(argv[0], "echo") == 0
+		|| ft_strcmp(argv[0], "exit") == 0);
 }
 
 int	argument_count(char **argv)

@@ -48,8 +48,8 @@ int	ft_readline(t_parsing *p, char *prompt)
 	if (*str == '\0' || is_blank(str))
 		return (free(str), 2);
 	add_history(str);
-	if (ft_strcmp(str, "exit") == 0)
-		return (free(str), 1);
+	// if (ft_strcmp(str, "exit") == 0)
+	// 	return (free(str), 1);
 	line_count++;
 	p->line_count = line_count;
 	if (parse(str, p) == 1)

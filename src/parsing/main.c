@@ -27,6 +27,7 @@ t_parsing	*init(char **envp)
 	if (!parse)
 		return (ft_putendl_fd("init: malloc failed\n", 2), NULL);
 	ft_bzero(parse, sizeof(t_parsing));
+	parse->interactive_mode = isatty(STDIN_FILENO) && isatty(STDERR_FILENO);
 	parse->env_list = env_to_list(envp);
 	if (!parse->env_list)
 		return (free(parse), ft_putendl_fd("init: env error\n", 2), NULL);
