@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 20:02:33 by selow             #+#    #+#             */
-/*   Updated: 2026/01/21 15:29:12 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/21 19:03:23 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ typedef struct	s_redir
 // opens and dup2 a file into their corresponding fds
 // serves nothing special other than a line saver, 
 // due to apply_redirection() being too long WHYYY (LMAO)
-static void	open_dup(char *file, int flags)
+static void	open_dup(t_parsing *p, char *file, int flags)
 {
 	int	fd;
 
@@ -32,14 +32,20 @@ static void	open_dup(char *file, int flags)
 	{
 		fd = open(file, flags);
 		if (fd < 0)
-			error_msg_exit(file, "No such file or directory\n", 1);
+		{
+			error_msg(file, "No such file or directory\n");
+			clean_child_exit(p->ast, p->internal_env, NULL, 1);
+		}
 		dup2(fd, STDIN_FILENO);
 		close(fd);
 		return ;
 	}
 	fd = open(file, flags, 0644);
 	if (fd < 0)
-		error_msg_exit(file, "Permission denied\n", 126);
+	{
+		error_msg(file, "Permission denied\n");
+		clean_child_exit(p->ast, p->internal_env, NULL, 1);
+	}
 	dup2(fd, STDOUT_FILENO);
 	close(fd);
 }
@@ -53,16 +59,19 @@ void	apply_redirections(t_parsing *p, t_redir *redir)
 	while (redir)
 	{
 		if (redir->type == REDIR_IN)
-			open_dup(redir->file, O_RDONLY);
+			open_dup(p, redir->file, O_RDONLY);
 		else if (redir->type == REDIR_OUT)
-			open_dup(redir->file, O_WRONLY | O_CREAT | O_TRUNC);
+			open_dup(p, redir->file, O_WRONLY | O_CREAT | O_TRUNC);
 		else if (redir->type == APPEND)
-			open_dup(redir->file, O_WRONLY | O_CREAT | O_APPEND);
+			open_dup(p, redir->file, O_WRONLY | O_CREAT | O_APPEND);
 		else if (redir->type == HERE_DOC)
 		{
 			fd = heredoc(p, redir->file);
 			if (fd == -1)
-				error_msg_exit("heredoc", "execution failed\n", 130);
+			{
+				error_msg("heredoc", "execution failed\n");
+				clean_child_exit(p->ast, p->internal_env, NULL, 1);
+			}
 			dup2(fd, STDIN_FILENO);
 			close(fd);
 		}

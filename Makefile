@@ -6,7 +6,7 @@
 #    By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/31 10:47:03 by wshou-xi          #+#    #+#              #
-#    Updated: 2026/01/21 15:26:56 by wshou-xi         ###   ########.fr        #
+#    Updated: 2026/01/21 18:09:40 by wshou-xi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ EXPFILES = expansion.c expansion_utils.c
 EXP = $(addprefix $(EXPDIR)/, $(EXPFILES))
 
 EXCDIR = src/execution
-EXECFILES = apply_redir.c error_msg_exit.c execution.c get_path.c
+EXECFILES = apply_redir.c error_msg_exit.c execution.c get_path.c free_child.c
 EXE = $(addprefix $(EXCDIR)/, $(EXECFILES))
 
 SIGDIR =  src/signals

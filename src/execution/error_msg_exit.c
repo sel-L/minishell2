@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 17:00:11 by selow             #+#    #+#             */
-/*   Updated: 2026/01/21 16:59:52 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/21 18:27:13 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,12 @@ void	error_msg_exit(char *target, char *msg, int exit_code)
 	ft_putstr_fd(": ", 2);
 	ft_putstr_fd(msg, 2);
 	exit(exit_code);
+}
+
+void	error_msg(char *target, char *msg)
+{
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(target, 2);
+	ft_putstr_fd(": ", 2);
+	ft_putstr_fd(msg, 2);
 }

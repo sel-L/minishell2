@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/20 06:43:29 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/21 15:56:28 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/21 18:56:42 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int	heredoc(t_parsing *p, char *delim)
 	{
 		close(pipefd[0]);
 		heredoc_loop(p, pipefd, delim);
+		final_cleanup(p);
 		close(pipefd[1]);
 		exit(0);
 	}

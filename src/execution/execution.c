@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 02:21:44 by selow             #+#    #+#             */
-/*   Updated: 2026/01/21 17:54:16 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/21 18:43:10 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,25 +89,28 @@ int exec_cmd(t_ast *node, char **env)
 	{
 		apply_redirections(node->parsing, node->redir);
 		if (!node->argv || !node->argv[0])
-			exit(0);
+			clean_child_exit(node, env, NULL, 0);
 		if (is_builtin(node->argv))
+		{
 			builtin(node->argv, node->parsing);
+			clean_child_exit(node, env, NULL, 0);
+		}
 		else if (!is_alr_path(node->argv[0]))
 			path = get_path(node->argv[0], env);
 		else
 			path = node->argv[0];
 		if (execve(path, node->argv, env) == -1)
 		{
-			ft_free_str_arr(env);
 			if (errno == ENOENT)
-				error_msg_exit(node->argv[0], "command not found\n", 127);
-			else
-				error_msg_exit(node->argv[0], "Permission denied\n", 126);
-
+			{
+				error_msg(node->argv[0], "command not found\n");
+				clean_child_exit(node, env, path, 127);
+			}
+			error_msg(node->argv[0], "Permission denied\n");
+			clean_child_exit(node, env, path, 126);
 		}
 	}
 	waitpid(pid, &status, 0);
-	garbage_collector(node->parsing, NULL, NULL);
 	if (WIFEXITED(status))
 		return (WEXITSTATUS(status));
 	return (0);
