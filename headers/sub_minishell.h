@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 20:02:22 by selow             #+#    #+#             */
-/*   Updated: 2026/01/19 23:50:33 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/21 15:29:36 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int		exec_pipe(t_ast *node, char **env);
 int		execute(t_ast *node, char **env);
 int		exec_cmd(t_ast *node, char **env);
 // apply_redir
-void apply_redirections(t_redir *redir);
+void apply_redirections(t_parsing *p, t_redir *redir);
 // get_path
 char	*get_path(char	*cmd, char **envp);
 // error handling

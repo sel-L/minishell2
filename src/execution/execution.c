@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 02:21:44 by selow             #+#    #+#             */
-/*   Updated: 2026/01/19 23:05:50 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/21 18:43:10 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,17 @@ int exec_cmd(t_ast *node, char **env)
 	int		status;
 	char	*path;
 
-    pid = fork();
-    if (pid == 0)
-    {
-        apply_redirections(node->redir);
-		if (is_builtin(node->argv[0]))
-			builtin(node->argv[0], get_parsing_struct(NULL));
+	pid = fork();
+	if (pid == 0)
+	{
+		apply_redirections(node->parsing, node->redir);
+		if (!node->argv || !node->argv[0])
+			clean_child_exit(node, env, NULL, 0);
+		if (is_builtin(node->argv))
+		{
+			builtin(node->argv, node->parsing);
+			clean_child_exit(node, env, NULL, 0);
+		}
 		else if (!is_alr_path(node->argv[0]))
 			path = get_path(node->argv[0], env);
 		else
@@ -97,9 +102,12 @@ int exec_cmd(t_ast *node, char **env)
 		if (execve(path, node->argv, env) == -1)
 		{
 			if (errno == ENOENT)
-				error_msg_exit(node->argv[0], "command not found\n", 127);
-			else
-				error_msg_exit(node->argv[0], "Permission denied\n", 126);
+			{
+				error_msg(node->argv[0], "command not found\n");
+				clean_child_exit(node, env, path, 127);
+			}
+			error_msg(node->argv[0], "Permission denied\n");
+			clean_child_exit(node, env, path, 126);
 		}
 	}
 	waitpid(pid, &status, 0);

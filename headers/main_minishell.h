@@ -6,7 +6,11 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 00:17:21 by wshou-xi          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2026/01/20 18:12:30 by wshou-xi         ###   ########.fr       */
+=======
+/*   Updated: 2026/01/21 18:33:43 by wshou-xi         ###   ########.fr       */
+>>>>>>> test3
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +29,11 @@
 # include <fcntl.h>
 # include <limits.h>
 # include <dirent.h>
+# include <signal.h>
 # include "../libft/libft.h"
 # include "../libft/gnl/get_next_line.h"
+
+typedef struct s_parsing t_parsing;
 
 typedef enum	e_token_type
 {
@@ -49,12 +56,12 @@ typedef struct	s_env_list
 
 typedef struct s_ast
 {
-	t_token_type		type;
-	struct s_parsing	*master_struct;
-	char				**argv;
-	struct s_redir		*redir;
-	struct s_ast		*left;
-	struct s_ast		*right;
+	t_token_type	type;
+	t_parsing		*parsing;
+	struct s_redir	*redir;
+	struct s_ast	*left;
+	struct s_ast	*right;
+	char			**argv;
 }	t_ast;
 
 typedef struct	s_node
@@ -222,8 +229,10 @@ void	ignore_sig(int signum);
 int		exec_pipe(t_ast *node, char **env);
 int		execute(t_ast *node, char **env);
 int		exec_cmd(t_ast *node, char **env);
+void	clean_child_exit(t_ast *node, char **env, char *path, int exitcode);
+void	error_msg(char *target, char *msg);
 // apply_redir
-void apply_redirections(t_redir *redir);
+void apply_redirections(t_parsing *p, t_redir *redir);
 // get_path
 char	*get_path(char	*cmd, char **envp);
 // error handling

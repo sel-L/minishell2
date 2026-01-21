@@ -6,12 +6,12 @@
 #    By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/31 10:47:03 by wshou-xi          #+#    #+#              #
-#    Updated: 2026/01/20 18:12:26 by wshou-xi         ###   ########.fr        #
+#    Updated: 2026/01/21 18:09:40 by wshou-xi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -Iheaders -I./libft0
+CFLAGS = -Wall -Werror -Wextra -Iheaders -I./libft
 LIB = -lreadline -lhistory -Llibft -lft
 RM = rm -rf
 VALGRIND = valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all --tool=memcheck --track-origins=yes --verbose
@@ -45,14 +45,19 @@ EXPFILES = expansion.c expansion_utils.c
 EXP = $(addprefix $(EXPDIR)/, $(EXPFILES))
 
 EXCDIR = src/execution
-EXECFILES = apply_redir.c error_msg_exit.c execution.c get_path.c
+EXECFILES = apply_redir.c error_msg_exit.c execution.c get_path.c free_child.c
 EXE = $(addprefix $(EXCDIR)/, $(EXECFILES))
 
 SIGDIR =  src/signals
 SIGFILE = sig_ignore.c sig_utils.c signals.c
 SIG =  $(addprefix $(SIGDIR)/, $(SIGFILE))
 
-SRC = $(MAIN) $(TOKEN) $(ENV) $(B_IN) $(ARGV) $(AST) $(EXP) $(EXE) $(SIG)
+HDDIR = src/heredoc
+HDFILE = heredoc.c
+HD = $(addprefix $(HDDIR)/, $(HDFILE))
+
+SRC = $(MAIN) $(TOKEN) $(ENV) $(B_IN) $(ARGV) $(AST) $(EXP) $(EXE) $(SIG) $(HD)
+
 OBJDIR = obj
 OBJS = $(SRC:%.c=$(OBJDIR)/%.o)
 

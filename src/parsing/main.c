@@ -6,23 +6,17 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 13:49:21 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/20 17:45:20 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/21 19:14:42 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // #include "../../headers/parsing.h"
 #include "main_minishell.h"
-int	g_signal;
-
-static void cleanup_on_exit(int status, void *arg)
-{
-	(void)status;
-	final_cleanup((t_parsing *)arg);
-}
 
 t_parsing	*init(char **envp)
 {
 	t_parsing	*parse;
+	char		*temp;
 
 	//Initialize parsing struct with envp
 	if (!envp)
@@ -35,6 +29,12 @@ t_parsing	*init(char **envp)
 	if (!parse->env_list)
 		return (free(parse), ft_putendl_fd("init: env error\n", 2), NULL);
 	parse->internal_env = NULL;
+	if (ft_atoi(getenv("SHLVL")) >= 0)
+	{
+		temp =  ft_itoa(ft_atoi(getenv("SHLVL")) + 1);
+		change_key_value("SHLVL", temp, &parse->env_list);
+		free(temp);
+	}
 	return (parse);
 }
 
@@ -44,12 +44,15 @@ int	process_command(t_parsing *p)
 
 	envp = list_to_char(&p->env_list, NULL);
 	p->internal_env = envp;
-	if (p->ast && p->ast->argv && is_builtin(p->ast->argv) == 1)
+	if (p->ast && p->ast->argv && p->ast->argv[0]  && is_builtin(p->ast->argv))
 		builtin(p->ast->argv, p);
 	else
 		execute(p->ast, envp);
-	garbage_collector(p ,NULL, NULL);
+	free_ast(p->ast);
+	free_token_list(p->token);
 	ft_free_str_arr(envp);
+	p->ast = NULL;
+	p->token = NULL;
 	p->internal_env = NULL;
 	return (0);
 }
@@ -64,7 +67,7 @@ int main(int ac, char **av, char **envp)
 	p = init(envp);
 	if (!p)
 		return (1);
-	on_exit(cleanup_on_exit, p);
+	get_parsing_struct(&p);
 	while (1)
 	{
 		setup_sig_interactive();
@@ -74,5 +77,6 @@ int main(int ac, char **av, char **envp)
 		else if (!res)
 			process_command(p);
 	}
+	final_cleanup(p);
 	return (0);
 }

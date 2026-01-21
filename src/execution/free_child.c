@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_parsing.c                                      :+:      :+:    :+:   */
+/*   free_child.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/19 21:21:05 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/21 15:14:32 by wshou-xi         ###   ########.fr       */
+/*   Created: 2026/01/21 18:05:51 by wshou-xi          #+#    #+#             */
+/*   Updated: 2026/01/21 18:33:05 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main_minishell.h"
 
-t_parsing	*get_parsing_struct(t_parsing **p)
+void	clean_child_exit(t_ast *node, char **env, char *path, int exitcode)
 {
-	static t_parsing	**parsing;
-
-	if (!p && (!parsing || !*parsing))
-		return (ft_putendl_fd(("get_parsing_struct: failed"), 2), NULL);
-	if (!p)
-		return (*parsing);
-	else
-		parsing = p;
-	return (NULL);
+	if (path && node && node->argv && node->argv[0] && path != node->argv[0])
+		free(path);
+	if (env)
+		ft_free_str_arr(env);
+	if (node && node->parsing)
+	{
+		node->parsing->internal_env = NULL;
+		final_cleanup(node->parsing);
+	}
+	exit(exitcode);
 }

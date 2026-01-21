@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 13:21:53 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/15 17:18:53 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/21 17:50:58 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	free_token_list(t_token *list)
 {
 	t_token	*temp;
 
+	if (!list)
+		return ;
 	while (list)
 	{
 		temp = list;
@@ -63,7 +65,7 @@ int	process_token(t_lexer *lex, t_token **list)
 	if (*lex->lex_end == '"' || *lex->lex_end == '\'')
 	{
 		if (quoted(lex, list) == NULL)
-			return (ft_putendl_fd("Tokenizer: unclosed quotes", 2), 0);
+			return (0);
 	}
 	else if (is_op(*lex->lex_end))
 	{
@@ -95,7 +97,7 @@ t_token	*tokenizer(char *input)
 			break ;
 		lex->lex_start = lex->lex_end;
 		if (process_token(lex, &list) == 0)
-			return (free(lex),
+			return (free(lex), free_token_list(list),
 				ft_putendl_fd("Tokenizer: invalid token.", 2), NULL);
 	}
 	return (free(lex), list);
