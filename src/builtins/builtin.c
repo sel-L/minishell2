@@ -48,7 +48,6 @@ void	builtin(char **argv, t_parsing *p)
 {
 	if (!argv || !argv[0])
 		return ;
-	ft_putstr_fd("Builtin called\n", 2);
 	if ((ft_strcmp(argv[0], "pwd") == 0))
 		pwd();
 	else if ((ft_strcmp(argv[0], "cd") == 0) && (argument_count(argv) == 2))
