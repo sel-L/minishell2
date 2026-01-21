@@ -42,7 +42,7 @@ extern int g_signal;
 
 // builtins ============================
 void	echo(char **argv);
-//void	ft_exit(char **argv, int argc, t_parsing *p);
+void	ft_exit(char **argv, int argc, t_parsing *p);
 
 // signal handling ======================
 //signals.c
@@ -67,5 +67,6 @@ void apply_redirections(t_parsing *p, t_redir *redir);
 char	*get_path(char	*cmd, char **envp);
 // error handling
 void	error_msg_exit(char *target, char *msg, int exit_code);
+void	error_msg(char *target, char *msg);
 
 #endif

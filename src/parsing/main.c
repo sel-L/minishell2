@@ -6,12 +6,14 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 13:49:21 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/21 19:14:42 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/22 00:00:00 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // #include "../../headers/parsing.h"
 #include "main_minishell.h"
+
+int g_signal = 0;
 
 t_parsing	*init(char **envp)
 {

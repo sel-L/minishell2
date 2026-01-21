@@ -53,22 +53,24 @@ void	exit_minishell_clean(t_parsing *p, int exitcode)
 
 void	ft_exit(char **argv, int argc, t_parsing *p)
 {
-	// int	exit_code;
+	int	exit_code;
 
-	// exit_code = rvalue(NULL);
-	if (p->interactive_mode == 1)
+	exit_code = rvalue(NULL);
+	if (p->interactive_mode == 0)
 		ft_putstr_fd("exit\n", 2);
 	if (argc > 2)
 	{
 		ft_putstr_fd("minishell: exit: too many arguments", 2);
-		rvalue(1);
+		exit_code = 1;
+		rvalue(&exit_code);
 	}
 	else if (!is_num(argv[1]))
 	{
 		ft_putstr_fd("minishell: exit: ", 2);
 		write(2, argv[1], ft_strlen(argv[1]));
 		ft_putstr_fd(": numeric argument required", 2);
-		rvalue(2);
+		exit_code = 2;
+		rvalue(&exit_code);
 	}
 	exit_minishell_clean(p, rvalue(NULL));
 }

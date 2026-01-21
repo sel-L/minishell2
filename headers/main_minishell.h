@@ -105,7 +105,7 @@ typedef struct	s_parsing
 // AST functions
 void	*free_ast(t_ast *ast);
 t_ast	*build_ast(t_token **token);
-t_ast	*ast(t_parsing *p, t_token **token);
+t_ast	*ast(t_token **token);
 void	print_ast(t_ast *ast, int depth);
 
 // Builtin functions
@@ -203,36 +203,6 @@ void	free_single_token(t_token *token);
 int		ft_isspace(char c);
 int		identify_op(char *op);
 
-
-typedef struct s_ast t_ast;
-typedef struct s_redir t_redir;
-
-// builtins ============================
-void	echo(char **argv);
-//void	ft_exit(char **argv, int argc, t_parsing *p);
-
-// signal handling ======================
-//signals.c
-void	setup_sig_interactive(void);
-void	setup_sig_non_intereactive(void);
-// sig_utils.c
-void	reset_prompt(int signum);
-void	set_signal(int signum);
-void	reset_sig_to_default(int signum);
-void	print_core_dump(int signum);
-// sig_ignore.c
-void	ignore_all_signals(void);
-void	ignore_sig(int signum);
-
-// execution =============================
-int		exec_pipe(t_ast *node, char **env);
-int		execute(t_ast *node, char **env);
-int		exec_cmd(t_ast *node, char **env);
-// apply_redir
-void apply_redirections(t_parsing *p, t_redir *redir);
-// get_path
-char	*get_path(char	*cmd, char **envp);
-// error handling
-void	error_msg_exit(char *target, char *msg, int exit_code);
+#include "sub_minishell.h"
 
 #endif

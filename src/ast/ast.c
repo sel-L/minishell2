@@ -14,16 +14,13 @@
 // #include "parsing.h"
 #include "main_minishell.h"
 
-t_ast	*ast(t_parsing *p, t_token **token)
+t_ast	*ast(t_token **token)
 {
 	t_ast	*ast;
-	t_ast	*temp;
 	t_token	*head;
 
 	head = *token;
 	ast = build_ast(token);
-	temp = ast;
-	set_master(p, temp);
 	*token = head;
 	return (ast);
 }

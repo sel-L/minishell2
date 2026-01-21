@@ -59,6 +59,8 @@ void	builtin(char **argv, t_parsing *p)
 		env(&p->env_list);
 	else if (ft_strcmp(argv[0], "echo") == 0)
 		echo(argv);
+	else if (ft_strcmp(argv[0], "exit") == 0)
+		ft_exit(argv, argument_count(argv), p);
 	else
 		print_invalid_argv();
 }
