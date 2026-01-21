@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 13:49:21 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/21 18:28:26 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/21 19:14:42 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ int	process_command(t_parsing *p)
 	free_ast(p->ast);
 	free_token_list(p->token);
 	ft_free_str_arr(envp);
+	p->ast = NULL;
+	p->token = NULL;
 	p->internal_env = NULL;
 	return (0);
 }
