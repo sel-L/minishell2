@@ -42,7 +42,7 @@ extern int g_signal;
 
 // builtins ============================
 void	echo(char **argv);
-void	ft_exit(char **argv, int argc, t_parsing *p);
+//void	ft_exit(char **argv, int argc, t_parsing *p);
 
 // signal handling ======================
 //signals.c

@@ -28,7 +28,6 @@
 # include <signal.h>
 # include "../libft/libft.h"
 # include "../libft/gnl/get_next_line.h"
-# include "sub_minishell.h"
 
 typedef struct s_parsing t_parsing;
 
@@ -235,5 +234,7 @@ void apply_redirections(t_parsing *p, t_redir *redir);
 char	*get_path(char	*cmd, char **envp);
 // error handling
 void	error_msg_exit(char *target, char *msg, int exit_code);
+
+# include "sub_minishell.h"
 
 #endif
