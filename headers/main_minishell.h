@@ -202,19 +202,20 @@ void	free_single_token(t_token *token);
 int		ft_isspace(char c);
 int		identify_op(char *op);
 
-// global var
-// extern int g_signal;
+
+typedef struct s_ast t_ast;
+typedef struct s_redir t_redir;
 
 // builtins ============================
 void	echo(char **argv);
-// exit func h e r e
+//void	ft_exit(char **argv, int argc, t_parsing *p);
 
 // signal handling ======================
 //signals.c
 void	setup_sig_interactive(void);
 void	setup_sig_non_intereactive(void);
 // sig_utils.c
-// void	reset_prompt(int signum);
+void	reset_prompt(int signum);
 void	set_signal(int signum);
 void	reset_sig_to_default(int signum);
 void	print_core_dump(int signum);
@@ -226,8 +227,6 @@ void	ignore_sig(int signum);
 int		exec_pipe(t_ast *node, char **env);
 int		execute(t_ast *node, char **env);
 int		exec_cmd(t_ast *node, char **env);
-void	clean_child_exit(t_ast *node, char **env, char *path, int exitcode);
-void	error_msg(char *target, char *msg);
 // apply_redir
 void apply_redirections(t_parsing *p, t_redir *redir);
 // get_path
@@ -235,6 +234,6 @@ char	*get_path(char	*cmd, char **envp);
 // error handling
 void	error_msg_exit(char *target, char *msg, int exit_code);
 
-# include "sub_minishell.h"
+#endif
 
 #endif
