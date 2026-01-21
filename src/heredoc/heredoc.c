@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/20 06:43:29 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/22 15:15:42 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/21 15:56:28 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void	*write_buffer_to_pipe(int pipe_write ,char *buffer)
 		return (NULL);
 	size = ft_strlen(buffer);
 	write(pipe_write, buffer, size);
-	write(1, "\n", 1);
+	write(pipe_write, "\n", 1);
+	return (NULL);
 }
 
 void	print_heredoc_warning(int line_count, char *delim)
@@ -41,10 +42,13 @@ void	*heredoc_loop(t_parsing *p, int *pipefd, char *delimiter)
 	char		*buffer;
 	int			line_count;
 
-	line_count = p->line_count;
+	if (p)
+		line_count = p->line_count;
+	else
+		line_count = 0;
 	while (1)
 	{
-		buffer = readline("> ");
+		buffer = readline("heredoc: ");
 		if (!buffer)
 			return (print_heredoc_warning(line_count, delimiter), NULL);
 		if (ft_strcmp(buffer, delimiter) == 0)
@@ -65,6 +69,8 @@ int	heredoc(t_parsing *p, char *delim)
 	if (pipe(pipefd) == -1)
 		return (perror("pipe"), -1);
 	pid = fork();
+	if (pid < 0)
+		return (close(pipefd[0]), close(pipefd[1]), -1);
 	if (pid == 0)
 	{
 		close(pipefd[0]);
@@ -76,8 +82,9 @@ int	heredoc(t_parsing *p, char *delim)
 	{
 		close(pipefd[1]);
 		waitpid(pid, &status, 0);
-		if (WIFEXITED(status) && WIFEXITED(status) != 0)
+		if (WIFEXITED(status) && WEXITSTATUS(status) != 0)
 			return (close(pipefd[0]), -1);
 		return (pipefd[0]);
 	}
+	return (0);
 }

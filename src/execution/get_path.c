@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_utils.c                                      :+:      :+:    :+:   */
+/*   get_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: selow <selow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 12:08:42 by selow             #+#    #+#             */
-/*   Updated: 2025/08/09 23:32:58 by selow            ###   ########.fr       */
+/*   Updated: 2026/01/21 16:59:30 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	*get_path(char	*cmd, char **envp)
 		free(temp);
 		if (access(path, X_OK) == 0)
 		{
-			free(v_possible_dir);
+			free_all(v_possible_dir);
 			return (path);
 		}
 		free(path);

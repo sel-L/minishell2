@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 16:15:12 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/01 15:22:40 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/21 17:50:15 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ t_ast	*build_pipe(t_ast *left, t_ast *right)
 			ft_putendl_fd("Creation pipe node failed\n", 2), NULL);
 	*pipe = (t_ast){.type = PIPE, .left = left,
 		.right = right, .redir = NULL, .argv = NULL};
+	pipe->parsing = get_parsing_struct(NULL);
 	return (pipe);
 }
 
@@ -69,6 +70,7 @@ t_ast	*parse_primary(t_token **token)
 	ast_node->type = CMD;
 	ast_node->left = NULL;
 	ast_node->right = NULL;
+	ast_node->parsing = get_parsing_struct(NULL);
 	return (ast_node);
 }
 

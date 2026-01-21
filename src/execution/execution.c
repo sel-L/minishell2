@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 02:21:44 by selow             #+#    #+#             */
-/*   Updated: 2026/01/20 19:08:14 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/21 17:54:16 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,22 +87,27 @@ int exec_cmd(t_ast *node, char **env)
 	pid = fork();
 	if (pid == 0)
 	{
-		apply_redirections(node->redir);
+		apply_redirections(node->parsing, node->redir);
+		if (!node->argv || !node->argv[0])
+			exit(0);
 		if (is_builtin(node->argv))
-			builtin(node->argv, get_parsing_struct(NULL));
+			builtin(node->argv, node->parsing);
 		else if (!is_alr_path(node->argv[0]))
 			path = get_path(node->argv[0], env);
 		else
 			path = node->argv[0];
 		if (execve(path, node->argv, env) == -1)
 		{
+			ft_free_str_arr(env);
 			if (errno == ENOENT)
 				error_msg_exit(node->argv[0], "command not found\n", 127);
 			else
 				error_msg_exit(node->argv[0], "Permission denied\n", 126);
+
 		}
 	}
 	waitpid(pid, &status, 0);
+	garbage_collector(node->parsing, NULL, NULL);
 	if (WIFEXITED(status))
 		return (WEXITSTATUS(status));
 	return (0);

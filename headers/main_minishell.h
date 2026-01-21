@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 00:17:21 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/20 22:24:10 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/21 15:29:45 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 # include <signal.h>
 # include "../libft/libft.h"
 # include "../libft/gnl/get_next_line.h"
+
+typedef struct s_parsing t_parsing;
 
 typedef enum	e_token_type
 {
@@ -51,10 +53,11 @@ typedef struct	s_env_list
 typedef struct s_ast
 {
 	t_token_type	type;
-	char			**argv;
+	t_parsing		*parsing;
 	struct s_redir	*redir;
 	struct s_ast	*left;
 	struct s_ast	*right;
+	char			**argv;
 }	t_ast;
 
 typedef struct	s_node
@@ -223,7 +226,7 @@ int		exec_pipe(t_ast *node, char **env);
 int		execute(t_ast *node, char **env);
 int		exec_cmd(t_ast *node, char **env);
 // apply_redir
-void apply_redirections(t_redir *redir);
+void apply_redirections(t_parsing *p, t_redir *redir);
 // get_path
 char	*get_path(char	*cmd, char **envp);
 // error handling

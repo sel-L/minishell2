@@ -6,7 +6,7 @@
 #    By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/31 10:47:03 by wshou-xi          #+#    #+#              #
-#    Updated: 2026/01/20 21:52:07 by wshou-xi         ###   ########.fr        #
+#    Updated: 2026/01/21 15:26:56 by wshou-xi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,11 @@ SIGDIR =  src/signals
 SIGFILE = sig_ignore.c sig_utils.c signals.c
 SIG =  $(addprefix $(SIGDIR)/, $(SIGFILE))
 
-SRC = $(MAIN) $(TOKEN) $(ENV) $(B_IN) $(ARGV) $(AST) $(EXP) $(EXE) $(SIG)
+HDDIR = src/heredoc
+HDFILE = heredoc.c
+HD = $(addprefix $(HDDIR)/, $(HDFILE))
+
+SRC = $(MAIN) $(TOKEN) $(ENV) $(B_IN) $(ARGV) $(AST) $(EXP) $(EXE) $(SIG) $(HD)
 
 OBJDIR = obj
 OBJS = $(SRC:%.c=$(OBJDIR)/%.o)

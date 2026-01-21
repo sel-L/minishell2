@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 13:49:21 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/20 22:42:57 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/21 17:47:48 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,12 @@ int	process_command(t_parsing *p)
 
 	envp = list_to_char(&p->env_list, NULL);
 	p->internal_env = envp;
-	if (p->ast && p->ast->argv && is_builtin(p->ast->argv) == 1)
+	if (p->ast && p->ast->argv && p->ast->argv[0]  && is_builtin(p->ast->argv))
 		builtin(p->ast->argv, p);
 	else
 		execute(p->ast, envp);
-	garbage_collector(p ,NULL, NULL);
-	ft_free_str_arr(envp);
+	free_ast(p->ast);
+	free_token_list(p->token);
 	p->internal_env = NULL;
 	return (0);
 }
@@ -64,6 +64,7 @@ int main(int ac, char **av, char **envp)
 	p = init(envp);
 	if (!p)
 		return (1);
+	get_parsing_struct(&p);
 	while (1)
 	{
 		setup_sig_interactive();
@@ -73,5 +74,6 @@ int main(int ac, char **av, char **envp)
 		else if (!res)
 			process_command(p);
 	}
+	final_cleanup(p);
 	return (0);
 }
