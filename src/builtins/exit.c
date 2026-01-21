@@ -56,8 +56,9 @@ void	ft_exit(char **argv, int argc, t_parsing *p)
 	int	exit_code;
 
 	exit_code = rvalue(NULL);
-	if (p->interactive_mode == 0)
-		ft_putstr_fd("exit\n", 2);
+	ft_putstr_fd("exit1\n", 1); // tryna debug BUT WHY IT NO WORK
+	if (p->interactive_mode == 1)
+		ft_putstr_fd("exit2\n", 1);
 	if (argc > 2)
 	{
 		ft_putstr_fd("minishell: exit: too many arguments", 2);

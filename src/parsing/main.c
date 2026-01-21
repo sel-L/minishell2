@@ -6,14 +6,14 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 13:49:21 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/22 00:00:00 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/21 19:14:42 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // #include "../../headers/parsing.h"
 #include "main_minishell.h"
 
-int g_signal = 0;
+int	g_signal = 0;
 
 t_parsing	*init(char **envp)
 {
@@ -27,7 +27,6 @@ t_parsing	*init(char **envp)
 	if (!parse)
 		return (ft_putendl_fd("init: malloc failed\n", 2), NULL);
 	ft_bzero(parse, sizeof(t_parsing));
-	parse->interactive_mode = isatty(STDIN_FILENO) && isatty(STDERR_FILENO);
 	parse->env_list = env_to_list(envp);
 	if (!parse->env_list)
 		return (free(parse), ft_putendl_fd("init: env error\n", 2), NULL);

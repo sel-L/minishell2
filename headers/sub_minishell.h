@@ -68,5 +68,7 @@ char	*get_path(char	*cmd, char **envp);
 // error handling
 void	error_msg_exit(char *target, char *msg, int exit_code);
 void	error_msg(char *target, char *msg);
+// free child
+void	clean_child_exit(t_ast *node, char **env,  char *path, int exitcode);
 
 #endif
