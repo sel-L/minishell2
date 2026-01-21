@@ -102,6 +102,7 @@ typedef struct	s_parsing
 	t_ast		*ast;
 	char		**internal_env;
 	int			line_count;
+	int			interactive_mode;
 }				t_parsing;
 
 // AST functions

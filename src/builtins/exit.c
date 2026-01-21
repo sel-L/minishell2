@@ -33,26 +33,26 @@ If exit’s arguments has anything that arent numbers
 	Exit
 */
 
-void	ft_exit(char **argv, int argc)
+void	ft_exit(char **argv, int argc, t_parsing *p)
 {
-	int	exit_code;
+	// int	exit_code;
 
-	exit_code = find_exit_code();
+	// exit_code = rvalue(NULL);
+	if (p->interactive_mode == 1)
+		ft_putstr_fd("exit\n", 2);
 	if (argc > 2)
 	{
 		ft_putstr_fd("minishell: exit: too many arguments", 2);
-		exit_code = 1;
-		// change the env variable
-		return ; // ??
+		rvalue(1);
 	}
-	if (!is_num(argv[1]))
+	else if (!is_num(argv[1]))
 	{
 		ft_putstr_fd("minishell: exit: ", 2);
 		write(2, argv[1], ft_strlen(argv[1]));
 		ft_putstr_fd(": numeric argument required", 2);
-		exit_code = 2;
+		rvalue(2);
 	}
-	exit_minishell(exit_code);
+	exit_minishell_clean(p, rvalue(NULL));
 }
 
 // checks if a string is completely integer characters, NO SPACES OR ANYTHING
@@ -67,12 +67,8 @@ bool	is_num(char *str)
 	return (true);
 }
 
-void	exit_minishell()
+void	exit_minishell_clean(t_parsing *p, int exitcode)
 {
-	
-}
-
-int	find_exit_code()
-{
-
+	final_cleanup(p);
+	exit(exitcode);
 }
