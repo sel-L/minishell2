@@ -6,11 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 00:17:21 by wshou-xi          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2026/01/20 18:12:30 by wshou-xi         ###   ########.fr       */
-=======
 /*   Updated: 2026/01/21 18:33:43 by wshou-xi         ###   ########.fr       */
->>>>>>> test3
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +28,7 @@
 # include <signal.h>
 # include "../libft/libft.h"
 # include "../libft/gnl/get_next_line.h"
+# include "sub_minishell.h"
 
 typedef struct s_parsing t_parsing;
 

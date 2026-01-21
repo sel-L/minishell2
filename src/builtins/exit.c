@@ -33,6 +33,24 @@ If exit’s arguments has anything that arent numbers
 	Exit
 */
 
+// checks if a string is completely integer characters, NO SPACES OR ANYTHING
+bool	is_num(char *str)
+{
+	while (*str)
+	{
+		if (*str < '0' && *str > '9')
+			return (false);
+		str++;
+	}
+	return (true);
+}
+
+void	exit_minishell_clean(t_parsing *p, int exitcode)
+{
+	final_cleanup(p);
+	exit(exitcode);
+}
+
 void	ft_exit(char **argv, int argc, t_parsing *p)
 {
 	// int	exit_code;
@@ -53,22 +71,4 @@ void	ft_exit(char **argv, int argc, t_parsing *p)
 		rvalue(2);
 	}
 	exit_minishell_clean(p, rvalue(NULL));
-}
-
-// checks if a string is completely integer characters, NO SPACES OR ANYTHING
-bool	is_num(char *str)
-{
-	while (*str)
-	{
-		if (*str < '0' && *str > '9')
-			return (false);
-		str++;
-	}
-	return (true);
-}
-
-void	exit_minishell_clean(t_parsing *p, int exitcode)
-{
-	final_cleanup(p);
-	exit(exitcode);
 }
