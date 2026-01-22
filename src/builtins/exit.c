@@ -72,5 +72,5 @@ void	ft_exit(char **argv, int argc, t_parsing *p)
 		exit_code = 2;
 		rvalue(&exit_code);
 	}
-	exit_minishell_clean(p, rvalue(NULL));
+	exit_minishell_clean(p, exit_code);
 }
