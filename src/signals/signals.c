@@ -41,7 +41,7 @@ void	setup_sig_non_intereactive(void)
 
 	ft_bzero(&sa, sizeof(struct sigaction));
 	sigemptyset(&sa.sa_mask);
-	sa.sa_handler = reset_prompt;
+	sa.sa_handler = reset_prompt_two;
 	sigaction(SIGINT, &sa, NULL);
 	ignore_sig(SIGQUIT);
 }

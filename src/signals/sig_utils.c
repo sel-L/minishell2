@@ -16,11 +16,21 @@
 // resetting the prompt
 void	reset_prompt(int signum)
 {
-	(void)signum;
+	// (void)signum;
 	write(2, "\n", 1);
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
+	set_signal(signum);
+	rl_done = 1;
+}
+
+void	reset_prompt_two(int signum)
+{
+	// (void)signum;
+	write(2, "\n", 1);
+	rl_on_new_line();
+	rl_replace_line("", 0);
 	set_signal(signum);
 }
 
@@ -48,9 +58,9 @@ void	reset_sig_to_default(int signum)
 
 // MIGHT BE AN EXTRA FUNCTION ?
 // Printing Quit (core dumped)
-void	print_core_dump(int signum)
-{
-	(void)signum;
-	ft_putstr_fd("Quit (core dumped)\n", 2);
-	set_signal(signum);
-}
+// void	print_core_dump(int signum)
+// {
+// 	(void)signum;
+// 	ft_putstr_fd("Quit (core dumped)\n", 2);
+// 	set_signal(signum);
+// }

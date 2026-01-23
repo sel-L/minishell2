@@ -52,7 +52,8 @@ void	setup_sig_non_intereactive(void);
 void	reset_prompt(int signum);
 void	set_signal(int signum);
 void	reset_sig_to_default(int signum);
-void	print_core_dump(int signum);
+void	reset_prompt_two(int signum);
+
 // sig_ignore.c
 void	ignore_all_signals(void);
 void	ignore_sig(int signum);

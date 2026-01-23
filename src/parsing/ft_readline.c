@@ -41,10 +41,17 @@ int	ft_readline(t_parsing *p, char *prompt)
 	static int	line_count;
 
 	str = readline(prompt);
+	if (g_signal == SIGINT)
+	{
+		g_signal = 0;
+		if (str)
+			free(str);
+		rl_on_new_line();
+		rl_redisplay();
+		return (2);
+	}
 	if (!str)
 		return (1);
-	if (g_signal == SIGINT)
-		return (g_signal = 0, free(str), 2);
 	if (*str == '\0' || is_blank(str))
 		return (free(str), 2);
 	add_history(str);
