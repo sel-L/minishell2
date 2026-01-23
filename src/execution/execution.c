@@ -99,7 +99,7 @@ int exec_cmd(t_ast *node, char **env)
 		else if (is_builtin(node->argv) == 1)
 		{
 			builtin(node->argv, node->parsing);
-			clean_child_exit(node, env, NULL, rvalue(NULL));
+			clean_child_exit(node, env, NULL, rvalue(0));
 		}
 		else if (!is_alr_path(node->argv[0]))
 			path = get_path(node->argv[0], env);
