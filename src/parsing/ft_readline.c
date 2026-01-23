@@ -41,15 +41,6 @@ int	ft_readline(t_parsing *p, char *prompt)
 	static int	line_count;
 
 	str = readline(prompt);
-	if (g_signal == SIGINT)
-	{
-		g_signal = 0;
-		if (str)
-			free(str);
-		rl_on_new_line();
-		rl_redisplay();
-		return (2);
-	}
 	if (!str)
 		return (1);
 	if (*str == '\0' || is_blank(str))
