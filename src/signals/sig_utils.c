@@ -22,7 +22,6 @@ void	reset_prompt(int signum)
 	rl_replace_line("", 0);
 	rl_redisplay();
 	set_signal(signum);
-	rl_done = 1;
 }
 
 void	reset_prompt_two(int signum)
