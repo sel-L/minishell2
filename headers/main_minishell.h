@@ -203,9 +203,7 @@ void	free_single_token(t_token *token);
 int		ft_isspace(char c);
 int		identify_op(char *op);
 
-<<<<<<< HEAD
 #include "sub_minishell.h"
-=======
 // global var
 extern int g_signal;
 
@@ -240,6 +238,5 @@ void apply_redirections(t_parsing *p, t_redir *redir);
 char	*get_path(char	*cmd, char **envp);
 // error handling
 void	error_msg_exit(char *target, char *msg, int exit_code);
->>>>>>> test3
 
 #endif
