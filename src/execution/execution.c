@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 02:21:44 by selow             #+#    #+#             */
-/*   Updated: 2026/01/23 20:56:01 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/23 23:36:00 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,10 +92,7 @@ int exec_cmd(t_ast *node, char **env)
 
 	apply_redirections(node->parsing, node->redir);
 	if (is_builtin(node->argv))
-	{
-		builtin(node->argv, node->parsing);
-		clean_child_exit(node, env, NULL, 0);
-	}
+		return (builtin(node->argv, node->parsing), 0);
 	pid = fork();
 	if (pid == 0)
 	{
