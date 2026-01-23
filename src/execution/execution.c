@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 02:21:44 by selow             #+#    #+#             */
-/*   Updated: 2026/01/21 18:43:10 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/23 20:56:01 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,18 +47,24 @@ int exec_pipe(t_ast *node, char **env)
 	pid_t	left;
 	pid_t	right;
 	int		status;
+	int		temp;
 
+	status = 0;
 	pipe(fd);
 	left = fork();
 	if (left == 0)
-		exit(exec_child(node->left, env, fd, STDOUT_FILENO));
+	{
+		temp = exec_child(node->left, env, fd, STDOUT_FILENO);
+		clean_child_exit(node, env, NULL, temp);
+	}
 	right = fork();
 	if (right == 0)
-		exit(exec_child(node->right, env, fd, STDIN_FILENO));
-	close(fd[0]);
-	close(fd[1]);
-	waitpid(left, &status, 0);
-	waitpid(right, &status, 0);
+	{
+		temp = exec_child(node->right, env, fd, STDIN_FILENO);
+		clean_child_exit(node, env, NULL, temp);
+	}
+	close_and_waitpid(fd[0], left, status);
+	close_and_waitpid(fd[1], right, status);
 	if (WIFEXITED(status))
 	 	return (WEXITSTATUS(status));
 	return (0);
@@ -84,17 +90,17 @@ int exec_cmd(t_ast *node, char **env)
 	int		status;
 	char	*path;
 
+	apply_redirections(node->parsing, node->redir);
+	if (is_builtin(node->argv))
+	{
+		builtin(node->argv, node->parsing);
+		clean_child_exit(node, env, NULL, 0);
+	}
 	pid = fork();
 	if (pid == 0)
 	{
-		apply_redirections(node->parsing, node->redir);
 		if (!node->argv || !node->argv[0])
 			clean_child_exit(node, env, NULL, 0);
-		if (is_builtin(node->argv))
-		{
-			builtin(node->argv, node->parsing);
-			clean_child_exit(node, env, NULL, 0);
-		}
 		else if (!is_alr_path(node->argv[0]))
 			path = get_path(node->argv[0], env);
 		else
@@ -102,11 +108,7 @@ int exec_cmd(t_ast *node, char **env)
 		if (execve(path, node->argv, env) == -1)
 		{
 			if (errno == ENOENT)
-			{
-				error_msg(node->argv[0], "command not found\n");
 				clean_child_exit(node, env, path, 127);
-			}
-			error_msg(node->argv[0], "Permission denied\n");
 			clean_child_exit(node, env, path, 126);
 		}
 	}

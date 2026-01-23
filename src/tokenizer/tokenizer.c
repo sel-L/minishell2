@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 13:21:53 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/21 17:50:58 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/21 19:45:52 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,57 +27,40 @@ void	free_token_list(t_token *list)
 	}
 }
 
-void	*quoted(t_lexer *lex, t_token **list)
+int	scan_word(t_lexer *lex)
 {
-	char	quoted_c;
+	char	q;
 
-	while (*lex->lex_end)
+	while (*lex->lex_end && !ft_isspace(*lex->lex_end)
+		&& !is_op(*lex->lex_end))
 	{
 		if (*lex->lex_end == '\'' || *lex->lex_end == '"')
 		{
-			quoted_c = *lex->lex_end;
+			q = *lex->lex_end++;
+			while (*lex->lex_end && *lex->lex_end != q)
+				lex->lex_end++;
+			if (*lex->lex_end != q)
+				return (0);
 			lex->lex_end++;
-			while (*lex->lex_end && *lex->lex_end != quoted_c)
-				lex->lex_end++;
-			if (*lex->lex_end == quoted_c)
-				lex->lex_end++;
-			else
-				return (NULL);
 		}
 		else
-			break ;
+			lex->lex_end++;
 	}
-	return (create_word_token(lex, list));
-}
-
-void	process_unquoted_word(t_lexer *lex)
-{
-	while (*lex->lex_end
-		&& (!ft_isspace(*lex->lex_end))
-		&& (!is_op(*lex->lex_end))
-		&& *lex->lex_end != '\''
-		&& *lex->lex_end != '"')
-		lex->lex_end++;
+	return (1);
 }
 
 int	process_token(t_lexer *lex, t_token **list)
 {
-	if (*lex->lex_end == '"' || *lex->lex_end == '\'')
-	{
-		if (quoted(lex, list) == NULL)
-			return (0);
-	}
-	else if (is_op(*lex->lex_end))
+	if (is_op(*lex->lex_end))
 	{
 		if (!create_op_token(lex, list))
 			return (0);
+		return (1);
 	}
-	else
-	{
-		process_unquoted_word(lex);
-		if (!create_word_token(lex, list))
-			return (0);
-	}
+	if (!scan_word(lex))
+		return (0);
+	if (!create_word_token(lex, list))
+		return (0);
 	return (1);
 }
 
