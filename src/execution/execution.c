@@ -90,12 +90,12 @@ int exec_cmd(t_ast *node, char **env)
 	int		status;
 	char	*path;
 
-	apply_redirections(node->parsing, node->redir);
 	if (is_builtin(node->argv))
 		return (builtin(node->argv, node->parsing), 0);
 	pid = fork();
 	if (pid == 0)
 	{
+		apply_redirections(node->parsing, node->redir);
 		if (!node->argv || !node->argv[0])
 			clean_child_exit(node, env, NULL, 0);
 		else if (!is_alr_path(node->argv[0]))

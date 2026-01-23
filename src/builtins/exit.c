@@ -38,7 +38,7 @@ bool	is_num(char *str)
 {
 	while (*str)
 	{
-		if (*str < '0' && *str > '9')
+		if (*str < '0' || *str > '9')
 			return (false);
 		str++;
 	}
@@ -60,7 +60,7 @@ void	ft_exit(char **argv, int argc, t_parsing *p)
 		ft_putstr_fd("exit\n", 1);
 	if (argc > 2)
 	{
-		ft_putstr_fd("minishell: exit: too many arguments", 2);
+		ft_putstr_fd("minishell: exit: too many arguments\n", 2);
 		exit_code = 1;
 		rvalue(&exit_code);
 	}
@@ -68,7 +68,7 @@ void	ft_exit(char **argv, int argc, t_parsing *p)
 	{
 		ft_putstr_fd("minishell: exit: ", 2);
 		write(2, argv[1], ft_strlen(argv[1]));
-		ft_putstr_fd(": numeric argument required", 2);
+		ft_putstr_fd(": numeric argument required\n", 2);
 		exit_code = 2;
 		rvalue(&exit_code);
 	}

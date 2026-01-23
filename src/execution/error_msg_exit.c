@@ -22,6 +22,7 @@ void	error_msg_exit(char *target, char *msg, int exit_code)
 	ft_putstr_fd(target, 2);
 	ft_putstr_fd(": ", 2);
 	ft_putstr_fd(msg, 2);
+	ft_putstr_fd("\n", 2);
 	exit(exit_code);
 }
 
@@ -31,4 +32,5 @@ void	error_msg(char *target, char *msg)
 	ft_putstr_fd(target, 2);
 	ft_putstr_fd(": ", 2);
 	ft_putstr_fd(msg, 2);
+	ft_putstr_fd("\n", 2);
 }
