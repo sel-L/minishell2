@@ -30,3 +30,17 @@ void	clean_child_exit(t_ast *node, char **env, char *path, int exitcode)
 	rl_clear_history();
 	exit(exitcode);
 }
+
+void	clean_child(t_ast *node, char **env, char *path)
+{
+	if (path && node && node->argv && node->argv[0] && path != node->argv[0])
+		free(path);
+	if (env)
+		ft_free_str_arr(env);
+	if (node && node->parsing)
+	{
+		node->parsing->internal_env = NULL;
+		final_cleanup(node->parsing);
+	}
+	rl_clear_history();
+}
