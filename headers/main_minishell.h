@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 00:17:21 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/21 18:33:43 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/23 09:36:45 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,6 +227,8 @@ int		execute(t_ast *node, char **env);
 int		exec_cmd(t_ast *node, char **env);
 void	clean_child_exit(t_ast *node, char **env, char *path, int exitcode);
 void	error_msg(char *target, char *msg);
+void	close_and_waitpid(int fd, pid_t pid, int status);
+
 // apply_redir
 void apply_redirections(t_parsing *p, t_redir *redir);
 // get_path
