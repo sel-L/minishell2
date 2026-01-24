@@ -230,7 +230,7 @@ int		execute(t_ast *node, char **env);
 int		exec_cmd(t_ast *node, char **env);
 void	clean_child_exit(t_ast *node, char **env, char *path, int exitcode);
 void	error_msg(char *target, char *msg);
-void	close_and_waitpid(int fd, pid_t pid, int status);
+void	close_and_waitpid(int fd, pid_t pid, int *status);
 void	clean_child(t_ast *node, char **env, char *path);
 
 // apply_redir

@@ -12,8 +12,8 @@
 
 #include "main_minishell.h"
 
-void	close_and_waitpid(int fd, pid_t pid, int status)
+void	close_and_waitpid(int fd, pid_t pid, int *status)
 {
 	close(fd);
-	waitpid(pid, &status, 0);
+	waitpid(pid, status, 0);
 }

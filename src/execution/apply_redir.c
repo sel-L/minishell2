@@ -58,7 +58,7 @@ void	apply_redirections(t_parsing *p, t_redir *redir)
 
 	while (redir)
 	{
-		printf("redir function entered\n");
+		//printf("redir function entered\n");
 		if (redir->type == REDIR_IN)
 			open_dup(p, redir->file, O_RDONLY);
 		else if (redir->type == REDIR_OUT)

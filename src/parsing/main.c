@@ -44,10 +44,12 @@ t_parsing	*init(char **envp)
 int	process_command(t_parsing *p)
 {
 	char	**envp;
+	int		exit_code;
 
 	envp = list_to_char(&p->env_list, NULL);
 	p->internal_env = envp;
-	execute(p->ast, envp);
+	exit_code = execute(p->ast, envp);
+	rvalue(&exit_code);
 	free_ast(p->ast);
 	free_token_list(p->token);
 	ft_free_str_arr(envp);

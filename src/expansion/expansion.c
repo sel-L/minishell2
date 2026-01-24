@@ -59,6 +59,7 @@ char	*handle_dollar(char *str, int *i, t_parsing *p)
 	char	*var_name;
 	char	*var_value;
 	char	*res;
+	int		return_val; // test variable
 
 	var_name = extract_expandable(&str[*i]);
 	if (!ft_strcmp(var_name, "$"))
@@ -66,6 +67,12 @@ char	*handle_dollar(char *str, int *i, t_parsing *p)
 		res = ft_strdup("$");
 		*i += 1;
 	}
+	else if (!ft_strcmp(var_name, "$?")) // start of test
+	{
+		return_val = rvalue(NULL);
+		res = ft_itoa(return_val);
+		*i += ft_strlen(var_name);
+	} // end of test
 	else
 	{
 		var_value = get_value(var_name + 1, &p->env_list);
