@@ -95,9 +95,13 @@ int exec_cmd(t_ast *node, char **env)
 	{
 		apply_redirections(node->parsing, node->redir);
 		if (!node->argv || !node->argv[0])
+		{
+			printf("entered !node->argv\n");
 			clean_child_exit(node, env, NULL, 0);
+		}
 		else if (is_builtin(node->argv) == 1)
 		{
+			printf("entered is_builtin\n");
 			builtin(node->argv, node->parsing);
 			clean_child_exit(node, env, NULL, rvalue(0));
 		}
@@ -105,6 +109,7 @@ int exec_cmd(t_ast *node, char **env)
 			path = get_path(node->argv[0], env);
 		else
 			path = node->argv[0];
+		printf("executing cmd: %s\n", path);
 		if (execve(path, node->argv, env) == -1)
 		{
 			if (errno == ENOENT)

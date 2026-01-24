@@ -37,6 +37,7 @@ void	echo(char **argv)
 {
 	int		i;
 	bool	n_flag;
+	int 	status;
 
 	i = 1;
 	n_flag = has_n_flag(argv[i]);
@@ -50,6 +51,8 @@ void	echo(char **argv)
 	}
 	if (n_flag == false)
 		ft_putchar_fd('\n', 1);
+	status = 0;
+	rvalue(&status);
 }
 /*
 int main(int argc, char **argv)
