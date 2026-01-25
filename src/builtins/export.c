@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 13:22:29 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/01 14:42:20 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/25 16:52:19 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,13 +100,13 @@ t_env_list	**export_with_arg(t_env_list **env , char *arg)
 	return (free(front), free(value), env);
 }
 
-void	*ft_export(t_env_list **env, char **arg)
+int	ft_export(t_env_list **env, char **arg)
 {
 	int	i;
 
 	i = 1;
 	if (!env || !*env || !arg || !*arg)
-		return (ft_putendl_fd("Export: Invalid arguments", 2), NULL);
+		return (ft_putendl_fd("Export: Invalid arguments", 2), 1);
 	if (arg[1])
 	{
 		while (arg[i])
@@ -117,5 +117,5 @@ void	*ft_export(t_env_list **env, char **arg)
 	}
 	else
 		export_without_arg(env);
-	return (NULL);
+	return (0);
 }

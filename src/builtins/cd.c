@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 13:22:06 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/01 14:13:23 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/25 16:50:59 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char *find_path(char *path)
 
 char *get_curr_path()
 {
-	char *currpwd;
+	char	*currpwd;
 
 	currpwd = getcwd(NULL, 0);
 	if (!currpwd)
@@ -66,17 +66,16 @@ char *get_curr_path()
 	return (currpwd);
 }
 
-void cd(char *h_path, t_parsing *p)
+int cd(char *h_path, t_parsing *p)
 {
 	char		*path;
-	char		*oldpath;
 	int			flag;
 	t_env_list	*env;
 
 	flag = 0;
 	env = p->env_list;
 	if (!h_path && !find_env_key("HOME", &env))
-		return (perror("HOME not set"));
+		return (ft_putendl_fd("cd: home not set", 2), 1);
 	else if (!h_path)
 	{
 		h_path = get_value("HOME", &env);
@@ -84,13 +83,9 @@ void cd(char *h_path, t_parsing *p)
 	}
 	path = find_path(h_path);
 	if (!path)
-		return (perror("path not found"));
-	oldpath = get_curr_path();
-	change_key_value("OLDPWD", oldpath, &env);
-	chdir(path);
-	change_key_value("PWD", path, &env);
-	free(path);
-	free(oldpath);
+		return (ft_putendl_fd("cd: path not found", 2), 1);
+	change_path(p, path);
 	if (flag == 1)
 		free(h_path);
+	return (0);
 }

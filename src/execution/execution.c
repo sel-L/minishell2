@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 02:21:44 by selow             #+#    #+#             */
-/*   Updated: 2026/01/23 23:36:00 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/24 23:46:32 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int exec_pipe(t_ast *node, char **env)
 // HELPER for exec_cmd
 // Checks if the string passed in is already a valid path
 // Valid path = executable (X_OK)
-static bool	is_alr_path(char *path)
+bool	is_alr_path(char *path)
 {
 	if (access(path, X_OK) == 0)
 		return (true);
@@ -88,35 +88,12 @@ int exec_cmd(t_ast *node, char **env)
 {
 	pid_t	pid;
 	int		status;
-	char	*path;
 
+	if (is_builtin(node->argv))
+		return (exec_builtin(node));
 	pid = fork();
 	if (pid == 0)
-	{
-		apply_redirections(node->parsing, node->redir);
-		if (!node->argv || !node->argv[0])
-		{
-			printf("entered !node->argv\n");
-			clean_child_exit(node, env, NULL, 0);
-		}
-		else if (is_builtin(node->argv) == 1)
-		{
-			printf("entered is_builtin\n");
-			builtin(node->argv, node->parsing);
-			clean_child_exit(node, env, NULL, rvalue(0));
-		}
-		else if (!is_alr_path(node->argv[0]))
-			path = get_path(node->argv[0], env);
-		else
-			path = node->argv[0];
-		printf("executing cmd: %s\n", path);
-		if (execve(path, node->argv, env) == -1)
-		{
-			if (errno == ENOENT)
-				clean_child_exit(node, env, path, 127);
-			clean_child_exit(node, env, path, 126);
-		}
-	}
+		exec_external_child(node, env);
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))
 		return (WEXITSTATUS(status));
