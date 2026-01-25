@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 00:26:28 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/23 20:39:00 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/24 23:00:25 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ int	ft_readline(t_parsing *p, char *prompt)
 	str = readline(prompt);
 	if (!str)
 		return (1);
-	// if (g_signal == SIGINT)
-	// 	return (g_signal = 0, free(str), 2);
 	if (*str == '\0' || is_blank(str))
 		return (free(str), 2);
 	add_history(str);
@@ -53,7 +51,7 @@ int	ft_readline(t_parsing *p, char *prompt)
 	line_count++;
 	p->line_count = line_count;
 	if (parse(str, p) == 1)
-		return (free(str), rl_clear_history(), 2);
+		return (free(str), 2);
 	free(str);
 	return (0);
 }
