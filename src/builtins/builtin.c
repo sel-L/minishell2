@@ -6,12 +6,25 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 00:02:15 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/23 20:44:13 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/25 16:50:19 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // #include "minishell.h"
+
 #include "main_minishell.h"
+
+void	change_path(t_parsing *p, char *path)
+{
+	char	*oldpath;
+
+	oldpath = get_curr_path();
+	change_key_value("OLDPWD", oldpath, &env0);
+	chdir(path);
+	change_key_value("PWD", path, &env);
+	free(path);
+	free(oldpath);
+}
 
 int	is_builtin(char	**argv)
 {

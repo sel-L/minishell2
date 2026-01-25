@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 00:17:21 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/24 23:49:02 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/25 16:54:12 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,13 +109,14 @@ t_ast	*ast(t_token **token);
 void	print_ast(t_ast *ast, int depth);
 
 // Builtin functions
-void	pwd(void);
-void	cd(char *h_path, t_parsing *p);
-void	*ft_export(t_env_list **env, char **arg);
-void	unset(char *target, t_env_list **env);
-void	env(t_env_list **env);
+int		pwd(void);
+int		cd(char *h_path, t_parsing *p);
+int		*ft_export(t_env_list **env, char **arg);
+int		unset(char *target, t_env_list **env);
+int		env(t_env_list **env);
 int		is_builtin(char	**argv);
 void	builtin(char **argv, t_parsing *p);
+char	*get_curr_path();
 
 // Env functions
 t_env_list	*find_env_key(char *to_find, t_env_list **list);
@@ -126,6 +127,7 @@ int			change_key_value(char *key, char *value, t_env_list **env);
 int			add_env(char *env, t_env_list **list);
 int			remove_env(char *target, t_env_list **list);
 void		print_env(t_env_list *env);
+void		change_path(t_parsing *p, char *path);
 
 // Parsing functions
 t_parsing	*get_parsing_struct(t_parsing **p);

@@ -6,17 +6,18 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 13:22:18 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/14 13:22:21 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/25 16:53:22 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // #include "parsing.h"
 #include "main_minishell.h"
 
-void	env(t_env_list **env)
+int	env(t_env_list **env)
 {
 	if (!env || !*env)
-		perror("Env error\n");
+		return (ft_putendl_fd("env: Invalid env", 2), 1);
 	print_env(*env);
+	return (0);
 }
 

@@ -6,19 +6,19 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 13:22:40 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/14 13:22:42 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/25 16:53:44 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // #include "parsing.h"
 #include "main_minishell.h"
 
-void	unset(char *target, t_env_list **env)
+int	unset(char *target, t_env_list **env)
 {
 	if (!target || !env || !*env)
-		return ;
+		return (1);
 	if (target[0] == '$')
-		return ;
+		return (1);
 	remove_env(target, env);
-	return ;
+	return (0);
 }
