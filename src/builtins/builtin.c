@@ -19,9 +19,9 @@ void	change_path(t_parsing *p, char *path)
 	char	*oldpath;
 
 	oldpath = get_curr_path();
-	change_key_value("OLDPWD", oldpath, p->internal_env);
+	change_key_value("OLDPWD", oldpath, &p->env_list);
 	chdir(path);
-	change_key_value("PWD", path, p->internal_env);
+	change_key_value("PWD", path, &p->env_list);
 	free(path);
 	free(oldpath);
 }

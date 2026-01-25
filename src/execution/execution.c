@@ -72,15 +72,6 @@ int exec_pipe(t_ast *node, char **env)
 // ===================================================
 
 // ==== EXECUTING A SINGLE COMMAND SECTION ===========
-// HELPER for exec_cmd
-// Checks if the string passed in is already a valid path
-// Valid path = executable (X_OK)
-bool	is_alr_path(char *path)
-{
-	if (access(path, X_OK) == 0)
-		return (true);
-	return (false);
-}
 
 // Executes a given command (an AST node) in a child process
 // Returns the child's exit status

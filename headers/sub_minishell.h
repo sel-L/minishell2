@@ -71,5 +71,9 @@ void	error_msg_exit(char *target, char *msg, int exit_code);
 void	error_msg(char *target, char *msg);
 // free child
 void	clean_child_exit(t_ast *node, char **env,  char *path, int exitcode);
+// execution helper
+int	exec_builtin(t_ast *node);
+void	exec_external_child(t_ast *node, char **env);
+void	close_and_waitpid(int fd, pid_t pid, int *status);
 
 #endif

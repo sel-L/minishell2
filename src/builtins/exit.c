@@ -31,24 +31,11 @@ If exit’s arguments has anything that arent numbers
 	Change exit_code ($?) to 2
 	Print “minishell: exit: <command>: numeric argument required”
 	Exit
-
-COMPLETED WITH TESTER YAYYYY
 */
-
-void	exit_err_msg(char *arg, char *msg)
-{
-	ft_putstr_fd("minishell:  ", 2);
-	ft_putstr_fd("exit: ", 2);
-	ft_putstr_fd(arg, 2);
-	ft_putstr_fd(": ", 2);
-	ft_putstr_fd(msg, 2);
-}
 
 // checks if a string is completely integer characters, NO SPACES OR ANYTHING
 bool	is_num(char *str)
 {
-	if (*str == '+' || *str == '-')
-		str++;
 	while (*str)
 	{
 		if (*str < '0' || *str > '9')
@@ -68,6 +55,7 @@ void	ft_exit(char **argv, int argc, t_parsing *p)
 {
 	int	exit_code;
 
+	exit_code = rvalue(NULL);
 	if (p->interactive_mode == 1)
 		ft_putstr_fd("exit\n", 1);
 	if (argc > 2)
@@ -78,16 +66,11 @@ void	ft_exit(char **argv, int argc, t_parsing *p)
 	}
 	else if (argv[1] && !is_num(argv[1]))
 	{
-		exit_err_msg(argv[1], "numeric argument required\n");
+		ft_putstr_fd("minishell: exit: ", 2);
+		write(2, argv[1], ft_strlen(argv[1]));
+		ft_putstr_fd(": numeric argument required\n", 2);
 		exit_code = 2;
 		rvalue(&exit_code);
 	}
-	else if (argv[1])
-	{
-		exit_code = ft_atoi(argv[1]) % 256;
-		rvalue(&exit_code);
-	}
-	else
-		exit_code = rvalue(NULL);
 	exit_minishell_clean(p, exit_code);
 }

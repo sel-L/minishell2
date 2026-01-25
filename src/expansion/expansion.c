@@ -71,6 +71,8 @@ char	*handle_dollar(char *str, int *i, t_parsing *p)
 	{
 		return_val = rvalue(NULL);
 		res = ft_itoa(return_val);
+		if (!res)
+			res = ft_strdup("0");
 		*i += ft_strlen(var_name);
 	} // end of test
 	else
@@ -90,6 +92,7 @@ char	*handle_dollar(char *str, int *i, t_parsing *p)
 char	*expansion(char *str, t_parsing *p)
 {
 	char	*res;
+	char	*temp;
 	char	quote;
 	int		i;
 
@@ -100,7 +103,10 @@ char	*expansion(char *str, t_parsing *p)
 	{
 		update_quote_state(str[i], &quote);
 		if (str[i] == '$' && quote != '\'')
-			res = ft_strjoin_then_free(res, handle_dollar(str, &i, p));
+		{
+			temp = handle_dollar(str, &i, p);
+			res = ft_strjoin_then_free(res, temp);
+		}
 		else
 		{
 			res = ft_charjoin(res, str[i]);

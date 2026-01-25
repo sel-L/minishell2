@@ -33,6 +33,16 @@ int	exec_builtin(t_ast *node)
 	return (0);
 }
 
+// HELPER for exec_cmd
+// Checks if the string passed in is already a valid path
+// Valid path = executable (X_OK)
+bool	is_alr_path(char *path)
+{
+	if (access(path, X_OK) == 0)
+		return (true);
+	return (false);
+}
+
 void	exec_external_child(t_ast *node, char **env)
 {
 	char	*path;

@@ -83,7 +83,7 @@ int cd(char *h_path, t_parsing *p)
 	}
 	path = find_path(h_path);
 	if (!path)
-		return (ft_putendl_fd("cd: path not found", 2), 1);
+		return (ft_putendl_fd("cd: No such file or directory", 2), 1);
 	change_path(p, path);
 	if (flag == 1)
 		free(h_path);
