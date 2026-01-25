@@ -19,4 +19,3 @@ void	env(t_env_list **env)
 		perror("Env error\n");
 	print_env(*env);
 }
-

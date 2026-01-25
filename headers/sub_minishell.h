@@ -41,7 +41,7 @@ typedef struct s_redir t_redir;
 extern int g_signal;
 
 // builtins ============================
-void	echo(char **argv);
+int	echo(char **argv);
 void	ft_exit(char **argv, int argc, t_parsing *p);
 
 // signal handling ======================

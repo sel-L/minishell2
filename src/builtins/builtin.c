@@ -46,22 +46,25 @@ void	print_invalid_argv()
 
 void	builtin(char **argv, t_parsing *p)
 {
+	int	exit_code;
+
 	if (!argv || !argv[0])
 		return ;
 	if ((ft_strcmp(argv[0], "pwd") == 0))
-		pwd();
+		exit_code = pwd();
 	else if ((ft_strcmp(argv[0], "cd") == 0) && (argument_count(argv) == 2))
-		cd(argv[1], p);
+		exit_code = cd(argv[1], p);
 	else if (ft_strcmp(argv[0], "export") == 0)
-		ft_export(&p->env_list, argv);
+		exit_code = ft_export(&p->env_list, argv);
 	else if (ft_strcmp(argv[0], "unset") == 0)
-		unset(argv[1], &p->env_list);
+		exit_code = unset(argv[1], &p->env_list);
 	else if ((ft_strcmp(argv[0], "env") == 0) && (argument_count(argv) == 1))
-		env(&p->env_list);
+		exit_code = env(&p->env_list);
 	else if (ft_strcmp(argv[0], "echo") == 0)
-		echo(argv);
+		exit_code = echo(argv);
 	else if (ft_strcmp(argv[0], "exit") == 0)
 		ft_exit(argv, argument_count(argv), p);
 	else
-		print_invalid_argv();
+		exit_code = print_invalid_argv();
+	rvalue(&exit_code);
 }
