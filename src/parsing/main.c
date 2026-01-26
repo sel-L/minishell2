@@ -80,6 +80,8 @@ int main(int ac, char **av, char **envp)
 		else if (!res)
 			process_command(p);
 	}
+	if (p->interactive_mode == 1)
+		ft_putstr_fd("exit\n", 1);
 	final_cleanup(p);
 	return (0);
 }

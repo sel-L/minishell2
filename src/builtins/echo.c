@@ -17,9 +17,10 @@ static bool	has_n_flag(char *str)
 {
 	if (!str)
 		return (false);
-	if (*str == '-')
-		str++;
-	else
+	if (*str != '-')
+		return (false);
+	str++;
+	if (*str == '\0')
 		return (false);
 	while (*str)
 	{
