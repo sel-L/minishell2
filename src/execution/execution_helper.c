@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 09:27:48 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/24 23:46:18 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/26 23:43:43 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	exec_external_child(t_ast *node, char **env)
 	char	*path;
 
 	apply_redirections(node->parsing, node->redir);
-	if (!node->argv || !node->argv[0])
+	if (!node->argv || !node->argv[0] || node->argv[0][0] == '\0')
 		clean_child_exit(node, env, NULL, 0);
 	if (!is_alr_path(node->argv[0]))
 		path = get_path(node->argv[0], env);
