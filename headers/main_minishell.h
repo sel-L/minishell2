@@ -117,7 +117,7 @@ int		ft_export(t_env_list **env, char **arg);
 int		unset(char *target, t_env_list **env);
 int		env(t_env_list **env);
 int		is_builtin(char	**argv);
-void	builtin(char **argv, t_parsing *p);
+int	builtin(char **argv, t_parsing *p);
 char	*get_curr_path();
 int		is_valid_identifier(char *arg);
 char	**sort_env(char	**env);

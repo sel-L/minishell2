@@ -45,12 +45,12 @@ void	print_invalid_argv()
 	ft_putendl_fd("Builtin: too many arguments", 2);
 }
 
-void	builtin(char **argv, t_parsing *p)
+int	builtin(char **argv, t_parsing *p)
 {
 	int	exit_code;
 
 	if (!argv || !argv[0])
-		return ;
+		return (0);
 	if ((ft_strcmp(argv[0], "pwd") == 0))
 		exit_code = pwd();
 	else if ((ft_strcmp(argv[0], "cd") == 0) && (argument_count(argv) <= 1))
@@ -70,7 +70,7 @@ void	builtin(char **argv, t_parsing *p)
 		print_invalid_argv();
 		exit_code = 1;
 	}
-	rvalue(&exit_code);
+	return (rvalue(&exit_code));
 }
 
 void	change_path(t_parsing *p, char *path)

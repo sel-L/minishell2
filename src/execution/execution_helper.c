@@ -21,16 +21,17 @@ void	close_and_waitpid(int fd, pid_t pid, int *status)
 int	exec_builtin(t_ast *node)
 {
 	int	fd[2];
+	int	exit_code;
 
 	fd[0] = dup(STDIN_FILENO);
 	fd[1] = dup(STDOUT_FILENO);
 	apply_redirections(node->parsing, node->redir);
-	builtin(node->argv, node->parsing);
+	exit_code = builtin(node->argv, node->parsing);
 	dup2(fd[0], STDIN_FILENO);
 	dup2(fd[1], STDOUT_FILENO);
 	close(fd[0]);
 	close(fd[1]);
-	return (0);
+	return (exit_code);
 }
 
 // HELPER for exec_cmd
