@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 16:35:28 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/01 14:22:04 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/26 22:12:11 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	check_env(t_env_list *env)
 	t_env_list	*temp;
 
 	temp = env;
-	while(temp)
+	while (temp)
 	{
 		if (ft_strcmp("SHLVL", temp->front) == 0)
 		{

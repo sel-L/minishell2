@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: selow <selow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 15:21:57 by selow             #+#    #+#             */
-/*   Updated: 2025/12/29 15:21:59 by selow            ###   ########.fr       */
+/*   Updated: 2026/01/26 22:09:40 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static bool	has_n_flag(char *str)
 - print whatever is passed in
 - if -n flag is specified, print without a newline
 */
+
 int	echo(char **argv)
 {
 	int		i;
@@ -51,7 +52,7 @@ int	echo(char **argv)
 	}
 	if (n_flag == false)
 		ft_putchar_fd('\n', 1);
-	return(0);
+	return (0);
 }
 /*
 int main(int argc, char **argv)

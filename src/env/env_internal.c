@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 17:28:55 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/18 13:58:59 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/26 22:12:34 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*get_int_env(char *target, char **list)
 		return (NULL);
 	len = ft_strlen(target);
 	i = 0;
-	while(list[i])
+	while (list[i])
 	{
 		if (ft_strncmp(list[i], target, len) == 0 && list[i][len] == '=')
 			return (ft_strdup(list[i] + len + 1));
@@ -82,7 +82,7 @@ void	*print_int_env(char **int_env)
 	if (!int_env || !*int_env)
 		return (NULL);
 	i = 0;
-	while(int_env[i])
+	while (int_env[i])
 	{
 		printf("declare -x %s\n", int_env[i]);
 		i++;

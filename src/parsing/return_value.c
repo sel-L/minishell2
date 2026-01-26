@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 09:30:04 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/26 14:56:52 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/26 22:24:14 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	rvalue(int *input)
 	static int	return_value;
 	int			temp;
 
-	//printf("return_value is %d\n", return_value);
 	if (input == NULL)
 		return (return_value);
 	temp = (*input);
@@ -34,4 +33,3 @@ int	rvalue(int *input)
 		return_value = temp;
 	return (return_value);
 }
-

@@ -6,24 +6,24 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 13:22:06 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/25 16:50:59 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/26 22:09:12 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main_minishell.h"
 
-char *get_curr_path();
+char	*get_curr_path();
 
-int check_absolute(char *path)
+int	check_absolute(char *path)
 {
 	if (!path || !path[0])
 		return (0);
 	return (path[0] == '/');
 }
 
-int validate_path(char *path)
+int	validate_path(char *path)
 {
-	DIR *dir;
+	DIR	*dir;
 
 	dir = opendir(path);
 	if (!dir)
@@ -32,11 +32,11 @@ int validate_path(char *path)
 	return (1);
 }
 
-char *find_path(char *path)
+char	*find_path(char *path)
 {
-	char *curr_path;
-	char *res;
-	char *temp;
+	char	*curr_path;
+	char	*res;
+	char	*temp;
 
 	if (check_absolute(path))
 	{
@@ -56,7 +56,7 @@ char *find_path(char *path)
 	return (res);
 }
 
-char *get_curr_path()
+char	*get_curr_path(void)
 {
 	char	*currpwd;
 
@@ -66,7 +66,7 @@ char *get_curr_path()
 	return (currpwd);
 }
 
-int cd(char *h_path, t_parsing *p)
+int	cd(char *h_path, t_parsing *p)
 {
 	char		*path;
 	int			flag;

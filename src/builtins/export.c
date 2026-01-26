@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 13:22:29 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/26 13:37:23 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/26 22:10:57 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	print_sorted_env(char **sorted_env)
 
 	temp = env_to_list(sorted_env);
 	head = temp;
-	while(temp)
+	while (temp)
 	{
 		if (ft_strcmp("?", temp->front) == 0)
 			temp = temp->next;
@@ -43,7 +43,8 @@ void	*export_without_arg(t_env_list **env)
 		return (ft_putendl_fd("Export: Invalid env", 2), NULL);
 	env_list = list_to_char(env, NULL);
 	if (!env_list)
-		return (free_env(env) ,ft_putendl_fd("Export: env_list error", 2), NULL);
+		return (free_env(env) ,
+			ft_putendl_fd("Export: env_list error", 2), NULL);
 	sorted = sort_env(env_list);
 	print_sorted_env(sorted);
 	ft_free_str_arr(sorted);

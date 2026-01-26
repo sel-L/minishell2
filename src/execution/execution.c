@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 02:21:44 by selow             #+#    #+#             */
-/*   Updated: 2026/01/24 23:46:32 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/26 22:17:51 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,27 +44,21 @@ static int	exec_child(t_ast *node, char **env, int *fd, int fileno)
 int exec_pipe(t_ast *node, char **env)
 {
 	int		fd[2];
-	pid_t	left;
-	pid_t	right;
+	pid_t	pid[2];
 	int		status;
-	int		temp;
 
 	status = 0;
 	pipe(fd);
-	left = fork();
-	if (left == 0)
-	{
-		temp = exec_child(node->left, env, fd, STDOUT_FILENO);
-		clean_child_exit(node, env, NULL, temp);
-	}
-	right = fork();
-	if (right == 0)
-	{
-		temp = exec_child(node->right, env, fd, STDIN_FILENO);
-		clean_child_exit(node, env, NULL, temp);
-	}
-	close_and_waitpid(fd[0], left, NULL);
-	close_and_waitpid(fd[1], right, &status);
+	pid[0] = fork();
+	if (pid[0] == 0)
+		clean_child_exit(node, env, NULL,
+				exec_child(node->left, env, fd, STDOUT_FILENO));
+	pid[1] = fork();
+	if (pid[1] == 0)
+		clean_child_exit(node, env, NULL,
+				exec_child(node->right, env, fd, STDIN_FILENO));
+	close_and_waitpid(fd[0], pid[0], NULL);
+	close_and_waitpid(fd[1], pid[1], &status);
 	if (WIFEXITED(status))
 	 	return (WEXITSTATUS(status));
 	else if (WIFSIGNALED(status))

@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 18:09:45 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/01 16:07:14 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/26 22:07:29 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	expand_ast_redir(t_ast *node, t_parsing *p)
 	char	*temp;
 
 	temp_redir = node->redir;
-	while(temp_redir)
+	while (temp_redir)
 	{
 		temp = expand_and_remove_quotes(temp_redir->file, p);
 		free(temp_redir->file);
