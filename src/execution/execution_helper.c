@@ -36,9 +36,15 @@ int	exec_builtin(t_ast *node)
 
 // HELPER for exec_cmd
 // Checks if the string passed in is already a valid path
-// Valid path = executable (X_OK)
+// Valid path = executable (X_OK) and is a regular file
 bool	is_alr_path(char *path)
 {
+	struct stat	st;
+
+	if (stat(path, &st) == -1)
+		return (false);
+	if (S_ISDIR(st.st_mode))
+		return (false);
 	if (access(path, X_OK) == 0)
 		return (true);
 	return (false);
@@ -57,7 +63,7 @@ void	exec_external_child(t_ast *node, char **env)
 		path = node->argv[0];
 	if (execve(path, node->argv, env) == -1)
 	{
-		if (errno == ENOENT)
+		if (errno == ENOENT || path == node->argv[0])
 			clean_child_exit(node, env, path, 127);
 		clean_child_exit(node, env, path, 126);
 	}

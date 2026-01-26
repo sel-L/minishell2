@@ -20,6 +20,7 @@
 # include <stdlib.h>
 # include <sys/time.h>
 # include <sys/wait.h>
+# include <sys/stat.h>
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <errno.h>
