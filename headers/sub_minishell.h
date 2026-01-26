@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 20:02:22 by selow             #+#    #+#             */
-/*   Updated: 2026/01/21 15:29:36 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/27 00:40:45 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ void	ignore_sig(int signum);
 int		exec_pipe(t_ast *node, char **env);
 int		execute(t_ast *node, char **env);
 int		exec_cmd(t_ast *node, char **env);
+int		prepare_heredocs(t_ast *node, t_parsing *parsing);
+
 // apply_redir
 void apply_redirections(t_parsing *p, t_redir *redir);
 // get_path

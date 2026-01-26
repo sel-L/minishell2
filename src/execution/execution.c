@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 02:21:44 by selow             #+#    #+#             */
-/*   Updated: 2026/01/26 22:17:51 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/27 00:58:59 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	execute(t_ast *node, char **env)
 {
 	if (!node)
 		return (0);
+	if (node->parsing && prepare_heredocs(node, node->parsing))
+		return (1);
 	if (node->type == CMD)
 		return (exec_cmd(node, env));
 	if (node->type == PIPE)
@@ -51,11 +53,11 @@ int exec_pipe(t_ast *node, char **env)
 	pipe(fd);
 	pid[0] = fork();
 	if (pid[0] == 0)
-		clean_child_exit(node, env, NULL,
+		clean_child_exit(node->left, env, NULL,
 				exec_child(node->left, env, fd, STDOUT_FILENO));
 	pid[1] = fork();
 	if (pid[1] == 0)
-		clean_child_exit(node, env, NULL,
+		clean_child_exit(node->right, env, NULL,
 				exec_child(node->right, env, fd, STDIN_FILENO));
 	close_and_waitpid(fd[0], pid[0], NULL);
 	close_and_waitpid(fd[1], pid[1], &status);
@@ -87,3 +89,26 @@ int exec_cmd(t_ast *node, char **env)
 	return (0);
 }
 // ===================================================================
+
+int	prepare_heredocs(t_ast *node, t_parsing *p)
+{
+	t_redir	*redir;
+
+	if (!node || !p)
+		return (0);
+	if (node->type == PIPE)
+		return (prepare_heredocs(node->left, p)
+			|| prepare_heredocs(node->right, p));
+	redir = node->redir;
+	while (redir)
+	{
+		if (redir->type == HERE_DOC && redir->heredoc_fd == -1)
+		{
+			redir->heredoc_fd = heredoc(p, redir->file);
+			if (redir->heredoc_fd < 0)
+				return (1);
+		}
+		redir = redir->next;
+	}
+	return (0);
+}

@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 20:02:33 by selow             #+#    #+#             */
-/*   Updated: 2026/01/24 23:04:40 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/27 00:48:51 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,6 @@ static void	open_dup(t_parsing *p, char *file, int flags)
 // Dup2 them accordingly for exec_cmd to pass on to the correct pipe
 void	apply_redirections(t_parsing *p, t_redir *redir)
 {
-	int	fd;
-
 	while (redir)
 	{
 		if (redir->type == REDIR_IN)
@@ -69,14 +67,14 @@ void	apply_redirections(t_parsing *p, t_redir *redir)
 			open_dup(p, redir->file, O_WRONLY | O_CREAT | O_APPEND);
 		else if (redir->type == HERE_DOC)
 		{
-			fd = heredoc(p, redir->file);
-			if (fd == -1)
+			if (redir->heredoc_fd == -1)
 			{
 				error_msg("heredoc", "execution failed\n");
 				clean_child_exit(p->ast, p->internal_env, NULL, 1);
 			}
-			dup2(fd, STDIN_FILENO);
-			close(fd);
+			dup2(redir->heredoc_fd, STDIN_FILENO);
+			close(redir->heredoc_fd);
+			redir->heredoc_fd = -1;
 		}
 		redir = redir->next;
 	}

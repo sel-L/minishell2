@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 16:17:14 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/20 22:25:59 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/27 00:57:35 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	redir_val(t_token *token)
 		return (0);
 	if (is_redir(token->type))
 	{
-		if (!token->next || token->next->type != WORD)
+		if (!token->next && token->next->type != WORD)
 		{
 			if (!token->next)
 				ft_putendl_fd("syntax error near unexpected token `newline'", 2);

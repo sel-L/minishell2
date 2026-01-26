@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ast_utils.c                                        :+:      :+:    :+:   */
+/*   ast_redir_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 19:03:48 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/19 16:01:16 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/27 00:36:14 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ t_redir	*create_redir_node(char *file_dest, t_token_type type)
 		return (free(redir), NULL);
 	redir->type = type;
 	redir->next = NULL;
+	redir->heredoc_fd = -1;
 	return (redir);
 }
 

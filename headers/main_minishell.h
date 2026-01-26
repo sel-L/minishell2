@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 00:17:21 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/25 16:54:12 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/27 00:36:01 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ typedef struct	s_redir
 {
 	t_token_type	type;
 	char			*file;
+	int				heredoc_fd;
 	struct s_redir	*next;
 }					t_redir;
 

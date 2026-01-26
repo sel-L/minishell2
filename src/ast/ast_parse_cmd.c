@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 16:15:12 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/21 17:50:15 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/27 00:43:01 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,17 @@ t_redir	*build_redir(t_redir **redir, t_token **token);
 
 void	*free_ast(t_ast *ast)
 {
+	t_redir	*redir;
+
 	if (!ast)
 		return (NULL);
+	redir = ast->redir;
+	while (redir)
+	{
+		if (redir->heredoc_fd >= 0)
+			close(redir->heredoc_fd);
+		redir = redir->next;
+	}
 	if (ast->argv)
 		ft_free_str_arr(ast->argv);
 	if (ast->redir)
