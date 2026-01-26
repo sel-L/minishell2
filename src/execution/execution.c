@@ -63,7 +63,7 @@ int exec_pipe(t_ast *node, char **env)
 		temp = exec_child(node->right, env, fd, STDIN_FILENO);
 		clean_child_exit(node, env, NULL, temp);
 	}
-	close_and_waitpid(fd[0], left, &status);
+	close_and_waitpid(fd[0], left, NULL);
 	close_and_waitpid(fd[1], right, &status);
 	if (WIFEXITED(status))
 	 	return (WEXITSTATUS(status));

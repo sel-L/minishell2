@@ -87,9 +87,9 @@ int	ft_export(t_env_list **env, char **arg)
 		{
 			if (!is_valid_identifier(arg[i]))
 			{
-				ft_putstr_fd("minishel: export `", 2);
+				ft_putstr_fd("minishell: export `", 2);
 				ft_putstr_fd(arg[i], 2);
-				ft_putendl_fd("': not a valid indentifier", 2);
+				ft_putendl_fd("': not a valid identifier", 2);
 				return (1);
 			}
 			else

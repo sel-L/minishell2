@@ -42,7 +42,7 @@ int	argument_count(char **argv)
 
 void	print_invalid_argv()
 {
-	ft_putendl_fd("Builtin: Too many arguments", 2);
+	ft_putendl_fd("Builtin: too many arguments", 2);
 }
 
 void	builtin(char **argv, t_parsing *p)

@@ -24,7 +24,7 @@ int	rvalue(int *input)
 	static int	return_value;
 	int			temp;
 
-	// printf("return_value is %d\n", return_value);
+	//printf("return_value is %d\n", return_value);
 	if (input == NULL)
 		return (return_value);
 	temp = (*input);
