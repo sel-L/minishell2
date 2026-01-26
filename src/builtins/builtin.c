@@ -14,18 +14,6 @@
 
 #include "main_minishell.h"
 
-void	change_path(t_parsing *p, char *path)
-{
-	char	*oldpath;
-
-	oldpath = get_curr_path();
-	change_key_value("OLDPWD", oldpath, &p->env_list);
-	chdir(path);
-	change_key_value("PWD", path, &p->env_list);
-	free(path);
-	free(oldpath);
-}
-
 int	is_builtin(char	**argv)
 {
 	if (!argv || !argv[0])
@@ -54,7 +42,7 @@ int	argument_count(char **argv)
 
 void	print_invalid_argv()
 {
-	ft_putendl_fd("Builtin: Invalid arguments", 2);
+	ft_putendl_fd("Builtin: Too many arguments", 2);
 }
 
 void	builtin(char **argv, t_parsing *p)
@@ -65,7 +53,7 @@ void	builtin(char **argv, t_parsing *p)
 		return ;
 	if ((ft_strcmp(argv[0], "pwd") == 0))
 		exit_code = pwd();
-	else if ((ft_strcmp(argv[0], "cd") == 0) && (argument_count(argv) == 2))
+	else if ((ft_strcmp(argv[0], "cd") == 0) && (argument_count(argv) <= 1))
 		exit_code = cd(argv[1], p);
 	else if (ft_strcmp(argv[0], "export") == 0)
 		exit_code = ft_export(&p->env_list, argv);
@@ -83,4 +71,16 @@ void	builtin(char **argv, t_parsing *p)
 		exit_code = 1;
 	}
 	rvalue(&exit_code);
+}
+
+void	change_path(t_parsing *p, char *path)
+{
+	char	*oldpath;
+
+	oldpath = get_curr_path();
+	change_key_value("OLDPWD", oldpath, &p->env_list);
+	chdir(path);
+	change_key_value("PWD", path, &p->env_list);
+	free(path);
+	free(oldpath);
 }

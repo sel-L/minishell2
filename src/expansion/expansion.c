@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 15:16:01 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/01 14:01:43 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/26 14:57:47 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ char	*handle_dollar(char *str, int *i, t_parsing *p)
 	char	*res;
 	int		return_val; // test variable
 
+	var_value = NULL;
 	var_name = extract_expandable(&str[*i]);
 	if (!ft_strcmp(var_name, "$"))
 	{

@@ -25,7 +25,7 @@ ARGVFILES = argv_to_node.c argv_utils.c tok_conv.c
 ARGV = $(addprefix $(ARGVDIR)/, $(ARGVFILES))
 
 B_INDIR = src/builtins
-B_INFILES = pwd.c cd.c export.c unset.c env.c builtin.c echo.c exit.c
+B_INFILES = pwd.c cd.c export.c unset.c env.c builtin.c echo.c exit.c export_helper.c
 B_IN = $(addprefix $(B_INDIR)/, $(B_INFILES))
 
 ENVDIR = src/env

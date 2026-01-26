@@ -6,39 +6,13 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 13:22:29 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/25 16:52:19 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/26 13:37:23 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // #include "minishell.h"
 // #include "parsing.h"
 #include "main_minishell.h"
-
-char	**sort_env(char	**env)
-{
-	int			i;
-	int			j;
-	const int	size = ft_strarr_len(env);
-	char		*temp;
-
-	i = 0;
-	while(i < size)
-	{
-		j = i + 1;
-		while(j < size)
-		{
-			if (ft_strcmp(env[i], env[j]) > 0)
-			{
-				temp = env[i];
-				env[i] = env[j];
-				env[j] = temp;
-			}
-			j++;
-		}
-		i++;
-	}
-	return (env);
-}
 
 void	print_sorted_env(char **sorted_env)
 {
@@ -54,7 +28,7 @@ void	print_sorted_env(char **sorted_env)
 		if (ft_strlen(temp->env_val) >= 1)
 			printf("declare -x %s=\"%s\"\n", temp->front, temp->env_val);
 		else
-			printf("%s\n", temp->front);
+			printf("declare -X %s\n", temp->front);
 		temp = temp->next;
 	}
 	free_env(&head);
@@ -111,7 +85,15 @@ int	ft_export(t_env_list **env, char **arg)
 	{
 		while (arg[i])
 		{
-			export_with_arg(env, arg[i]);
+			if (!is_valid_identifier(arg[i]))
+			{
+				ft_putstr_fd("minishel: export `", 2);
+				ft_putstr_fd(arg[i], 2);
+				ft_putendl_fd("': not a valid indentifier", 2);
+				return (1);
+			}
+			else
+				export_with_arg(env, arg[i]);
 			i++;
 		}
 	}

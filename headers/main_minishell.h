@@ -119,6 +119,8 @@ int		env(t_env_list **env);
 int		is_builtin(char	**argv);
 void	builtin(char **argv, t_parsing *p);
 char	*get_curr_path();
+int		is_valid_identifier(char *arg);
+char	**sort_env(char	**env);
 
 // Env functions
 t_env_list	*find_env_key(char *to_find, t_env_list **list);
