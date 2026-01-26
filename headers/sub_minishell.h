@@ -53,6 +53,7 @@ void	reset_prompt(int signum);
 void	set_signal(int signum);
 void	reset_sig_to_default(int signum);
 void	reset_prompt_two(int signum);
+void	handle_segfault(int signum);
 
 // sig_ignore.c
 void	ignore_all_signals(void);

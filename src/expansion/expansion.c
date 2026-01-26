@@ -87,6 +87,8 @@ char	*handle_dollar(char *str, int *i, t_parsing *p)
 	}
 	free(var_name);
 	free(var_value);
+	if (!res)
+		res = ft_strdup("");
 	return (res);
 }
 
@@ -106,7 +108,13 @@ char	*expansion(char *str, t_parsing *p)
 		if (str[i] == '$' && quote != '\'')
 		{
 			temp = handle_dollar(str, &i, p);
-			res = ft_strjoin_then_free(res, temp);
+			if (temp)
+				res = ft_strjoin_then_free(res, temp);
+			else
+			{
+				free(res);
+				return (NULL);
+			}
 		}
 		else
 		{

@@ -42,6 +42,14 @@ void	set_signal(int signum)
 		g_signal = SIGQUIT;
 }
 
+// Handle segmentation fault by exiting with code 139
+void	handle_segfault(int signum)
+{
+	(void)signum;
+	ft_putstr_fd("Segmentation fault (core dumped)\n", 2);
+	exit(139);
+}
+
 // resetting sig to their original action; based on POSIX
 // During execution, the child should be responding the DEFAULT signals.
 void	reset_sig_to_default(int signum)
