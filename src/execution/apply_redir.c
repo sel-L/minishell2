@@ -43,7 +43,10 @@ static void	open_dup(t_parsing *p, char *file, int flags)
 	fd = open(file, flags, 0644);
 	if (fd < 0)
 	{
-		error_msg(file, "Permission denied\n");
+		if (errno == ENOENT)
+			error_msg(file, "No such file or directory\n");
+		else
+			error_msg(file, "Permission denied\n");
 		clean_child_exit(p->ast, p->internal_env, NULL, 1);
 	}
 	dup2(fd, STDOUT_FILENO);
