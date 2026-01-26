@@ -16,7 +16,7 @@
 int	unset(char *target, t_env_list **env)
 {
 	if (!target || !env || !*env)
-		return (1);
+		return (0);
 	if (target[0] == '$')
 		return (1);
 	remove_env(target, env);
