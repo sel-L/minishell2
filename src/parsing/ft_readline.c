@@ -19,7 +19,11 @@ int	parse(char *str, t_parsing *parse)
 		return (1);
 	parse->token = tokenizer(str);
 	if (validator(parse->token) != 0)
-		return (free_token_list(parse->token), 1);
+	{
+		free_token_list(parse->token);
+		parse->token = NULL;
+		return (1);
+	}
 	parse->ast = ast(&parse->token);
 	process_ast_expansion(parse->ast, parse);
 	return (0);

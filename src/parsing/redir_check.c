@@ -29,9 +29,9 @@ int	validator(t_token *token)
 	while (temp)
 	{
 		if (redir_val(temp) == 1)
-			return (ft_putendl_fd("syntax error near unexpected token", 2), 2);
+			return (2);
 		if (pipe_val(temp) == 1)
-			return (ft_putendl_fd("syntax error near unexpected token", 2), 2);
+			return (2);
 		temp = temp->next;
 	}
 	if (!token->next && token->type == PIPE)
@@ -56,8 +56,18 @@ int	pipe_val(t_token *token)
 		return (0);
 	if (token->type == PIPE)
 	{
-		if (!token->next || token->next->type != WORD)
+		if (!token->next || (token->next->type != WORD && !is_redir(token->next->type)))
+		{
+			if (!token->next)
+				ft_putendl_fd("syntax error near unexpected token `newline'", 2);
+			else
+			{
+				ft_putstr_fd("syntax error near unexpected token `", 2);
+				ft_putstr_fd(token->next->value, 2);
+				ft_putendl_fd("'", 2);
+			}
 			return (1);
+		}
 	}
 	return (0);
 }
@@ -72,7 +82,17 @@ int	redir_val(t_token *token)
 	if (is_redir(token->type))
 	{
 		if (!token->next || token->next->type != WORD)
+		{
+			if (!token->next)
+				ft_putendl_fd("syntax error near unexpected token `newline'", 2);
+			else
+			{
+				ft_putstr_fd("syntax error near unexpected token `", 2);
+				ft_putstr_fd(token->next->value, 2);
+				ft_putendl_fd("'", 2);
+			}
 			return (1);
+		}
 	}
 	return (0);
 }
