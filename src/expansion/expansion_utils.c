@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 17:11:02 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/01 16:22:35 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/26 22:21:19 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	*get_expanded_value(t_parsing *p, char *str)
 	free(res);
 	if (!expanded)
 		return (NULL);
-	return(expanded);
+	return (expanded);
 }
 
 char	*ft_strjoin_then_free(char *s1, char *s2)
@@ -88,7 +88,7 @@ char	*extract_expandable(char *str)
 		return (ft_strdup("$?"));
 	if (!ft_isalpha(str[i]) && str[i] != '_')
 		return (ft_strdup("$"));
-	while(str[i] && (ft_isalpha(str[i]) || str[i] == '_'))
+	while (str[i] && (ft_isalpha(str[i]) || str[i] == '_'))
 		i++;
 	res = ft_substr(str, 0, i);
 	return (res);

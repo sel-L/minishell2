@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 16:34:04 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/21 18:12:55 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/26 22:22:58 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,3 @@ void	final_cleanup(t_parsing *p)
 	free(p);
 	rl_clear_history();
 }
-
-// void	clean_child(t_parsing *p)
-// {
-	
-// }

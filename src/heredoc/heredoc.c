@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/20 06:43:29 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/21 18:56:42 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/26 22:22:30 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	*write_buffer_to_pipe(int pipe_write ,char *buffer)
 {
-	int		size;
+	int	size;
 
 	if (!buffer)
 		return (NULL);
@@ -69,8 +69,6 @@ int	heredoc(t_parsing *p, char *delim)
 	if (pipe(pipefd) == -1)
 		return (perror("pipe"), -1);
 	pid = fork();
-	if (pid < 0)
-		return (close(pipefd[0]), close(pipefd[1]), -1);
 	if (pid == 0)
 	{
 		close(pipefd[0]);

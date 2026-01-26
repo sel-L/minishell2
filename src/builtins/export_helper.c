@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 11:30:19 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/26 11:30:19 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/26 22:12:01 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ char	**sort_env(char	**env)
 	char		*temp;
 
 	i = 0;
-	while(i < size)
+	while (i < size)
 	{
 		j = i + 1;
-		while(j < size)
+		while (j < size)
 		{
 			if (ft_strcmp(env[i], env[j]) > 0)
 			{

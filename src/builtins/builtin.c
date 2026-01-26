@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 00:02:15 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/25 16:50:19 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/26 22:19:56 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	argument_count(char **argv)
 	return (i);
 }
 
-void	print_invalid_argv()
+void	print_invalid_argv(void)
 {
 	ft_putendl_fd("Builtin: too many arguments", 2);
 }
@@ -53,7 +53,7 @@ int	builtin(char **argv, t_parsing *p)
 		return (0);
 	if ((ft_strcmp(argv[0], "pwd") == 0))
 		exit_code = pwd();
-	else if ((ft_strcmp(argv[0], "cd") == 0) && (argument_count(argv) <= 1))
+	else if ((ft_strcmp(argv[0], "cd") == 0) && (argument_count(argv) <= 2))
 		exit_code = cd(argv[1], p);
 	else if (ft_strcmp(argv[0], "export") == 0)
 		exit_code = ft_export(&p->env_list, argv);

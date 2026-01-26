@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 16:29:30 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/18 14:00:15 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/26 22:04:45 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	print_node(t_node *node)
 	t_node	*temp;
 
 	temp = node;
-	while(temp)
+	while (temp)
 	{
 		printf("%s\n", temp->cmd);
 		print_str_arr(temp->argv);
@@ -51,7 +51,7 @@ void	add_node_back(t_node *src, t_node **node)
 		return ;
 	}
 	temp = *node;
-	while(temp->next)
+	while (temp->next)
 		temp = temp->next;
 	temp->next = src;
 	src->next = NULL;
@@ -65,7 +65,7 @@ t_node	*token_to_node(t_token *token)
 
 	list = NULL;
 	temp = NULL;
-	while(token)
+	while (token)
 	{
 		if (token->type == WORD)
 			temp = ft_2d_append_back(temp, token->value);

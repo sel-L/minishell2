@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   argv_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wshou-xi <wshou-xi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 23:48:14 by wshou-xi          #+#    #+#             */
-/*   Updated: 2025/12/05 17:51:36 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/26 22:04:52 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ char	**ft_2d_append_back(char **ori, char *content)
 	i = 0;
 	if (!ori)
 		return (new_2d(content));
-	while(ori[td_size])
+	while (ori[td_size])
 		td_size++;
 	temp = malloc(sizeof(char *) * (td_size + 2));
 	if (!temp)
 		return (ft_free_str_arr(ori), NULL);
-	while(i < td_size)
+	while (i < td_size)
 	{
 		temp[i] = ft_strdup(ori[i]);
 		i++;

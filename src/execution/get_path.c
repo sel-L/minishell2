@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 12:08:42 by selow             #+#    #+#             */
-/*   Updated: 2026/01/21 16:59:30 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/26 22:20:58 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	free_all(char **vpd)
 char	**_get_path(char **envp)
 {
 	int		i;
-	
+
 	i = 0;
 	while (envp[i])
 	{
@@ -46,7 +46,7 @@ char	*get_path(char	*cmd, char **envp)
 	int		i;
 	char	*path;
 	char	*temp;
-	
+
 	v_possible_dir = _get_path(envp);
 	if (!v_possible_dir)
 		return (NULL);

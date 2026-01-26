@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 16:40:49 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/01 14:42:21 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/26 22:12:53 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ char	*get_value(char *key, t_env_list **list)
 	t_env_list	*temp;
 	char		*res;
 
-
 	if (!key || !list || !*list)
 		return (NULL);
 	temp = find_env_key(key, list);
@@ -101,7 +100,7 @@ char	**ft_strarrdup(char **str)
 	temp = malloc(sizeof(char *) * (size + 1));
 	if (!temp)
 		return (NULL);
-	while(i < size)
+	while (i < size)
 	{
 		temp[i] = ft_strdup(str[i]);
 		if (!temp[i])

@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 13:49:21 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/23 20:44:29 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/26 22:23:25 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ t_parsing	*init(char **envp)
 	t_parsing	*parse;
 	char		*temp;
 
-	//Initialize parsing struct with envp
 	if (!envp)
 		return (ft_putendl_fd("init: no env\n", 2), NULL);
 	parse = malloc(sizeof(t_parsing));
@@ -34,7 +33,7 @@ t_parsing	*init(char **envp)
 	parse->internal_env = NULL;
 	if (ft_atoi(getenv("SHLVL")) >= 0)
 	{
-		temp =  ft_itoa(ft_atoi(getenv("SHLVL")) + 1);
+		temp = ft_itoa(ft_atoi(getenv("SHLVL")) + 1);
 		change_key_value("SHLVL", temp, &parse->env_list);
 		free(temp);
 	}
