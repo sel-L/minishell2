@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 16:29:30 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/26 22:04:45 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/27 22:53:38 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,15 +81,3 @@ t_node	*token_to_node(t_token *token)
 		create_and_add_node(&list, temp);
 	return (list);
 }
-
-// int	main()
-// {
-// 	t_token	*token;
-// 	t_node	*node;
-
-// 	token = tokenize("echo -ls | pipe");
-// 	node = token_to_node(token);
-// 	print_node(node);
-// 	free_node_list(node);
-// 	return (0);
-// }

@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 02:21:44 by selow             #+#    #+#             */
-/*   Updated: 2026/01/27 00:58:59 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/27 22:51:11 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ int exec_cmd(t_ast *node, char **env)
 	pid_t	pid;
 	int		status;
 
+	if (!node->argv || !node->argv[0] || !node->argv[0][0])
+		return (0);
 	if (is_builtin(node->argv))
 		return (exec_builtin(node));
 	pid = fork();

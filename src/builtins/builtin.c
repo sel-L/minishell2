@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 00:02:15 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/26 22:19:56 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/01/27 22:51:24 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 int	is_builtin(char	**argv)
 {
-	if (!argv || !argv[0])
+	if (!argv || !argv[0] || !argv[0][0])
 		return (0);
 	return (ft_strcmp(argv[0], "pwd") == 0
 		|| ft_strcmp(argv[0], "cd") == 0
