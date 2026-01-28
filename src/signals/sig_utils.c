@@ -16,7 +16,6 @@
 // resetting the prompt
 void	reset_prompt(int signum)
 {
-	// (void)signum;
 	write(2, "\n", 1);
 	rl_on_new_line();
 	rl_replace_line("", 0);
@@ -26,7 +25,6 @@ void	reset_prompt(int signum)
 
 void	reset_prompt_two(int signum)
 {
-	// (void)signum;
 	write(2, "\n", 1);
 	rl_on_new_line();
 	rl_replace_line("", 0);
@@ -54,11 +52,11 @@ void	handle_segfault(int signum)
 // During execution, the child should be responding the DEFAULT signals.
 void	reset_sig_to_default(int signum)
 {
-	struct	sigaction	sa;
+	struct sigaction	sa;
 
 	ft_bzero(&sa, sizeof(struct sigaction));
 	sigemptyset(&sa.sa_mask);
-	sa.sa_handler = SIG_DFL; // RESET SIGNALS TO WORK AS USUAL
+	sa.sa_handler = SIG_DFL;
 	sigaction(signum, &sa, NULL);
 	set_signal(signum);
 }
