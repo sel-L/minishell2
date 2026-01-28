@@ -52,9 +52,9 @@ bool	is_alr_path(char *path)
 
 void	exec_external_child(t_ast *node, char **env)
 {
-	char	*path;
+	char		*path;
 	struct stat	st;
-	bool	is_explicit_path;
+	bool		is_explicit_path;
 
 	apply_redirections(node->parsing, node->redir);
 	if (!node->argv || !node->argv[0] || node->argv[0][0] == '\0')
@@ -69,7 +69,8 @@ void	exec_external_child(t_ast *node, char **env)
 		if (S_ISDIR(st.st_mode))
 		{
 			error_msg(node->argv[0], "Is a directory\n");
-			if (path && node && node->argv && node->argv[0] && path != node->argv[0])
+			if (path && node && node->argv
+				&& node->argv[0] && path != node->argv[0])
 				free(path);
 			if (env)
 				ft_free_str_arr(env);
@@ -84,7 +85,8 @@ void	exec_external_child(t_ast *node, char **env)
 		else if ((st.st_mode & S_IXUSR) == 0)
 		{
 			error_msg(node->argv[0], "Permission denied\n");
-			if (path && node && node->argv && node->argv[0] && path != node->argv[0])
+			if (path && node && node->argv
+				&& node->argv[0] && path != node->argv[0])
 				free(path);
 			if (env)
 				ft_free_str_arr(env);
@@ -105,7 +107,8 @@ void	exec_external_child(t_ast *node, char **env)
 				error_msg(node->argv[0], "No such file or directory\n");
 			else
 				error_msg(node->argv[0], "command not found\n");
-			if (path && node && node->argv && node->argv[0] && path != node->argv[0])
+			if (path && node && node->argv
+				&& node->argv[0] && path != node->argv[0])
 				free(path);
 			if (env)
 				ft_free_str_arr(env);
@@ -120,7 +123,8 @@ void	exec_external_child(t_ast *node, char **env)
 		if (!is_explicit_path && path == node->argv[0])
 		{
 			error_msg(node->argv[0], "command not found\n");
-			if (path && node && node->argv && node->argv[0] && path != node->argv[0])
+			if (path && node && node->argv
+				&& node->argv[0] && path != node->argv[0])
 				free(path);
 			if (env)
 				ft_free_str_arr(env);

@@ -43,7 +43,7 @@ static int	exec_child(t_ast *node, char **env, int *fd, int fileno)
 
 // Returns the last executed node's exit code to execute()
 // Takes in an AST pipe node to fork for right and left nodes
-int exec_pipe(t_ast *node, char **env)
+int	exec_pipe(t_ast *node, char **env)
 {
 	int		fd[2];
 	pid_t	pid[2];
@@ -54,15 +54,15 @@ int exec_pipe(t_ast *node, char **env)
 	pid[0] = fork();
 	if (pid[0] == 0)
 		clean_child_exit(node->left, env, NULL,
-				exec_child(node->left, env, fd, STDOUT_FILENO));
+			exec_child(node->left, env, fd, STDOUT_FILENO));
 	pid[1] = fork();
 	if (pid[1] == 0)
 		clean_child_exit(node->right, env, NULL,
-				exec_child(node->right, env, fd, STDIN_FILENO));
+			exec_child(node->right, env, fd, STDIN_FILENO));
 	close_and_waitpid(fd[0], pid[0], NULL);
 	close_and_waitpid(fd[1], pid[1], &status);
 	if (WIFEXITED(status))
-	 	return (WEXITSTATUS(status));
+		return (WEXITSTATUS(status));
 	else if (WIFSIGNALED(status))
 		return (128 + WTERMSIG(status));
 	return (0);
@@ -73,7 +73,7 @@ int exec_pipe(t_ast *node, char **env)
 
 // Executes a given command (an AST node) in a child process
 // Returns the child's exit status
-int exec_cmd(t_ast *node, char **env)
+int	exec_cmd(t_ast *node, char **env)
 {
 	pid_t	pid;
 	int		status;
