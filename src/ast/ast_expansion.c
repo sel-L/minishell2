@@ -34,7 +34,7 @@ void	rebuild_argv(char **old, char **new, t_parsing *p)
 	int		i;
 	int		j;
 	char	*expanded;
-	
+
 	i = 0;
 	j = 0;
 	while (old[i])
@@ -52,7 +52,7 @@ void	rebuild_argv(char **old, char **new, t_parsing *p)
 
 void	process_ast_expansion(t_ast *node, t_parsing *p)
 {
-	if(!node)
+	if (!node)
 		return ;
 	if (node->type == CMD)
 	{

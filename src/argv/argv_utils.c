@@ -58,7 +58,7 @@ void	free_node_list(t_node *node)
 {
 	t_node	*temp;
 
-	while(node)
+	while (node)
 	{
 		temp = node->next;
 		free_node(node);

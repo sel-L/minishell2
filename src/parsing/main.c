@@ -58,7 +58,7 @@ int	process_command(t_parsing *p)
 	return (0);
 }
 
-int main(int ac, char **av, char **envp)
+int	main(int ac, char **av, char **envp)
 {
 	t_parsing	*p;
 	int			res;

@@ -49,14 +49,14 @@ t_ast	*build_ast(t_token **token)
 	return (left);
 }
 
-void	print_redir(t_redir *redir, int	depth)
+void	print_redir(t_redir *redir, int depth)
 {
 	int	i;
 
 	while (redir)
 	{
 		i = 0;
-		while(i < depth)
+		while (i < depth)
 		{
 			printf("  ");
 			i++;

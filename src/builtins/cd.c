@@ -12,7 +12,7 @@
 
 #include "main_minishell.h"
 
-char	*get_curr_path();
+char	*get_curr_path(void);
 
 int	check_absolute(char *path)
 {

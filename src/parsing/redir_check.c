@@ -56,10 +56,12 @@ int	pipe_val(t_token *token)
 		return (0);
 	if (token->type == PIPE)
 	{
-		if (!token->next || (token->next->type != WORD && !is_redir(token->next->type)))
+		if (!token->next || (token->next->type != WORD
+				&& !is_redir(token->next->type)))
 		{
 			if (!token->next)
-				ft_putendl_fd("syntax error near unexpected token `newline'", 2);
+				ft_putendl_fd("syntax error near \
+					unexpected token `newline'", 2);
 			else
 			{
 				ft_putstr_fd("syntax error near unexpected token `", 2);
@@ -84,7 +86,8 @@ int	redir_val(t_token *token)
 		if (!token->next || token->next->type != WORD)
 		{
 			if (!token->next)
-				ft_putendl_fd("syntax error near unexpected token `newline'", 2);
+				ft_putendl_fd("syntax error near \
+					unexpected token `newline'", 2);
 			else
 			{
 				ft_putstr_fd("syntax error near unexpected token `", 2);

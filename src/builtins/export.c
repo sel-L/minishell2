@@ -43,7 +43,7 @@ void	*export_without_arg(t_env_list **env)
 		return (ft_putendl_fd("Export: Invalid env", 2), NULL);
 	env_list = list_to_char(env, NULL);
 	if (!env_list)
-		return (free_env(env) ,
+		return (free_env(env),
 			ft_putendl_fd("Export: env_list error", 2), NULL);
 	sorted = sort_env(env_list);
 	print_sorted_env(sorted);
@@ -51,7 +51,7 @@ void	*export_without_arg(t_env_list **env)
 	return (NULL);
 }
 
-t_env_list	**export_with_arg(t_env_list **env , char *arg)
+t_env_list	**export_with_arg(t_env_list **env, char *arg)
 {
 	char	*front;
 	char	*value;

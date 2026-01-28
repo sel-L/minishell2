@@ -52,7 +52,7 @@ int	ft_strarr_len(char **str)
 	if (!str)
 		return (0);
 	size = 0;
-	while(str[size])
+	while (str[size])
 		size++;
 	return (size);
 }
@@ -64,7 +64,7 @@ void	ft_free_str_arr(char **str)
 	if (!str)
 		return ;
 	i = 0;
-	while(str[i])
+	while (str[i])
 	{
 		free(str[i]);
 		i++;

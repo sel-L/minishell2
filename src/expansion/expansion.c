@@ -21,7 +21,7 @@ void	*expandable(char *str, int *flag)
 	s_quote = (str[i] == '\'');
 	while (str[i] == '\'')
 		i++;
-	while(str[i])
+	while (str[i])
 	{
 		if (str[i] == '\'' && s_quote)
 			s_quote = !s_quote;
@@ -37,7 +37,7 @@ char	*quote_remover(char *str)
 	char	*res;
 	char	quote;
 	int		i;
-	
+
 	i = 0;
 	quote = '\0';
 	res = ft_strdup("");
@@ -59,7 +59,7 @@ char	*handle_dollar(char *str, int *i, t_parsing *p)
 	char	*var_name;
 	char	*var_value;
 	char	*res;
-	int		return_val; // test variable
+	int		return_val;
 
 	var_value = NULL;
 	var_name = extract_expandable(&str[*i]);
@@ -68,14 +68,14 @@ char	*handle_dollar(char *str, int *i, t_parsing *p)
 		res = ft_strdup("$");
 		*i += 1;
 	}
-	else if (!ft_strcmp(var_name, "$?")) // start of test
+	else if (!ft_strcmp(var_name, "$?"))
 	{
 		return_val = rvalue(NULL);
 		res = ft_itoa(return_val);
 		if (!res)
 			res = ft_strdup("0");
 		*i += ft_strlen(var_name);
-	} // end of test
+	}
 	else
 	{
 		var_value = get_value(var_name + 1, &p->env_list);

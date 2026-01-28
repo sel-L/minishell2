@@ -12,7 +12,7 @@
 
 #include "main_minishell.h"
 
-void	*write_buffer_to_pipe(int pipe_write ,char *buffer)
+void	*write_buffer_to_pipe(int pipe_write, char *buffer)
 {
 	int	size;
 
