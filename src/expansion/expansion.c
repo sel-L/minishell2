@@ -59,7 +59,6 @@ char	*handle_dollar(char *str, int *i, t_parsing *p)
 	char	*var_name;
 	char	*var_value;
 	char	*res;
-	int		return_val;
 
 	var_value = NULL;
 	var_name = extract_expandable(&str[*i]);
@@ -69,13 +68,7 @@ char	*handle_dollar(char *str, int *i, t_parsing *p)
 		*i += 1;
 	}
 	else if (!ft_strcmp(var_name, "$?"))
-	{
-		return_val = rvalue(NULL);
-		res = ft_itoa(return_val);
-		if (!res)
-			res = ft_strdup("0");
-		*i += ft_strlen(var_name);
-	}
+		res = expand_exit_status(var_name, i);
 	else
 	{
 		var_value = get_value(var_name + 1, &p->env_list);
@@ -85,11 +78,9 @@ char	*handle_dollar(char *str, int *i, t_parsing *p)
 			res = ft_strdup("");
 		*i += ft_strlen(var_name);
 	}
-	free(var_name);
-	free(var_value);
 	if (!res)
 		res = ft_strdup("");
-	return (res);
+	return (free(var_name), free(var_value), res);
 }
 
 char	*expansion(char *str, t_parsing *p)
@@ -111,16 +102,10 @@ char	*expansion(char *str, t_parsing *p)
 			if (temp)
 				res = ft_strjoin_then_free(res, temp);
 			else
-			{
-				free(res);
-				return (NULL);
-			}
+				return (free(res), NULL);
 		}
 		else
-		{
-			res = ft_charjoin(res, str[i]);
-			i++;
-		}
+			res = ft_charjoin(res, str[i++]);
 	}
 	return (res);
 }

@@ -41,7 +41,7 @@ ASTFILES = ast.c ast_redir_utils.c ast_parse_cmd.c ast_expansion.c
 AST = $(addprefix $(ASTDIR)/, $(ASTFILES))
 
 EXPDIR = src/expansion
-EXPFILES = expansion.c expansion_utils.c
+EXPFILES = expansion.c expansion_utils.c expand_exit_status.c
 EXP = $(addprefix $(EXPDIR)/, $(EXPFILES))
 
 EXCDIR = src/execution

@@ -163,6 +163,7 @@ char		*expansion(char *str, t_parsing *p);
 char		*get_expanded_value(t_parsing *p, char *str);
 void		*expandable(char *str, int *flag);
 char		*quote_remover(char *str);
+char		*expand_exit_status(char *var_name, int *i);
 
 // Heredoc
 int			heredoc(t_parsing *p, char *delim);
