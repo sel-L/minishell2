@@ -24,6 +24,7 @@
 			signals:
 				signals.c -> global variable, shld be placed into main.c
 		norminette with imac
+		final testing/seg faults/valgrind
 			
 */
 #ifndef SUB_MINISHELL_H

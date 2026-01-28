@@ -254,5 +254,13 @@ void		clean_child_exit(t_ast *node, char **env, char *path, int exitcode);
 int			exec_builtin(t_ast *node);
 void		exec_external_child(t_ast *node, char **env);
 void		close_and_waitpid(int fd, pid_t pid, int *status);
+void		clean_exit_extern_child(
+				t_ast *node, char *path, char **env, int exitcode);
+
+// if fails.c
+void		if_fileexists_fail(
+				t_ast *node, char *path, char **env);
+void		if_execve_fail(
+				t_ast *node, char *path, char **env, bool is_explicit_path);
 
 #endif

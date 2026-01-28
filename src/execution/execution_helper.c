@@ -37,7 +37,7 @@ int	exec_builtin(t_ast *node)
 // HELPER for exec_cmd
 // Checks if the string passed in is already a valid path
 // Valid path = executable (X_OK) and is a regular file
-bool	is_alr_path(char *path)
+static bool	is_alr_path(char *path)
 {
 	struct stat	st;
 
@@ -50,10 +50,26 @@ bool	is_alr_path(char *path)
 	return (false);
 }
 
+void	clean_exit_extern_child(
+	t_ast *node, char *path, char **env, int exitcode)
+{
+	if (path && node && node->argv
+		&& node->argv[0] && path != node->argv[0])
+		free(path);
+	if (env)
+		ft_free_str_arr(env);
+	if (node && node->parsing)
+	{
+		node->parsing->internal_env = NULL;
+		final_cleanup(node->parsing);
+	}
+	rl_clear_history();
+	exit(exitcode);
+}
+
 void	exec_external_child(t_ast *node, char **env)
 {
 	char		*path;
-	struct stat	st;
 	bool		is_explicit_path;
 
 	apply_redirections(node->parsing, node->redir);
@@ -64,78 +80,8 @@ void	exec_external_child(t_ast *node, char **env)
 		path = get_path(node->argv[0], env);
 	else
 		path = node->argv[0];
-	if (is_explicit_path && stat(path, &st) == 0)
-	{
-		if (S_ISDIR(st.st_mode))
-		{
-			error_msg(node->argv[0], "Is a directory\n");
-			if (path && node && node->argv
-				&& node->argv[0] && path != node->argv[0])
-				free(path);
-			if (env)
-				ft_free_str_arr(env);
-			if (node && node->parsing)
-			{
-				node->parsing->internal_env = NULL;
-				final_cleanup(node->parsing);
-			}
-			rl_clear_history();
-			exit(126);
-		}
-		else if ((st.st_mode & S_IXUSR) == 0)
-		{
-			error_msg(node->argv[0], "Permission denied\n");
-			if (path && node && node->argv
-				&& node->argv[0] && path != node->argv[0])
-				free(path);
-			if (env)
-				ft_free_str_arr(env);
-			if (node && node->parsing)
-			{
-				node->parsing->internal_env = NULL;
-				final_cleanup(node->parsing);
-			}
-			rl_clear_history();
-			exit(126);
-		}
-	}
+	if (is_explicit_path)
+		if_fileexists_fail(node, path, env);
 	if (execve(path, node->argv, env) == -1)
-	{
-		if (errno == ENOENT)
-		{
-			if (is_explicit_path)
-				error_msg(node->argv[0], "No such file or directory\n");
-			else
-				error_msg(node->argv[0], "command not found\n");
-			if (path && node && node->argv
-				&& node->argv[0] && path != node->argv[0])
-				free(path);
-			if (env)
-				ft_free_str_arr(env);
-			if (node && node->parsing)
-			{
-				node->parsing->internal_env = NULL;
-				final_cleanup(node->parsing);
-			}
-			rl_clear_history();
-			exit(127);
-		}
-		if (!is_explicit_path && path == node->argv[0])
-		{
-			error_msg(node->argv[0], "command not found\n");
-			if (path && node && node->argv
-				&& node->argv[0] && path != node->argv[0])
-				free(path);
-			if (env)
-				ft_free_str_arr(env);
-			if (node && node->parsing)
-			{
-				node->parsing->internal_env = NULL;
-				final_cleanup(node->parsing);
-			}
-			rl_clear_history();
-			exit(127);
-		}
-		clean_child_exit(node, env, path, 126);
-	}
+		if_execve_fail(node, path, env, is_explicit_path);
 }

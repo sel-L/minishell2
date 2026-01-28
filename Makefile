@@ -45,7 +45,7 @@ EXPFILES = expansion.c expansion_utils.c expand_exit_status.c
 EXP = $(addprefix $(EXPDIR)/, $(EXPFILES))
 
 EXCDIR = src/execution
-EXECFILES = apply_redir.c error_msg_exit.c execution.c get_path.c free_child.c execution_helper.c
+EXECFILES = apply_redir.c error_msg_exit.c execution.c get_path.c free_child.c execution_helper.c if_fails.c
 EXE = $(addprefix $(EXCDIR)/, $(EXECFILES))
 
 SIGDIR =  src/signals
