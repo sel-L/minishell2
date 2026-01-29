@@ -75,6 +75,7 @@ void	ft_exit(char **argv, int argc, t_parsing *p)
 		ft_putstr_fd("minishell: exit: too many arguments\n", 2);
 		exit_code = 1;
 		rvalue(&exit_code);
+		return ;
 	}
 	else if (argv[1] && !is_num(argv[1]))
 	{
