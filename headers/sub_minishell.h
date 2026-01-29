@@ -15,14 +15,6 @@
 		-> Test signals with readline etｃ
 		-> Add exit func from imac
 	BEFORE SUBMISSION
-		DELETE:
-			execution:
-				test_files/
-				libft/
-				test.c
-				Makefile
-			signals:
-				signals.c -> global variable, shld be placed into main.c
 		norminette with imac
 		final testing/seg faults/valgrind
 			
