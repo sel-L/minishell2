@@ -6,7 +6,7 @@
 #    By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/31 10:47:03 by wshou-xi          #+#    #+#              #
-#    Updated: 2026/01/23 09:40:38 by wshou-xi         ###   ########.fr        #
+#    Updated: 2026/01/29 10:06:51 by wshou-xi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,11 +14,14 @@ CC = cc
 CFLAGS = -Wall -Werror -Wextra -Iheaders -I./libft
 LIB = -lreadline -lhistory -Llibft -lft
 RM = rm -rf
-VALGRIND = valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all --tool=memcheck --track-origins=yes --verbose
 
-MAINDIR = src/parsing
-MAINFILES = main.c ft_readline.c redir_check.c garbage_collector.c return_value.c get_parsing.c
-MAIN = $(addprefix $(MAINDIR)/, $(MAINFILES))
+MAINDIR = src
+MAINFILE = main.c
+MAIN = $(addprefix $(MAINDIR)/,$(MAINFILE))
+
+PARDIR = src/parsing
+PARFILES = ft_readline.c redir_check.c garbage_collector.c return_value.c get_parsing.c
+PARSING = $(addprefix $(PARDIR)/, $(PARFILES))
 
 ARGVDIR = src/argv
 ARGVFILES = argv_to_node.c argv_utils.c tok_conv.c
@@ -56,7 +59,7 @@ HDDIR = src/heredoc
 HDFILE = heredoc.c
 HD = $(addprefix $(HDDIR)/, $(HDFILE))
 
-SRC = $(MAIN) $(TOKEN) $(ENV) $(B_IN) $(ARGV) $(AST) $(EXP) $(EXE) $(SIG) $(HD)
+SRC = $(MAIN) $(PARSING) $(TOKEN) $(ENV) $(B_IN) $(ARGV) $(AST) $(EXP) $(EXE) $(SIG) $(HD)
 
 OBJDIR = obj
 OBJS = $(SRC:%.c=$(OBJDIR)/%.o)
