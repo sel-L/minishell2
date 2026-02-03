@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 13:22:29 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/26 22:10:57 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/02/03 14:27:23 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	print_sorted_env(char **sorted_env)
 		if (ft_strlen(temp->env_val) >= 1)
 			printf("declare -x %s=\"%s\"\n", temp->front, temp->env_val);
 		else
-			printf("declare -X %s\n", temp->front);
+			printf("declare -X %s=\"\"\n", temp->front);
 		temp = temp->next;
 	}
 	free_env(&head);
