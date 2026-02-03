@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 15:21:57 by selow             #+#    #+#             */
-/*   Updated: 2026/01/26 22:09:40 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/02/03 16:56:26 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,3 @@ int	echo(char **argv)
 		ft_putchar_fd('\n', 1);
 	return (0);
 }
-/*
-int main(int argc, char **argv)
-{
-	echo(argv);
-}*/
