@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 11:30:19 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/01/26 22:12:01 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/02/03 14:36:29 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	is_valid_identifier(char *arg)
 	int	i;
 
 	i = 0;
-	if (!arg[1] || (!ft_isalpha(arg[i]) && arg[i] != '_'))
+	if (!ft_isalpha(arg[i]))
 		return (0);
 	i++;
 	while (arg[i] && arg[i] != '=')
