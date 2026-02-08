@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 00:02:15 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/02/08 22:20:29 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/02/08 22:31:35 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,11 @@ int	argument_count(char **argv)
 	return (i);
 }
 
-void	print_invalid_argv(void)
+void	print_invalid_argv(char *cmd)
 {
-	ft_putendl_fd("Builtin: too many arguments", 2);
+	ft_putstr_fd("Minishell: ", 2);
+	ft_putstr_fd(cmd, 2);
+	ft_putendl_fd(": too many arguments", 2);
 }
 
 int	builtin(char **argv, t_parsing *p)
