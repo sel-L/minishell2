@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 00:02:15 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/02/08 22:19:15 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/02/08 22:20:29 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	builtin(char **argv, t_parsing *p)
 		exit_code = env(&p->env_list);
 	else if (ft_strcmp(argv[0], "echo") == 0)
 		exit_code = echo(argv);
-	else if (ft_strcmp(argv[0], "exit") == 0 && (argument_count(argv) == 2))
+	else if (ft_strcmp(argv[0], "exit") == 0 && (argument_count(argv) <= 2))
 		ft_exit(argv, argument_count(argv), p);
 	else
 	{
