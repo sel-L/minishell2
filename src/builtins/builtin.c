@@ -6,7 +6,7 @@
 /*   By: wshou-xi <wshou-xi@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 00:02:15 by wshou-xi          #+#    #+#             */
-/*   Updated: 2026/02/08 22:31:35 by wshou-xi         ###   ########.fr       */
+/*   Updated: 2026/02/08 22:33:40 by wshou-xi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	builtin(char **argv, t_parsing *p)
 		exit_code = ft_exit(argv, argument_count(argv), p);
 	else
 	{
-		print_invalid_argv();
+		print_invalid_argv(argv[0]);
 		exit_code = 1;
 	}
 	return (rvalue(&exit_code));
