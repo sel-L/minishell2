@@ -218,7 +218,7 @@ int			identify_op(char *op);
 
 // builtins ============================
 int			echo(char **argv);
-void		ft_exit(char **argv, int argc, t_parsing *p);
+int		ft_exit(char **argv, int argc, t_parsing *p);
 
 // signal handling ======================
 //signals.c

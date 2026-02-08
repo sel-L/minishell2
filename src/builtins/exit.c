@@ -64,7 +64,7 @@ void	exit_minishell_clean(t_parsing *p, int exitcode)
 	exit(exitcode);
 }
 
-void	ft_exit(char **argv, int argc, t_parsing *p)
+int	ft_exit(char **argv, int argc, t_parsing *p)
 {
 	int	exit_code;
 
@@ -75,7 +75,7 @@ void	ft_exit(char **argv, int argc, t_parsing *p)
 		ft_putstr_fd("minishell: exit: too many arguments\n", 2);
 		exit_code = 1;
 		rvalue(&exit_code);
-		return ;
+		return (1);
 	}
 	else if (argv[1] && !is_num(argv[1]))
 	{
@@ -90,5 +90,5 @@ void	ft_exit(char **argv, int argc, t_parsing *p)
 	}
 	else
 		exit_code = rvalue(NULL);
-	exit_minishell_clean(p, exit_code);
+	return (exit_minishell_clean(p, exit_code), 0);
 }

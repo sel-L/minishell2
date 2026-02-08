@@ -63,8 +63,8 @@ int	builtin(char **argv, t_parsing *p)
 		exit_code = env(&p->env_list);
 	else if (ft_strcmp(argv[0], "echo") == 0)
 		exit_code = echo(argv);
-	else if (ft_strcmp(argv[0], "exit") == 0 && (argument_count(argv) <= 2))
-		ft_exit(argv, argument_count(argv), p);
+	else if (ft_strcmp(argv[0], "exit") == 0)
+		exit_code = ft_exit(argv, argument_count(argv), p);
 	else
 	{
 		print_invalid_argv();
