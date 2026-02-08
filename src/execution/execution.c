@@ -78,8 +78,6 @@ int	exec_cmd(t_ast *node, char **env)
 	pid_t	pid;
 	int		status;
 
-	if (!node->argv || !node->argv[0] || !node->argv[0][0])
-		return (0);
 	if (is_builtin(node->argv))
 		return (exec_builtin(node));
 	pid = fork();
