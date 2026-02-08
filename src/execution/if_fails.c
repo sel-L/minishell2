@@ -20,7 +20,7 @@ void	if_fileexists_fail(t_ast *node, char *path, char **env)
 		return ;
 	if (S_ISDIR(st.st_mode))
 		error_msg(node->argv[0], "Is a directory\n");
-	else if ((st.st_mode & S_IXUSR) == 0)
+	else
 		error_msg(node->argv[0], "Permission denied\n");
 	clean_exit_extern_child(node, path, env, 126);
 }
@@ -29,19 +29,9 @@ void	if_fileexists_fail(t_ast *node, char *path, char **env)
 void	if_execve_fail(
 	t_ast *node, char *path, char **env, bool is_explicit_path)
 {
-	if (errno == ENOENT)
-	{
-		if (is_explicit_path)
-			error_msg(node->argv[0], "No such file or directory\n");
-		else
-			error_msg(node->argv[0], "command not found\n");
-		clean_exit_extern_child(node, path, env, 127);
-	}
-	if (!is_explicit_path && path == node->argv[0])
-	{
+	if (errno == ENOENT && is_explicit_path)
+		error_msg(node->argv[0], "No such file or directory\n");
+	else
 		error_msg(node->argv[0], "command not found\n");
-		clean_exit_extern_child(node, path, env, 127);
-	}
-	perror("execve failed");
-	clean_child_exit(node, env, path, 126);
+	clean_exit_extern_child(node, path, env, 127);
 }
