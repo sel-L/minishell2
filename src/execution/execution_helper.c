@@ -80,7 +80,7 @@ void	exec_external_child(t_ast *node, char **env)
 		path = get_path(node->argv[0], env);
 	else
 		path = node->argv[0];
-	if (is_explicit_path)
+	if (is_explicit_path && (ft_strcmp(node->argv[0], "./minishell")))
 		if_fileexists_fail(node, path, env);
 	if (execve(path, node->argv, env) == -1)
 		if_execve_fail(node, path, env, is_explicit_path);
